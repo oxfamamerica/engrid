@@ -28,6 +28,16 @@ module.exports = {
       },
     }),
     new HtmlWebpackPlugin({
+      title: "Oxfam US - Engaging Networks Page - Donation",
+      filename: "page-donation-oxfamus.html",
+      template: "./src/templates/page-donation-oxfamus.html",
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: false,
+      },
+    }),
+    new HtmlWebpackPlugin({
       title: "Ocean Conservancy - Engaging Networks Page - Donation",
       filename: "page-donation-oc.html",
       template: "./src/templates/page-donation-oc.html",
