@@ -55,3 +55,394 @@
   font-weight: bold;
   font-style: normal;
 }
+
+@font-face {
+    font-family: 'ous-icons';
+    src: url('https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/ous-icons.eot?v=1604328515000');
+    src: url('https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/ous-icons.eot?v=1604328515000?#iefix') format('embedded-opentype'),
+         url('https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/ous-icons.woff?v=1604328517000') format('woff'),
+         url('https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/ous-icons.ttf?v=1604328516000') format('truetype'),
+         url('https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/ous-icons.svg?v=1604328516000') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+.icon-volunteer, .icon-twitter, .icon-take-action, .icon-pinterest, .icon-phone, .icon-mobile-nav, .icon-mail, .icon-home, .icon-google-plus, .icon-facebook, .icon-new-tab, .icon-donate, .icon-arrow, .icon-search, .icon-info-icon, .icon-unwrapped, .icon-trade, .icon-usa, .icon-active-citizens, .icon-resilience, .icon-climate, .icon-private-sector, .icon-aid, .icon-disasters, .icon-resources, .icon-gender, .icon-water, .icon-food-ag, .icon-accountability, .icon-match {
+    font-family: 'ous-icons', Arial, sans-serif;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+.icon-volunteer:before {
+    content: "\e000";
+}
+.icon-twitter:before {
+    content: "\e001";
+}
+.icon-take-action:before {
+    content: "\e002";
+}
+.icon-pinterest:before {
+    content: "\e003";
+}
+.icon-phone:before {
+    content: "\e004";
+}
+.icon-mobile-nav:before {
+    content: "\e005";
+}
+.icon-mail:before {
+    content: "\e006";
+}
+.icon-home:before {
+    content: "\e007";
+}
+.icon-google-plus:before {
+    content: "\e008";
+}
+.icon-facebook:before {
+    content: "\e009";
+}
+.icon-new-tab:before {
+    content: "\e00a";
+}
+.icon-donate:before {
+    content: "\e00b";
+}
+.icon-arrow:before {
+    content: "\e00c";
+}
+.icon-search:before {
+    content: "\e00d";
+}
+.icon-info-icon:before {
+    content: "\e00e";
+}
+.icon-match:before {
+    content: "\e600";
+}
+.icon-unwrapped:before {
+    content: "\e601";
+}
+// Icons for Policy & Practice
+
+.icon-trade:before {
+    content: "\e601";
+}
+
+.icon-usa:before {
+    content: "\e602";
+}
+
+.icon-active-citizens:before {
+    content: "\e603";
+}
+
+.icon-resilience:before {
+    content: "\e604";
+}
+
+.icon-climate:before {
+    content: "\e605";
+}
+
+.icon-private-sector:before {
+    content: "\e606";
+}
+
+.icon-aid:before {
+    content: "\e607";
+}
+
+.icon-disasters:before {
+    content: "\e608";
+}
+
+.icon-resources:before {
+    content: "\e609";
+}
+
+.icon-gender:before {
+    content: "\e60a";
+}
+
+.icon-water:before {
+    content: "\e60b";
+}
+
+.icon-food-ag:before {
+    content: "\e60c";
+}
+
+.icon-accountability:before {
+    content: "\e60d";
+}
+
+
+
+/* new icons */
+
+
+.icon-linkedin, .icon-arrow_forward, .icon-light_bulb, .icon-arrow_back, .icon-arrow_down, .icon-arrow_up, .icon-basic_circle, .icon-basic_square, .icon-basic_triangle, .icon-brandoxfam, .icon-building, .icon-calendar, .icon-capitol_building, .icon-cart_natural_resources, .icon-chart, .icon-close_circle, .icon-cog, .icon-conversation, .icon-Exclamation-point, .icon-gift, .icon-hand, .icon-heart, .icon-home, .icon-images, .icon-info, .icon-instagram, .icon-leaf, .icon-magnifying_glass, .icon-megaphone, .icon-mobile_phone, .icon-paper, .icon-pencil, .icon-person_woman, .icon-person, .icon-plant, .icon-plate, .icon-podium, .icon-quote_1, .icon-quote_2, .icon-recycle, .icon-scales, .icon-shaking_hands, .icon-shopping_cart, .icon-signature, .icon-speech_bubble, .icon-star, .icon-tablet, .icon-tent, .icon-three_hands, .icon-three_people, .icon-thumbs_up, .icon-tippedscale, .icon-toilet, .icon-toolbox, .icon-trash_can, .icon-two_arrows, .icon-umbrella, .icon-US_map, .icon-water_droplet, .icon-water_spigot, .icon-world, .icon-youtube{
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'ous-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-linkedin:before {
+  content: "\e917";
+}
+.icon-arrow_forward:before {
+  content: "\e918";
+}
+.icon-light_bulb:before {
+  content: "\e919";
+}
+.icon-arrow_back:before {
+  content: "\e900";
+}
+.icon-arrow_down:before {
+  content: "\e901";
+}
+.icon-arrow_up:before {
+  content: "\e902";
+}
+.icon-basic_circle:before {
+  content: "\e903";
+}
+.icon-basic_square:before {
+  content: "\e904";
+}
+.icon-basic_triangle:before {
+  content: "\e905";
+}
+.icon-brandoxfam:before {
+  content: "\e91c";
+}
+.icon-building:before {
+  content: "\e906";
+}
+.icon-calendar:before {
+  content: "\e907";
+}
+.icon-capitol_building:before {
+  content: "\e908";
+}
+.icon-cart_natural_resources:before {
+  content: "\e909";
+}
+.icon-chart:before {
+  content: "\e90a";
+}
+.icon-close_circle:before {
+  content: "\e90b";
+}
+.icon-cog:before {
+  content: "\e90c";
+}
+.icon-conversation:before {
+  content: "\e90d";
+}
+.icon-Exclamation-point:before {
+  content: "\e90e";
+}
+.icon-gift:before {
+  content: "\e90f";
+}
+.icon-hand:before {
+  content: "\e910";
+}
+.icon-heart:before {
+  content: "\e911";
+}
+.icon-home:before {
+  content: "\e912";
+}
+.icon-images:before {
+  content: "\e913";
+}
+.icon-info:before {
+  content: "\e914";
+}
+.icon-instagram:before {
+  content: "\e915";
+}
+.icon-leaf:before {
+  content: "\e916";
+}
+.icon-magnifying_glass:before {
+  content: "\e924";
+}
+.icon-megaphone:before {
+  content: "\e925";
+}
+.icon-mobile_phone:before {
+  content: "\e926";
+}
+.icon-paper:before {
+  content: "\e927";
+}
+.icon-pencil:before {
+  content: "\e928";
+}
+.icon-person_woman:before {
+  content: "\e929";
+}
+.icon-person:before {
+  content: "\e92a";
+}
+.icon-plant:before {
+  content: "\e92b";
+}
+.icon-plate:before {
+  content: "\e92c";
+}
+.icon-podium:before {
+  content: "\e92d";
+}
+.icon-quote_1:before {
+  content: "\e92e";
+}
+.icon-quote_2:before {
+  content: "\e92f";
+}
+.icon-recycle:before {
+  content: "\e930";
+}
+.icon-scales:before {
+  content: "\e931";
+}
+.icon-shaking_hands:before {
+  content: "\e932";
+}
+.icon-shopping_cart:before {
+  content: "\e933";
+}
+.icon-signature:before {
+  content: "\e91d";
+}
+.icon-speech_bubble:before {
+  content: "\e934";
+}
+.icon-star:before {
+  content: "\e935";
+}
+.icon-tablet:before {
+  content: "\e936";
+}
+.icon-tent:before {
+  content: "\e937";
+}
+.icon-three_hands:before {
+  content: "\e938";
+}
+.icon-three_people:before {
+  content: "\e939";
+}
+.icon-thumbs_up:before {
+  content: "\e93a";
+}
+.icon-tippedscale:before {
+  content: "\e91b";
+}
+.icon-toilet:before {
+  content: "\e93b";
+}
+.icon-toolbox:before {
+  content: "\e93c";
+}
+.icon-trash_can:before {
+  content: "\e93d";
+}
+.icon-two_arrows:before {
+  content: "\e93e";
+}
+.icon-umbrella:before {
+  content: "\e93f";
+}
+.icon-US_map:before {
+  content: "\e940";
+}
+.icon-water_droplet:before {
+  content: "\e941";
+}
+.icon-water_spigot:before {
+  content: "\e942";
+}
+.icon-world:before {
+  content: "\e943";
+}
+.icon-youtube:before {
+  content: "\e91a";
+}
+.icon-uniE600:before {
+  content: "\e600";
+}
+.icon-uniE000:before {
+  content: "\e000";
+}
+.icon-uniE001:before {
+  content: "\e001";
+}
+.icon-uniE002:before {
+  content: "\e002";
+}
+.icon-uniE003:before {
+  content: "\e003";
+}
+.icon-uniE004:before {
+  content: "\e004";
+}
+.icon-uniE005:before {
+  content: "\e005";
+}
+.icon-uniE006:before {
+  content: "\e006";
+}
+.icon-uniE007:before {
+  content: "\e007";
+}
+.icon-uniE008:before {
+  content: "\e008";
+}
+.icon-uniE009:before {
+  content: "\e009";
+}
+.icon-uniE00A:before {
+  content: "\e00a";
+}
+.icon-uniE00B:before {
+  content: "\e00b";
+}
+.icon-uniE00C:before {
+  content: "\e00c";
+}
+.icon-uniE00D:before {
+  content: "\e00d";
+}
+.icon-uniE00E:before {
+  content: "\e00e";
+}
+.icon-uniE601:before {
+  content: "\e601";
+}
+
+
+

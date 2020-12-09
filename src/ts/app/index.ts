@@ -11,6 +11,7 @@ import SimpleCountrySelect from "./utils/simple-country-select";
 import getUrlParameter from "./utils/query-string";
 import ApplePay from "./utils/apple-pay";
 import CapitalizeFields from "./utils/capitalize-fields";
+import Postcode from "./events/postcode-lookup";
 
 // IE Warning
 const ie = new IE();
@@ -23,6 +24,7 @@ export const amount = new DonationAmount(
 );
 export const frequency = new DonationFrequency("transaction.recurrpay");
 export const form = new EnForm();
+export const postcode = new Postcode("supporter.postcode");
 
 // Processing Fees Event
 export const fees = new ProcessingFees();
@@ -32,11 +34,16 @@ export const run = (opts: Object) => {
     ...{
       backgroundImage: "auto",
       submitLabel: "Donate",
+      feesLabel: "",
+      donationLevelsOnetime: [1000,500,250,100],
+      donationLevelsMonthly: [100,50,35,20]
     },
     ...opts,
   };
+  frequency.load();
   // The entire App
   app.setBackgroundImages(options.backgroundImage);
+  app.setDonationAmountLevels(frequency.frequency, options.donationLevelsOnetime, options.donationLevelsMonthly);
 
   app.inputPlaceholder();
   app.watchInmemField();
@@ -63,6 +70,7 @@ export const run = (opts: Object) => {
   frequency.onFrequencyChange.subscribe((s) =>
     console.log(`Live Frequency: ${s}`)
   );
+  postcode.onPostcodeChange.subscribe((s) => console.log(`Postcode: ${s}`));
   form.onSubmit.subscribe((s) => console.log('Submit: ', s));
   form.onError.subscribe((s) => console.log('Error:', s));
 
@@ -126,7 +134,7 @@ export const run = (opts: Object) => {
   // Iframe Code End
 
   // Live Variables
-  new LiveVariables(options.submitLabel);
+  new LiveVariables(options.submitLabel, options.feesLabel);
 
   // Modal
   const modal = new Modal();
@@ -135,6 +143,7 @@ export const run = (opts: Object) => {
   // On the end of the script, after all subscribers defined, let's load the current value
   amount.load();
   frequency.load();
+  postcode.load();
 
   // Simple Country Select
   const simpleCountrySelect = new SimpleCountrySelect();

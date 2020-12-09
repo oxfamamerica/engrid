@@ -1,13 +1,43 @@
 $slicer-breakpoints: 0 400px 600px 1024px 1200px;
 
+$C-OxfamGreen: #61A534;
+$C-OxfamGreenDarken: darken($C-OxfamGreen, 15%);
+$C-Orange: #F16E22;
+$C-OrangeDarken: darken($C-Orange, 15%);
+$C-Red: #E70052;
+$C-RedDarken: darken($C-Red, 15%);
+
+$C-DarkGreen:  #0C884A;
+$C-DarkGreenDarken: darken($C-DarkGreen, 15%);
+$C-Burgundy:   #630235;
+$C-BurgundyDarken: darken($C-Burgundy, 15%);
+$C-Purple:     #53297D;
+$C-PurpleDarken: darken($C-Purple, 15%);
+$C-White: #FFFFFF;
+/* Non-compliant palette */
+$C-Pink:       #E43989;
+$C-PinkDarken: darken($C-Pink, 15%);
+$C-LightGreen: #BECE45;
+$C-LightGreenDarken: darken($C-LightGreen, 15%);
+$C-Blue:       #0B9CDA;
+$C-BlueDarken: darken($C-Blue, 15%);
+$C-Yellow:     #FBC43A;
+$C-YellowDarken: darken($C-Yellow, 15%);
+
 $client-white: #ffffff;
-$client-black: #3b3b3b;
+$client-black: #545454;
 $client-gray: #8a8a8a;
 $client-light-gray: #cacaca;
-$client-cta: #f16e22;
-$client-cta-hover: #f05523;
-$background-color: $client-white;
+$client-lightest-gray: #eeeeee;
+$client-input-button: $C-White; //$C-OxfamGreen;//#f16e22;
+$client-input-button-hover: $C-OxfamGreen; //#f05523;
+$client-cta: $C-Orange;//#f16e22;
+$client-cta-hover: $C-OrangeDarken; //#f05523;
+$client-cta-secondary: $C-OxfamGreen;//#f16e22;
+$client-cta-secondary-hover: $C-OxfamGreenDarken; //#f05523;
+$background-color: $client-lightest-gray;
 $background-image-background-color: #333333;
+
 
 /* @TODO Look into replicating "Teach a System of Space Visually" as a Development page that shows all styling decisions for the brand
  * https://medium.com/eightshapes-llc/space-in-design-systems-188bcbae0d62#.fwng4aef7
@@ -20,32 +50,35 @@ $body-padding: calc(0.8652rem * 0.75); //@TODO Revisit
 $body-padding-lg: calc(0.8652rem * 2.5); //@TODO Revisit
 $body-padding-xlg: calc(0.8652rem * 5); //@TODO Revisit
 
+$body-padding: 2.0rem;
+
 $client-input-border-radius: 5px;
 $client-input-border-width: 2px;
-$client-input-border-color: $client-black;
-$client-input-background-color: transparent;
-$client-input-background-color-hover: transparent;
-$client-input-border-color-focus: $client-cta;
-$client-input-border-color-hover: $client-cta;
+$client-input-border-color: $client-light-gray;
+$client-input-background-color:$client-white;
+$client-input-background-color-hover: $client-white;
+$client-input-border-color-focus: $client-cta-secondary;
+$client-input-border-color-hover: $client-cta-secondary;
 
-$client-button-background-color: $client-black;
-$client-button-background-color-hover: $client-cta-hover;
-$client-button-background-color-active: $client-cta;
+$client-button-background-color: $client-input-button;//$client-black;
+$client-button-background-color-hover: $client-input-button-hover;//$client-cta-hover;
+$client-button-background-color-active: $client-input-button-hover;//$client-cta;
 $client-button-background-color-disabled: #949494;
-$client-button-border-color: $client-black;
-$client-button-border-color-active: $client-cta;
-$client-button-border-color-hover: $client-cta-hover;
-$client-button-border-radius: 0px;
-$client-button-font-color: $client-white;
+$client-button-border-color: $client-light-gray; //$client-black;
+$client-button-border-color-active: $client-cta-secondary;
+$client-button-border-color-hover: $client-cta-secondary-hover;
+$client-button-border-radius: 5px;
+$client-button-font-color: $client-cta-secondary;
 $client-button-font-color-active: $client-white;
+$client-button-border-width: 2px;
 
 $client-submit-button-background-color: $client-cta;
 $client-submit-button-background-color-hover: $client-cta-hover;
 $client-submit-button-border-color: $client-cta;
 $client-submit-button-font-color: $client-white;
 
-$client-checkmark-background-color: $client-cta;
-$client-checkmark-border-color: $client-cta;
+$client-checkmark-background-color: $client-input-button; //$client-cta;
+$client-checkmark-border-color: $client-input-button; //$client-cta;
 $client-checkmark-font-color: $client-white;
 
 $client-error-red: #f12222;
@@ -56,3 +89,42 @@ $client-error-input-border-width: $client-input-border-width;
 
 $client-highlight-background-color: #f9f003;
 $client-highlight-font-color: #343432;
+
+
+/* Additional palette */
+$C-Beige:      #EAEADE;
+$C-BeigeHover: darken($C-Beige, 5%);
+$C-BeigeDarken: darken($C-Beige, 15%);
+$C-DeepRed:    #FF1D34;
+$C-DeepRedDarken: darken($C-DeepRed, 15%);
+$C-Grey:       #545454;
+$C-DarkGrey:   #333;
+$C-GreyLinks:  #666;
+$C-GreyText:  #666;
+$C-GreyPlaceholder: #818181;
+$C-GreyCounter: #bfbfbf;
+$C-White:      #FFF;
+$C-Black:      #000;
+
+/* Selection Colour */
+$C-Selection: $C-Orange;
+
+/* Non-Global Identity colours */
+$C-GreenAlt:        #44841a;
+$C-GreenAlt2:       #589b2c; // used for green borders on footer donate
+$C-RedHero:         #ec4631; // used for homepage hero bg when image can't stretch far enough
+$C-Shadow:          rgba(226, 226, 215, 0.96);
+$C-GreenInputBG:    #d0e4c2;
+$C-InputShadow:     rgba(97, 165, 52, 0.5);
+$C-PlaceholderText: #a6a6a2;
+$C-AltGrey:         #888; // Used for lighter grey elements
+$C-BlueAlt:         shade($C-Blue, 20%); // Used for the blue button hover styles
+
+// Social Colours
+$C-Facebook:   #3b5998;
+$C-Twitter:    #00a0d1;
+$C-Pinterest:  #da0734;
+$C-GooglePlus: #ff8700;
+$C-LinkedIn: #0075b4;
+$C-Instagram: #c32aa3;
+$C-Youtube: #FF0000;

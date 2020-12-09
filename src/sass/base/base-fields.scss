@@ -510,6 +510,7 @@ div:not(.manual-form-layout) {
   .en__field--phoneNumber2,
   .en__field--country,
   .en__field--address1,
+  .en__field--address2,
   .en__field--honname,
   .en__field--infname,
   .en__field--infemail,
@@ -552,6 +553,7 @@ div:not(.manual-form-layout) {
     align-items: center;
     padding-left: 0;
     padding-right: 0;
+    padding-bottom: 0;
   }
 
   .en__field--donationAmt.en__field--withOther

@@ -1,0 +1,347 @@
+#PageFooter {
+    margin:0 auto;
+    text-align:center;
+    background: $client-white url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/strip-green-desktop.png?v=1590997562000") repeat-x left bottom;
+
+    @media screen and (min-width: 970px){
+        background: $client-white url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/strip-green-desktop.png?v=1590997562000") repeat-x left bottom;
+        padding-bottom: 14px;
+    }
+    .wrapper{
+        margin: 0 auto;
+        max-width: 1220px;
+        &:before, &:after{
+            display: table;
+            content: "";
+            line-height: 0;
+        }
+        &:after{
+            clear: both;
+        }
+        
+    }
+    &:before, &:after{
+        display: table;
+        content: "";
+        line-height: 0;
+    }
+    &:after{
+        clear: both;
+    }
+}
+
+
+#PageFooter .footer-last {
+    margin: $body-padding $body-padding $body-padding * 2;
+    &:before, &:after{
+        display: table;
+        content: "";
+        line-height: 0;
+    }
+    &:after{
+        clear: both;
+    }
+    .footer-legal {
+        font-size: 1.0rem;;
+        text-align: left;
+        @media screen and (min-width: 970px){
+            float: left;
+            font-size:1.2rem;
+            width: 70%;
+        }
+        a{
+            color: $C-OxfamGreen;
+        }
+    }
+
+    .footer-logo {
+        img, svg {
+            width: 120px;
+            margin-top: $body-padding;
+        }
+        svg.ox-horiz{
+            fill: $C-OxfamGreen;
+        }
+
+        @media screen and (min-width: 970px){
+            float: left;
+            margin-left: 2%;
+            width: 25%;
+
+            img, svg {
+                width: auto;
+                max-width:160px;
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+#PageFooter  .phone-email{
+    @media screen and (min-width: 970px){
+        font-size: 1.4rem;
+    }
+
+    i {
+        font-size: 1.7rem;
+        margin: 0 10px;
+    }
+}
+
+#PageFooter .footer-secondary-nav {
+    margin: $body-padding;
+    clear: both;
+
+    ul {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    li {
+        display: inline-block;
+        list-style-type: none;
+        margin: 0 10px;
+        padding: 0 10px;
+
+        &:first-child {
+            border-left: none;
+            margin-left: 0;
+            padding-left: 0;
+        }
+    }
+
+    a {
+        text-align: center;
+        padding: 0 0 10px 0;
+        display: block;
+        color: $C-OxfamGreen;
+        text-decoration:none;
+    }
+
+    @media screen and (min-width: 970px){
+        ul {
+            text-align: left;
+        }
+
+        li {
+            border-left: 1px solid $C-Beige;
+            margin: 0;
+        }
+
+        a {
+            padding: 0;
+            display:  inline-block;
+        }
+    }
+}
+
+
+
+#PageFooter .footer-contact {
+
+    // Mobile
+    padding: $body-padding 0 $body-padding / 2;
+    margin-bottom: $body-padding / 2;
+    margin-bottom: 0;
+    font-size:1.6rem;
+
+    // Larger Screens
+    @media screen and (min-width: 970px){
+        border-bottom: 3px solid $C-Beige;
+        margin-right: 0;
+        margin-bottom: $body-padding * 2;
+        margin-left: 0;
+        display: inline-block;
+    }
+
+    
+    
+    h4 {
+        font-size: 1.6rem;
+        margin-bottom: 5px;
+        margin-top: 0;
+    }
+
+    ul.footer-cols {
+        list-style-type: none;
+        text-align:  center;
+        margin: 0;
+        padding: 0;
+
+        li a {
+            display: inline-block;
+            color: $C-OxfamGreen;
+            text-decoration:none;
+        }
+
+        
+
+        li {
+            float: left;
+            list-style-type:  none;
+            padding: 0 $body-padding $body-padding 0;
+            width: 22%;
+            text-align: left;
+            word-wrap: break-word;
+
+            &.social-col {
+                width: 30%;
+                text-align: center;
+                margin: 0 auto;
+                float:none;
+                @media screen and (min-width:970px){
+                    float:left;
+                    //text-align:left;
+                    margin: 0 20px;
+                    width: 22%;
+                }
+            }
+        }
+
+        .social-presence li {
+            width: 50%;
+            text-align: center;
+            margin: 0 auto;
+            @media screen and (min-width:970px){
+                width: auto;
+            }
+        }
+        
+
+        
+    }
+
+    .social-presence {
+        a {
+            color: $C-White !important;
+        }
+
+        .fb {
+            background-color: $C-Facebook;
+        }
+
+        .tw {
+            background-color: $C-Twitter;
+        }
+
+        .pn {
+            background-color: $C-Pinterest;
+        }
+
+        .gp {
+            background-color: $C-GooglePlus;
+        }
+        .ig {
+            background-color: $C-Instagram;
+        }
+        .yt {
+            background-color: $C-Youtube;
+        }
+        .li{
+            background-color:$C-LinkedIn;
+        }
+    }
+}
+/* Modals and modals links */
+.form-sidebar section.logo-grouping div#modals-block
+{
+    color: #eaeade;
+    width: 100%;
+    padding-bottom: 20px;
+}
+.modal-content
+{
+    margin-top: -14px;
+    max-width: 600px;
+}
+.modal-content h3
+{
+    margin-bottom: 14px;
+    text-align: center;
+}
+.close-modal-button
+{
+    margin-top: 18px;
+    display: block;
+}
+#modals-block a,
+.close-modal-button
+{
+    color: #61a534;
+    cursor: pointer;
+}
+#modals-block a:hover,
+.close-modal-button:hover
+{
+    color: #44841a;
+}
+
+/* Pre-footer content */
+.form-prefooter{
+    display: block;
+    //background-image: url(https://s.bsd.net/oxfamlive/main/page/-/wrappers/default/img/patterns/strip-green-desktop.png?1362759430);
+    background-repeat: no-repeat;
+    background-color: #fff;
+    background-position: -170px 0;
+    padding: 30px 20px 10px 20px;
+    vertical-align: top;
+
+
+    section.logo-grouping{
+        text-align: center;
+        div{
+            display: inline-block;
+            vertical-align: middle;
+            width: 25%;
+            padding: 12px 0px;
+        }
+    }
+}
+
+/* Social media icons */
+
+.social-presence {
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+
+    li {
+        display: inline-block;
+        margin-right: $body-padding;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    a {
+        background-color: $C-White;
+        color: $C-Purple;
+        display: block;
+        width: 40px;
+        height: 40px;
+        position: relative;
+        top: 0; 
+        //@include transition(all $E-Duration $E-Easing);
+
+        &:hover {
+            top: -3px; 
+            //@include transition(all $E-Duration $E-Easing);
+        }
+
+    }
+
+    i {
+        display: block;
+        font-size: 1.8rem;
+        height: 100%;
+        line-height: 25px;
+        text-align: center;
+        width: 100%;
+
+        font-size: 3.5rem;
+        line-height: 40px;
+        
+    }
+}

@@ -1,0 +1,75 @@
+</div>
+
+    
+    <meta property="og:description" content="Oxfam is a global movement of people working to end the injustice of poverty. Together we save lives, create lasting solutions, and hold the powerful accountable.">
+    <meta name="description" content="Oxfam is a global movement of people working to end the injustice of poverty. Together we save lives, create lasting solutions, and hold the powerful accountable.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Oxfam is a global movement of people working to end the injustice of poverty. Together we save lives, create lasting solutions, and hold the powerful accountable.">
+    <meta name="twitter:title" content="Oxfam">
+    <meta name="twitter:site" content="@OxfamAmerica">
+    <meta name="twitter:image" content="https://assets.oxfamamerica.org/media/images/oxfam-america-image_nr63lYZ.width-1200.png">
+    <meta name="twitter:creator" content="@OxfamAmerica">
+
+    <script>
+      // document.addEventListener("DOMContentLoaded", function(){
+
+      function isIframe() {
+        try {
+          return window.self !== window.top;
+        } catch (e) {
+          console.log("Page is in an iFrame");
+          return true;
+        }
+      }
+
+      if (
+        isIframe() &&
+        window.hasOwnProperty("pageJson") &&
+        pageJson.pageNumber == 1
+      ) {
+        console.log(
+          "Page is in an iFrame AND on the first page of the Engaging Networks page sequence"
+        );
+        var loaded_once;
+        window.onfocus = function() {
+          if (!loaded_once) {
+            load_scripts_fast();
+            load_scripts_slow();
+            loaded_once = true;
+          }
+        };
+      } else {
+        console.log(
+          "Page is NOT in an iFrame OR not on the first page of the Engaging Networks page sequence"
+        );
+        load_scripts_fast();
+        load_scripts_slow();
+
+        // window.addEventListener('load', (event) => {
+        // console.log('page is fully loaded');
+        // TODO: Moved to fire after DOMContentLoaded. See: https://app.productive.io/2650-4site-interactive-studios-inc/projects/19523/tasks/task/1160301
+        // load_scripts_slow();
+        // });
+      }
+
+      // });
+    </script>
+
+    
+
+    
+    <noscript>
+      <iframe style="width: 100px; height: 100px; border: 0; position: absolute; top: -5000px;" src="https://h.online-metrix.net/fp/tags.js?org_id=XXXX&session_id=XXXXX&page_id=1"></iframe>
+    </noscript>
+    
+
+    
+    <style>
+      body:not(#en__pagebuilder) {
+        transition: opacity 0.1s;
+        -webkit-transition: opacity 0.1s;
+        opacity: 1;
+      }
+    </style>
+  <script type="text/javascript" src="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.js?v=1605733492000"></script></body>
+</html>

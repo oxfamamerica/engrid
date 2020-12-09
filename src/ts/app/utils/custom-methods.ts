@@ -1,9 +1,16 @@
+import getUrlParameter from "./query-string";
 declare global {
   interface Window {
     enOnSubmit: any;
     enOnError: any;
+    wDonationLevelAmt: any;
+    wDonationLevelAmtMonthly: any;
   }
 }
+
+window.wDonationLevelAmt = window.wDonationLevelAmt || {};
+window.wDonationLevelAmtMonthly = window.wDonationLevelAmtMonthly || {};
+
 export const body = document.body;
 export const enGrid = document.getElementById("engrid") as HTMLElement;
 export const enInput = (() => {
@@ -63,6 +70,84 @@ export const enInput = (() => {
     init: init
   };
 })();
+
+
+export const setDonationAmountLevels = (dFreq: string, dAmtOnetime?: Array<number>, dAmtMonthly?: Array<number>) => {
+  console.log("IN SET DONATION AMOUNTS");
+  const donationAmt = document.querySelector(
+    ".en__field--donationAmt"
+    ) as HTMLElement;
+    
+    let wDonationLevelAmt = window.wDonationLevelAmt;
+    let wDonationLevelAmtMonthly = window.wDonationLevelAmtMonthly;
+    let donationAmtLevels = [1002,502,252,102];
+    if(dAmtOnetime){let donationAmtLevels: Array<number> = dAmtOnetime;} 
+  
+  if(dFreq == "monthly"){
+    console.log("it is monthly");
+    let donationAmtLevels = [102,52,22,12];
+    if(dAmtMonthly){let donationAmtLevels: Array<number> = dAmtMonthly;} 
+  }
+  const hpcQuery = getUrlParameter("hpc");
+ console.log("Initial dFreq: "+dFreq);
+  console.log("Initial donationAmtLevels: "+donationAmtLevels);
+  console.log("Initial wDonationLevelAmt: "+window.wDonationLevelAmt);
+  console.log("Initial wDonationLevelAmtMonthly: "+window.wDonationLevelAmtMonthly);
+  
+  if (hpcQuery && dFreq == "single"){
+    if (hpcQuery != ""){
+      var comma = hpcQuery.includes("%2C");
+      if( comma ){
+        donationAmtLevels = [15000, 10000, 7500, 5000];
+      }
+      else{
+        var hpc = parseInt(hpcQuery);
+
+        if (hpc <= 99.99){
+          donationAmtLevels = [1000, 500, 100, 50];
+        }
+        else if (hpc >= 100 && hpc <= 249.99){
+          donationAmtLevels = [1000, 500, 250, 150];
+        }
+        else if (hpc >= 250 && hpc <= 499.99){
+          donationAmtLevels = [5000, 1000, 500, 350];
+        }
+        else if (hpc >= 500 && hpc <= 999.99){
+          donationAmtLevels = [7500, 5000, 1000, 750];
+        }
+        else if(hpc >= 1000){
+          donationAmtLevels = [15000, 10000, 7500, 5000];
+        }
+      }
+    }
+  } else if(wDonationLevelAmt.length && dFreq == "single"){
+  
+    donationAmtLevels = window.wDonationLevelAmt;
+    console.log("single donationAmtLevels " +donationAmtLevels);
+  }else if(wDonationLevelAmtMonthly.length && dFreq == "monthly"){
+    
+    donationAmtLevels = window.wDonationLevelAmtMonthly;
+    console.log("monthly donationAmtLevels "+ donationAmtLevels);
+  }
+   else {
+    donationAmtLevels = donationAmtLevels;
+  }
+
+  console.log("Final donationAmtLevels = "+donationAmtLevels);
+  console.log("Final donationFrequency = "+dFreq);
+  //if(dFreq != 'monthly'){
+    for( var i = 0; i < donationAmtLevels.length; i++){
+      console.log(donationAmtLevels[i]);
+      var field = <HTMLInputElement>document.getElementById('en__field_transaction_donationAmt'+(i));
+      field.value = String(donationAmtLevels[i]);
+      var label = field.nextElementSibling;
+      if(label){
+        label.innerHTML = '$'+donationAmtLevels[i];
+      }
+    }
+  //}
+
+};
 
 export const setBackgroundImages = (bg: string | Array<String>) => {
   console.log("Backgroud", bg);
@@ -126,6 +211,8 @@ export const setBackgroundImages = (bg: string | Array<String>) => {
     }
   }
 };
+
+
 
 export const bindEvents = (e: Element) => {
   /* @TODO */
@@ -569,6 +656,17 @@ export const watchRecurrpayField = () => {
     'input[name="transaction.recurrpay"]:checked'
   ) as HTMLInputElement;
 
+  let roiSourceCode = document.querySelector(
+    "#en__field_supporter_appealCode"
+  ) as HTMLInputElement;
+  let roiSourceCodeMonthly = document.querySelector(
+    "#en__field_supporter_NOT_TAGGED_72"
+  ) as HTMLInputElement;
+  let roiSourceCodeOnetime = document.querySelector(
+    "#en__field_supporter_NOT_TAGGED_73"
+  ) as HTMLInputElement;
+
+
   const handleEnFieldRecurrpay = (e: Event) => {
     enFieldRecurrpayCurrentValue = document.querySelector(
       'input[name="transaction.recurrpay"]:checked'
@@ -576,9 +674,11 @@ export const watchRecurrpayField = () => {
     if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "y" && enGrid) {
       enGrid.classList.remove("has-give-once");
       enGrid.classList.add("has-give-monthly");
+      roiSourceCode.value = roiSourceCodeMonthly.value;
     } else if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "n" && enGrid) {
       enGrid.classList.remove("has-give-monthly");
       enGrid.classList.add("has-give-once");
+      roiSourceCode.value= roiSourceCodeOnetime.value;
     }
   };
 
@@ -590,9 +690,11 @@ export const watchRecurrpayField = () => {
     if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "y" && enGrid) {
       enGrid.classList.remove("has-give-once");
       enGrid.classList.add("has-give-monthly");
+      roiSourceCode.value = roiSourceCodeMonthly.value;
     } else if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "n" && enGrid) {
       enGrid.classList.add("has-give-once");
       enGrid.classList.remove("has-give-monthly");
+      roiSourceCode.value = roiSourceCodeOnetime.value;
     }
   }
 
@@ -647,7 +749,7 @@ export const watchGiveBySelectField = () => {
         removeClassesByPrefix(enGrid, prefix);
         enGrid.classList.add("has-give-by-check");
       }
-      enFieldPaymentType.value = "check";
+      enFieldPaymentType.value = "ACH";
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "paypal"
@@ -695,6 +797,16 @@ export const watchGiveBySelectField = () => {
       }
       enFieldPaymentType.value = "check";
       enFieldPaymentType.value = "Check";
+    } else if (
+      enFieldGiveBySelectCurrentValue &&
+      enFieldGiveBySelectCurrentValue.value.toLowerCase() == "ach"
+    ) {
+      if (enGrid) {
+        removeClassesByPrefix(enGrid, prefix);
+        enGrid.classList.add("has-give-by-check");
+      }
+      enFieldPaymentType.value = "ach";
+      enFieldPaymentType.value = "ACH";
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "paypal"
@@ -775,6 +887,16 @@ export const watchLegacyGiveBySelectField = () => {
       enFieldPaymentType.value = "check";
     } else if (
       enFieldGiveBySelectCurrentValue &&
+      enFieldGiveBySelectCurrentValue.value.toLowerCase() == "ach"
+    ) {
+      if (enGrid) {
+        removeClassesByPrefix(enGrid, prefix);
+        enGrid.classList.add("has-give-by-check");
+      }
+      enFieldPaymentType.value = "ACH";
+      enFieldPaymentType.value = "ach";
+    } else if (
+      enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "paypal"
     ) {
       if (enGrid) {
@@ -822,6 +944,16 @@ export const watchLegacyGiveBySelectField = () => {
       }
       enFieldPaymentType.value = "Check";
       enFieldPaymentType.value = "check";
+    } else if (
+      enFieldGiveBySelectCurrentValue &&
+      enFieldGiveBySelectCurrentValue.value.toLowerCase() == "ach"
+    ) {
+      if (enGrid) {
+        removeClassesByPrefix(enGrid, prefix);
+        enGrid.classList.add("has-give-by-check");
+      }
+      enFieldPaymentType.value = "ACH";
+      enFieldPaymentType.value = "ach";
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "paypal"
@@ -953,13 +1085,15 @@ const getCardType = (cc_partial: string) => {
  */
 const handleCCUpdate = () => {
   const card_type = getCardType(field_credit_card.value);
-  const payment_text =
-    field_payment_type.options[field_payment_type.selectedIndex].text;
+  if(field_payment_type.selectedIndex > 0){
+    const payment_text =
+      field_payment_type.options[field_payment_type.selectedIndex].value;
 
-  if (card_type && payment_text != card_type) {
-    field_payment_type.value = Array.from(field_payment_type.options).filter(
-      d => d.text === card_type
-    )[0].value;
+    if (card_type && payment_text != card_type) {
+      field_payment_type.value = Array.from(field_payment_type.options).filter(
+        d => d.text === card_type
+      )[0].value;
+    }
   }
 };
 
@@ -1156,6 +1290,7 @@ if (country_select) {
     }, 100);
   });
 }
+
 
 // @TODO "Footer in Viewport Check" should be made its own TS file
 // @TODO "Footer in Viewport Check" should be inlined in <head> because it is render critical

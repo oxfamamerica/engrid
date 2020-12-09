@@ -14,13 +14,13 @@ $background-image-background-color: #487c0f;
  */
 
 $client-body-background-color: $client-white; //@TODO Not yet used anywhere
-$client-body-border-radius: 0px;
+$client-body-border-radius: 5px;
 $body-padding-sm: 0.8652rem; //@TODO Revisit
 $body-padding: calc(0.8652rem * 0.75); //@TODO Revisit
 $body-padding-lg: calc(0.8652rem * 2.5); //@TODO Revisit
 $body-padding-xlg: calc(0.8652rem * 5); //@TODO Revisit
 
-$client-input-border-radius: 0px;
+$client-input-border-radius: 5px;
 $client-input-border-width: 1px;
 $client-input-border-color: $client-black;
 $client-input-background-color: transparent;
@@ -32,7 +32,7 @@ $client-button-background-color-disabled: #949494;
 $client-button-border-color: $client-black;
 $client-button-border-color-active: $client-cta;
 $client-button-border-color-hover: $client-cta-hover;
-$client-button-border-radius: 0px;
+$client-button-border-radius: 5px;
 $client-button-font-color: $client-white;
 $client-button-font-color-active: $client-white;
 

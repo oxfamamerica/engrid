@@ -19,10 +19,10 @@
     grid-template-columns:
     [
     pc-start lpc-start]  minmax(0px, 1fr)                  [lpc-end
-    cc-start lcc-start]  minmax(15px, 1fr)                 [lcc-end
+    cc-start lcc-start]  minmax(0px, 1fr)                 [lcc-end
     bc-start lbc-start]  minmax(calc(50vw - 15px), 250px)  [lbc-end
     rbc-start]           minmax(calc(50vw - 15px), 250px)  [rbc-end bc-end
-    rcc-start]           minmax(15px, 1fr)                 [rcc-end cc-end
+    rcc-start]           minmax(0px, 1fr)                 [rcc-end cc-end
     rpc-start]           minmax(0px, 1fr)                  [rpc-end pc-end               
     ];
   }

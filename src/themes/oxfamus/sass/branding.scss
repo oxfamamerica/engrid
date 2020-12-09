@@ -1,3 +1,38 @@
+html {
+  font: 62.5% / 1.6 Arial, sans-serif; /* Sets up the Base 10 stuff */
+}
+/************************************
+     * Inputs
+     ***********************************/
+
+/* General */
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="range"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+input[type="hidden"],
+select,
+select.en__field__input--select, // @TODO Required, otherwise EN's CSS wins out on Selects
+select.en__field__input--splitselect, // @TODO Required, otherwise EN's CSS wins out on Selects
+select.en__field__input--tripleselect, // @TODO Required, otherwise EN's CSS wins out on Selects
+textarea {
+  font-size: 1.8rem;
+}
+
+.en__field__element--select .en__field__item{
+  padding: 0;
+}
+
 #engrid {
   &::before {
     content: "";
@@ -8,6 +43,24 @@
       center center no-repeat;
     background-size: cover;
   }
+  &[data-engrid-layout="centerleft1col"] .body-headerOutside{
+    margin-top: 0;
+    margin-bottom: 0;
+
+    @media  screen and (min-width: 970px) {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      grid-column: bc;
+    }
+    .ox-horiz{
+      fill: $client-cta-secondary;
+      max-width: 130px;
+      @media screen and (min-width: 970px){
+        fill: $client-white;
+        max-width: 200px;
+      }
+    }
+  }
   .body-header {
     border-top: 0 !important;
     &::before {
@@ -15,13 +68,43 @@
       display: block;
       height: 12px;
       width: 100%;
-      background: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/strip-green-desktop.png?v=1590997562000")
-        center center no-repeat;
+      
       background-size: cover;
       background-position: left;
       z-index: 0 !important;
       box-shadow: none !important;
+      @media screen and (min-width: 970px) {
+      background: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/strip-green-desktop.png?v=1590997562000")
+        center center no-repeat;
+      }
     }
+    .ox-horiz{
+      fill: $client-cta-secondary;
+      @media screen and (min-width: 970px){
+        //fill: $client-white;
+      }
+    }
+  }
+  .en__component--advrow .body-main{
+    background-color: $background-color;
+    padding-top: $body-padding;
+    input, select{
+      min-height: 50px;
+    }
+    a{
+        color: $client-cta-secondary;
+    }
+    .disclaimer{
+        font-size: 1.4rem;
+        margin-top: 2.0rem;
+        a{
+            text-decoration:none;
+            &:hover{
+                text-decoration:underline;
+            }
+        }
+    }
+
   }
   .page-backgroundImage {
     background-attachment: fixed;
@@ -33,6 +116,7 @@
       top: -12px;
       width: 100vw;
       height: calc(100vh + 12px);
+      clip-path: none !important;
     }
   }
 }
@@ -46,8 +130,8 @@ body {
 body,
 body#en__pagebuilder {
   // font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
-  font-size: 1.125em;
+  font-family: Arial, Helvetica, sans-serif;//"Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
+  font-size: 2.0rem;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -69,11 +153,15 @@ body:not(#en__pagebuilder)
   #engrid
   .en__component--advrow
   .page-backgroundImage.page-backgroundImageSet::before {
+  background-image: none;
+  background-color: $client-white;
+  @media screen and (min-width: 970px){
   background-position: top left;
   background-repeat: no-repeat;
   background-size: cover;
   background-image: var(--background-image);
   will-change: transform; // creates a new paint layer
+  }
 }
 
 /* RAN Named their EMAIl Opt-in `email` which causes it to get the generated class `en__field--email` that matches the auto assigned class `en__field--email` given to EMAIL type fields. This fixes that collision of styles. https://d.pr/i/ziiG76 */
@@ -90,80 +178,99 @@ body:not(#en__pagebuilder)
   display: initial !important;
 }
 
-h1 {
-  color: $client-black;
-  font-family: OxfamHeadline;
-  font-size: calc(0.05552rem * 48);
-  font-weight: 900;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: -1px;
-  text-align: center;
-  margin-bottom: 0;
-  text-transform: uppercase;
-}
+#engrid {
+    h1 {
+        color: $client-black;
+        font-family: OxfamHeadline;
+        font-size: 3.2rem;
+        font-weight: 900;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 0px;
+        text-align: center;
+        margin-bottom: 0;
+        text-transform: uppercase;
+        @media screen and (min-width: 970px){
+          font-size: 4.8rem;
+        }
+    }
 
-h2 {
-  color: $client-black;
-  font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
-  font-size: 32px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 36px;
-  letter-spacing: normal;
-}
+    h2 {
+        color: $client-black;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 2.4rem;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
 
-h3 {
-  color: $client-black;
-  font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
-  font-size: 32px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 36px;
-  letter-spacing: normal;
-}
+        letter-spacing: normal;
+        @media screen and (min-width: 970px){
+           font-size: 3.2rem;
+           line-height: 3.6rem;
+        }
+    }
+
+    h3 {
+        color: $client-black;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 2.4rem;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 36px;
+        letter-spacing: normal;@media screen and (min-width: 970px){
+           font-size: 3.2rem;
+           line-height: 3.6rem;
+        }
+    }
 
 label.en__field__label {
-  font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.8rem;
+  font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: normal;
-  letter-spacing: 1.68px;
-  text-transform: uppercase;
+  letter-spacing: 0px;
+  width: auto;
 }
 
 .en__field__label--item {
-  font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
-  font-size: calc(0.05552rem * 18);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.0rem;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
   line-height: 1.44;
   letter-spacing: normal;
 }
-
+.en__field--text:not(.en__mandatory){
+  .en__field__label{
+    width: 100%;
+    &:after{
+      content: "(optional)";
+      padding-left: 2px;
+      float: right;
+    }
+  }
+}
 .en__field--donationAmt {
   .en__field__label--item,
   .en__field__item--other::before,
   .en__field__item--other input {
-    font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
-    font-size: calc(0.05552rem * 24);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2.0rem;
     font-weight: 900;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
     letter-spacing: normal;
-    border-radius: 0px;
   }
 }
 
 .en__field--recurrpay label.en__field__label {
-  font-size: calc(0.05552rem * 24);
+  font-size: 2.0rem;
 }
 
 .give-by-select .en__field--radio {
@@ -172,7 +279,7 @@ label.en__field__label {
     margin-top: 0.83rem;
     display: block;
     width: 100%;
-    font-size: calc(0.05552rem * 24);
+    font-size: 2.0rem;
     font-weight: 900;
     line-height: 1;
     padding: 18px 0;
@@ -195,10 +302,11 @@ label.en__field__label {
   input[type="text"].en__field__input--other,
   input[type="number"].en__field__input--other,
   input[type="tel"].en__field__input--other {
-    padding-left: 33%;
+    padding-left: 3.2rem;
+    //padding-left: 33%;
     // padding-right: 27%;
     // text-align: center;
-    min-height: 64px;
+    min-height: 50px;
   }
 }
 
@@ -207,9 +315,10 @@ label.en__field__label {
   content: "$";
   position: relative;
   height: 0;
-  left: calc((100% / 3) - 1rem);
-  top: 1.1rem;
-  color: #ffffff;
+  //left: calc((100% / 3) - 1rem);
+  left: 2.0rem;
+  top: 1.3rem;
+  color: $client-button-font-color;
   width: 0;
 }
 
@@ -225,31 +334,11 @@ label.en__field__label {
   margin-top: 0.25rem;
 }
 
-// .en__field--donationAmt .en__field__item--other::after{
-//   opacity: .8;
-//   font-size: 80%;
-//   position: absolute;
-//   font-family: inherit;
-//   font-weight: 400;
-//   line-height: 1.5;
-//   bottom: 1.25rem;
-//   display: inline-block;
-//   height: 0;
-//   margin-left: .5rem;
-// }
-
-// .en__field--donationAmt.monthly-giving .en__field__item--other::after {
-//   content: "enter monthly amount";
-// }
-
-// .en__field--donationAmt:not(.monthly-giving) .en__field__item--other::after {
-//   content: "enter amount";
-// }
 
 .en__field--recurrpay {
   label.en__field__label {
-    // font-size: calc(0.05552rem * 24) !important;
-    font-weight: 900 !important;
+    font-size: 2.0rem;
+    font-weight: bold !important;
     text-transform: none !important;
     &::before {
       top: 3px;
@@ -281,7 +370,7 @@ label.en__field__label {
 
 .en__field__input--checkbox + .en__field__label,
 .en__contactDetails__rows {
-  font-size: calc(0.05552rem * 18);
+  font-size: 2.0rem;
   font-weight: 400;
   text-transform: none;
   letter-spacing: 0.4px;
@@ -294,42 +383,49 @@ label.en__field__label {
   }
 }
 
-.en__field--donationAmt .en__field__element--radio {
+.en__component .en__field.en__field--radio.en__field--recurrpay .en__field__element--radio {
+  flex-wrap: nowrap;
+  width:100%;
+  display:flex;
+  .en__field__item:not(.en__field__item--other){
+    margin-right: 0;
+  }
+}
+.en__field--donationAmt .en__field__element--radio{
   justify-content: center;
   flex-wrap: wrap;
   justify-items: center;
   margin: 0.9375rem auto;
+  display: flex;
+  width: 100%;
 }
 
 .en__field--donationAmt .en__field__element--radio .en__field__item,
-.en__component--formblock
-  .en__field--donationAmt
-  div.en__field__item:first-of-type,
-.en__component--formblock
-  .en__field--donationAmt
-  div.en__field__item:last-of-type {
+.en__component--formblock .en__field--donationAmt div.en__field__item:first-of-type,
+.en__component--formblock .en__field--donationAmt div.en__field__item:last-of-type {
   margin: 0 0.25rem 1rem 0.25rem !important;
   margin-top: 0 !important;
-  margin-right: 0.25rem !important;
-  margin-bottom: 1rem !important;
-  margin-left: 0.25rem !important;
+  margin-right: 0.5rem !important;
+  margin-bottom: 0 !important;
+  margin-left: 0.5rem !important;
 }
 
 .en__field--donationAmt .en__field__element--radio .en__field__item {
-  width: calc((100% / 3) - (1rem / 2));
+  //width: calc((100% / 3) - (1rem / 2));
+  width: calc((100% / 2) - (1rem / 1));
 }
+.en__field--donationAmt .en__field__element--radio .en__field__item.en__field__item--other{
+  width: 100%;
+} 
 
 .en__field--donationAmt .en__field__element--radio .en__field__item label {
   width: 100%;
   display: flex;
   justify-content: center;
-  height: 64px;
+  height: 50px;
   align-items: center;
 }
 
-.content-footer {
-  background-color: #ffffff;
-}
 
 .pre-footer-card-wrapper {
   display: flex;
@@ -354,9 +450,9 @@ label.en__field__label {
   .header-wrapper {
     h2 {
       margin: 0;
-      font-size: calc(0.05552rem * 32);
+      font-size: 2.4rem;
       font-weight: 900;
-      letter-spacing: 1px;
+      letter-spacing: 0px;
       color: $client-black;
       text-transform: uppercase;
       line-height: 1;
@@ -364,15 +460,16 @@ label.en__field__label {
     }
   }
   p {
-    font-size: calc(0.05552rem * 16);
-    line-height: 1.58;
-    letter-spacing: 0.2px;
+    font-size: 2.0rem;
+    line-height: 1em;
+    letter-spacing: 0px;
     text-align: center;
     color: $client-black;
   }
 }
 .content-footer {
-  background-color: $client-black;
+  background: $client-white url(https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/strip-green-desktop.png?v=1590997562000) no-repeat;
+
 }
 
 .footer-wrapper {
@@ -394,7 +491,7 @@ label.en__field__label {
     a {
       display: block;
       color: #fff;
-      font-size: calc(0.05552rem * 16);
+      font-size: 1.8rem;
       font-weight: bold;
       text-decoration: none;
       &:hover {
@@ -407,7 +504,7 @@ label.en__field__label {
     max-width: 452px;
 
     p {
-      font-size: calc(0.05552rem * 14);
+      font-size: 1.6rem;
       font-weight: 400;
       line-height: 1.57;
       letter-spacing: 0.6px;
@@ -415,7 +512,7 @@ label.en__field__label {
     }
   }
   .address {
-    font-size: calc(0.05552rem * 14);
+    font-size: 1.6rem;
     font-weight: 400;
     line-height: 1.57;
     letter-spacing: 0.6px;
@@ -444,39 +541,49 @@ label.en__field__label {
 
 .give-by-select .en__field--radio .en__field__item {
   flex-grow: 1;
-
+  width: 100%;
+  
+  @media screen and (min-width: 970px) {
+    width: calc((100% / 2) - (3rem / 2)) !important;
+    display: inline-flex !important; 
+  }
   input[type="radio"] + label {
     flex-grow: 1;
     padding: 1rem 0 1rem 2.25rem;
-    background-position-x: calc(50% - 25px);
+    //background-position-x: calc(50% - 35px);
+    background-position-x: 1.0rem;
     background-position-y: calc(50% - 2px);
     background-repeat: no-repeat;
-    font-size: calc(0.05552rem * 18);
+    font-size: 2.0rem;
     font-weight: bold;
-    letter-spacing: 0.4px;
+    letter-spacing: 0px;
     text-align: center;
-    color: #ffffff;
-    // line-height: 1;
+    color: $client-cta-secondary;
+    line-height: 1;
     text-transform: none;
+    min-height: 50px;
+  }
+  input[type="radio"]:checked + label{
+    color: $client-white;
   }
 }
 
 // Case insensitive selector
 .give-by-select .en__field--radio input[value$="ard"] + label {
   background-size: 24px 18px;
-  background-image: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/card.png?v=1604329052000");
+  background-image: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/oxfam-2017-cc-icon.png?v=1605711049000");
 }
 
 // Case insensitive selector
 .give-by-select .en__field--radio input[value$="heck"] + label {
-  background-size: 18px 16px;
-  background-image: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/bank.png?v=1604329051000");
+  background-size: 24px 16px;
+  background-image: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/oxfam-2017-check-icon.png?v=1605711049000");
 }
 
 // Case insensitive selector
 .give-by-select .en__field--radio input[value$="aypal"] + label {
   background-size: 17px 20px;
-  background-image: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/paypal.png?v=1604329052000");
+  background-image: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/oxfam-2017-pp-icon.png?v=1605711049000");
 }
 
 // This field had a highlight applied to it that causes the checbox to show up off center
@@ -528,7 +635,7 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
 
 .footer-block-two .yd-col.yd-ft-left p {
   color: #ffffff;
-  font-size: 14px;
+  font-size: 1.4rem;
   display: inline-block;
   font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
   font-weight: normal;
@@ -539,7 +646,7 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
 
 .footer-block-two .yd-col.yd-ft-right p {
   color: #ffffff;
-  font-size: 14px;
+  font-size: 1.4rem;
   display: inline-block;
   font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
   margin-right: 10px;
@@ -578,7 +685,7 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
   margin-right: 25px !important;
   text-decoration: none !important;
   color: #ffffff !important;
-  font-size: 14px !important;
+  font-size: 1.4rem !important;
   display: inline-block;
   font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
   font-weight: normal;
@@ -588,3 +695,302 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
 .ft-link-wrapper a:hover {
   text-decoration: underline;
 }
+
+
+
+.radio-to-buttons .en__field--radio label.en__field__label.en__field__label--item,
+  .give-by-select .en__field--radio label.en__field__label.en__field__label--item,
+  .en__field--donationAmt.en__field--radio label.en__field__label.en__field__label--item {
+    border: 2px solid var(--client-button-border-color,$client-button-border-color);
+    background-position-x: 40px;
+  }
+
+/* DONATION AMOUNTS - changing to buttons */
+    /* 1. change the color of the donation label */
+    //.en__field--donationAmt label.en__field__label.en__field__label--item, 
+    .en__field--othamt1 label.en__field__label.en__field__label--item, 
+    .en__field--recurrpay label.en__field__label.en__field__label--item, 
+    .en__field--inmem label.en__field__label.en__field__label--item,
+    .en__field--paymenttype label.en__field__label.en__field__label--item {
+        display: inline-block;
+        width: 100%;
+        margin:  0;
+        font-family: inherit;
+        padding: 12px 10px 12px 10px;
+        -webkit-appearance: none;
+        border-radius: 0;
+        -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+        transition: background-color 0.25s ease-out, color 0.25s ease-out;
+        font-size: 2.0rem;
+        text-align: center;
+        cursor: pointer;
+        color: $client-cta-secondary;
+        background-color: $client-input-button;
+        border:2px solid $client-cta-secondary;
+    }
+    .en__field--recurrpay .en__field__item:first-of-type {
+        margin-left: 0.5rem;
+        label.en__field__label.en__field__label--item{
+            -webkit-border-top-left-radius: 5px;
+            -webkit-border-bottom-left-radius: 5px;
+            -moz-border-radius-topleft: 5px;
+            -moz-border-radius-bottomleft: 5px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        
+        }
+    }
+    .en__field--recurrpay .en__field__item:last-of-type {
+        margin-right: 0.5rem;
+        label.en__field__label.en__field__label--item{
+            -webkit-border-top-right-radius: 5px;
+            -webkit-border-bottom-right-radius: 5px;
+            -moz-border-radius-topright: 5px;
+            -moz-border-radius-bottomright: 5px;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            
+        }
+    }
+    /*//.en__field--donationAmt label.en__field__label.en__field__label--item,
+    .en__field--othamt1 label.en__field__label.en__field__label--item{
+        background-color: $client-cta-secondary;
+        color: #ffffff;
+        border:2px solid $client-cta-secondary;
+        & span.mo{
+          display:none;
+          font-size: 1.6rem;
+        }
+    }*/
+
+
+    .en__field--recurrpay label.en__field__label.en__field__label--item {
+       
+    }
+    .en__field--recurrpay label.en__field__label.en__field__label--item:after{
+        border-top-color:transparent;
+    }
+
+    /* 2. change the hover or active behavior of the donation amount */
+    /*.en__field--donationAmt label.en__field__label.en__field__label--item:hover,*/ 
+    
+    .en__field--othamt1 input[type='radio']:checked + label,
+    .en__field--othamt1 label.en__field__label.en__field__label--item:hover{
+        background-color: $client-cta-secondary;
+        border: 2px solid $client-cta-secondary;
+        color: $C-White;
+    }
+    
+    .en__field--recurrpay input[type='radio']:checked + label{
+        background-color: $client-cta-secondary;
+        border: 2px solid $client-cta-secondary;
+        color: $C-White;
+        //padding: 12px 10px 12px 30px;
+        font-size: 2.0rem;
+        text-align:center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .en__field--recurrpay input[type='radio']:checked + label:after{
+        border: 15px solid transparent;
+        border-top-color: $client-cta-secondary;
+        position: relative;
+        content: " ";
+        height: 0;
+        left: -50px;
+        top: 50px;
+        width: 0;
+        -webkit-transition: border-top-color 0.25s ease-out, color 0.25s ease-out;
+        transition: border-top-color 0.25s ease-out, color 0.25s ease-out;
+    }
+
+     .en__field--paymenttype input[type='radio']:checked + label{
+        background-color: $C-DarkGreen;
+        border: 2px solid $C-DarkGreen;
+        color: $C-White;
+    }
+
+
+    /* 3. remove the radio button */
+    //.en__field--donationAmt .en__field__label:before, .en__field--donationAmt .en__field__input,
+    .en__field--othamt1 .en__field__label:before, .en__field--othamt1 .en__field__input{
+     display:none !important;
+     } 
+     
+     .en__field--recurrpay .en__field__label:before, .en__field--recurrpay .en__field__input{
+     display:none !important;
+     }
+     
+    .en__field--inmem .en__field__label:before, .en__field--inmem .en__field__input{
+     display:none !important;
+     } 
+
+    .en__field--paymenttype .en__field__label:before, .en__field--paymenttype .en__field__input{
+      display:none !important;
+    }
+     
+   
+    //.en__field--donationAmt .en__field__input--radio+.en__field__label,
+    .en__field--othamt1 .en__field__input--radio+.en__field__label{
+      margin-left: 0px !important;
+      margin-right: .5em;
+    }
+
+
+.en__field--donationAmt.en__field--radio .en__field__item--other.has-value input,
+.en__field--donationAmt.en__field--radio .en__field__item--other:not(.en__field__item--hidden) input {
+    background-color: $client-white !important;
+    border: 2px solid $client-cta-secondary;
+
+    color: $client-cta-secondary !important;
+}
+
+&.has-give-monthly{
+  .en__field--giveBySelect .en__field__element--radio .en__field__item:nth-of-type(2){
+    display: none !important;
+  }
+  .en__field--donationAmt div:not(.en__field__item--other) .en__field__label--item::after{
+    font-size:100%;
+    opacity: 1.0;
+    line-height:normal;
+  }
+}
+&.has-give-once{
+  .en__field--giveBySelect .en__field__element--radio .en__field__item:nth-of-type(3){
+    display: none !important;
+  }
+}
+
+
+div.manual-form-layout {
+  &.en__component--formblock {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .en__field--firstName,
+  .en__field--lastName,
+  .en__field--bankAccountNumber,
+  .en__field--bankRoutingNumber {
+    flex-basis: 100%;
+    @media screen and (min-width: 970px){
+      flex-basis: 50%;
+    }
+  }
+
+  .en__field--ccexpire {
+    flex-basis: calc((100% / 3) * 2);
+  }
+
+  .en__field--checkbox,
+  .en__field--emailAddress,
+  .en__field--phoneNumber,
+  .en__field--phoneNumber2,
+  .en__field--country,
+  .en__field--address1,
+  .en__field--address2,
+  .en__field--honname,
+  .en__field--infname,
+  .en__field--infemail,
+  .en__field--infcountry,
+  .en__field--infadd1,
+  .en__field--gftrsn,
+  .en__field--paymenttype,
+  .en__field--ccnumber,
+  .en__field--bankAccountType {
+    flex-basis: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .en__field--city,
+  .en__field--region,
+  .en__field--postcode,
+  .en__field--infcity,
+  .en__field--infreg,
+  .en__field--infpostcd{
+    //flex-basis: calc(100% / 2);
+    flex-basis: calc((100% / 2) - (1rem / 1));
+    @media screen and (min-width: 970px){
+      //flex-basis: calc(100% / 3);
+      flex-basis: calc((100% / 3) - (1rem / 1));
+    }
+  }
+  .en__field--ccvv{
+    flex-basis: calc(100% / 3);
+  }
+  .en__field--city{
+    flex-basis: calc(100%);
+    @media screen and (min-width: 970px){
+      flex-basis: calc(100% / 3);
+    }
+  }
+
+  .en__field--city,
+  .en__field--infcity,
+  .en__field--ccexpire {
+    padding-left: 0;
+  }
+
+  .en__field--lastName,
+  .en__field--postcode,
+  .en__field--infpostcd,
+  .en__field--ccvv {
+    padding-right: 0;
+  }
+
+  .en__field--recurrpay,
+  .en__field--donationAmt {
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+  }
+
+  .en__field--donationAmt.en__field--withOther
+    .en__field__element--radio
+    .en__field__item:nth-last-child(1) {
+    display: flex !important;
+  }
+
+  .en__field--donationAmt.en__field--withOther
+    .en__field__element--radio
+    .en__field__item:nth-last-child(2) {
+    display: none !important;
+  }
+
+  .en__field--donationAmt.en__field--withOther {
+    align-items: center;
+  }
+}
+.en__field--ccexpire .en__field__element--splitselect{
+  display: flex;
+  .en__field__item{
+    padding-top: 0;
+  }
+}
+.en__submit button{
+    font-size: 2.0rem;
+    font-weight: bold; 
+    min-width: 250px;
+    width: auto;
+    margin: 0 auto;
+    padding: 1em 3em;
+}
+
+    span.form-section-index{
+        display: inline-block;
+        margin: 0 auto;
+        width: 40px;
+        height: 40px;
+        line-height: 24px;
+        border-radius: 36px;
+        background-color: #545454;
+        border: 8px solid transparent;
+        color: #fff;
+        margin-right: 10px;
+        text-align:center;
+    }
+}
+

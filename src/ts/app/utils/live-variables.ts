@@ -1,32 +1,43 @@
 import DonationAmount from "../events/donation-amount";
 import DonationFrequency from "../events/donation-frequency";
 import ProcessingFees from "../events/processing-fees";
+import Postcode from "../events/postcode-lookup";
+import { setDonationAmountLevels } from "../utils/custom-methods";
 
 import { amount } from "../index";
 import { frequency } from "../index";
 import { fees } from "../index";
 import { form } from "../index";
+import { postcode } from "../index";
 
 export default class LiveVariables {
   public _amount: DonationAmount;
   public _fees: ProcessingFees;
+  public _postcode: Postcode;
   private _frequency: DonationFrequency;
   private multiplier: number = 1 / 12;
 
-  constructor(submitLabel: string) {
+  constructor(submitLabel: string, feesLabel: string) {
     this._amount = amount;
     this._frequency = frequency;
     this._fees = fees;
+    this._postcode = postcode;
     amount.onAmountChange.subscribe(() => this.changeSubmitButton(submitLabel));
+    amount.onAmountChange.subscribe(() => this.changeFeesLabel(feesLabel));
     amount.onAmountChange.subscribe(() => this.changeLiveAmount());
     amount.onAmountChange.subscribe(() => this.changeLiveUpsellAmount());
     fees.onFeeChange.subscribe(() => this.changeLiveAmount());
     fees.onFeeChange.subscribe(() => this.changeLiveUpsellAmount());
     fees.onFeeChange.subscribe(() => this.changeSubmitButton(submitLabel));
+    fees.onFeeChange.subscribe(() => this.changeFeesLabel(feesLabel));
     frequency.onFrequencyChange.subscribe(() => this.changeLiveFrequency());
     frequency.onFrequencyChange.subscribe(() =>
       this.changeSubmitButton(submitLabel)
     );
+    frequency.onFrequencyChange.subscribe(() => this.changeFeesLabel(feesLabel));
+    frequency.onFrequencyChange.subscribe(() => this.changeDonationLevels(frequency.frequency));
+    
+    postcode.onPostcodeChange.subscribe(() => this.changePostcode());
     form.onSubmit.subscribe(() => this.loadingSubmitButton());
     form.onError.subscribe(() => this.changeSubmitButton(submitLabel));
 
@@ -68,12 +79,25 @@ export default class LiveVariables {
     const amount = this.getAmountTxt(this._amount.amount + this._fees.fee);
 
     if (amount) {
-      const frequency = this._frequency.frequency == "single" ? "" : " Monthly";
+      const frequency = this._frequency.frequency == "single" ? " now" : "/month";
       const label =
         amount != ""
           ? submitLabel + " " + amount + frequency
-          : submitLabel + " Now";
+          : submitLabel + " now";
       submit.innerHTML = label;
+    }
+  }
+  public changeFeesLabel(feesLabel: string) {
+    const amount = this.getAmountTxt(this._amount.amount + this._fees.processingFee);
+    const feeTotalDonationAmount = document.querySelector('#total_donation_amount');
+
+    if (amount) {
+      const frequency = this._frequency.frequency == "single" ? "" : "/month";
+      const label =
+        amount != ""
+          ? feesLabel + " " + amount + frequency 
+          : feesLabel + " " + amount;
+      if(feeTotalDonationAmount) {feeTotalDonationAmount.innerHTML = label;}
     }
   }
   public loadingSubmitButton() {
@@ -121,6 +145,13 @@ export default class LiveVariables {
         (elem.innerHTML =
           this._frequency.frequency == "single" ? "" : "monthly")
     );
+  }
+  public changePostcode(){
+    console.log("zip changed");
+  }
+  public changeDonationLevels(frequency: string) {
+    console.log("change donation Levels ");
+    setDonationAmountLevels(frequency);    
   }
 
   // Watch for a clicks on monthly-upsell link

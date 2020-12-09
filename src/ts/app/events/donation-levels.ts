@@ -1,46 +1,49 @@
-import DonationAmount from "./donation-amount";
+/*import DonationAmount from "./donation-amount";
+import getUrlParameter from "../utils/query-string";
 
-import { amount } from "../index";
-import { form } from "../index";
 import { SimpleEventDispatcher } from "strongly-typed-events";
 
-export default class ProcessingFees {
-  private _onFeeChange = new SimpleEventDispatcher<number>();
-  public _amount: DonationAmount = amount;
-  private _fee: number = 0;
+export default class DonationLevels {
+  private _onDonationLevelsChange = new SimpleEventDispatcher<number>();
+  
+  public _donationAmountLevels = "";
+  public _windowDonationAmt = "";
+  
+  private _donationLevelAmtOnetime: Array<number> = dAmtOnetime;
+  private _donationLevelAmtMonthly: Array<number> = dAmtMonthly;
+  private _wDonationLevelAmt = window.wDonationLevelAmt;
+  private _wDonationLevelAmtMonthly = window.wDonationLevelAmtMonthly;
+  private _hpcQuery = getUrlParameter("hpc");
   private _field: HTMLInputElement | null = document.querySelector(
-    'input[name="supporter.processing_fees"]'
+    'input[name="transaction.recurrpay"]'
   );
-  private _processingFee: number = 0;
 
   private _subscribe?: () => void;
 
   constructor() {
-    // console.log('%c Processing Fees Constructor', 'font-size: 30px; background-color: #000; color: #FF0');
     // Run only if it is a Donation Page with a Donation Amount field
     if (!document.getElementsByName("transaction.donationAmt").length) {
       return;
     }
     // Watch the Radios for Changes
     if (this._field instanceof HTMLInputElement) {
-      // console.log('%c Processing Fees Start', 'font-size: 30px; background-color: #000; color: #FF0');
+      // console.log('%c Change in recurrpay', 'font-size: 30px; background-color: #000; color: #FF0');
       this._field.addEventListener("change", (e: Event) => {
         if (
           this._field instanceof HTMLInputElement &&
-          this._field.checked &&
           !this._subscribe
         ) {
-          this._subscribe = form.onSubmit.subscribe(() => this.addFees());
+          this._subscribe = form.onSubmit.subscribe(() => this.changeLevels());
         }
-        this._onFeeChange.dispatch(this.fee);
-        // // console.log('%c Processing Fees Script Applied', 'font-size: 30px; background-color: #000; color: #FF0');
+        this._onDonationLevelsChange.dispatch(this.fee);
+        // // console.log('%c Donation Levels Script Applied', 'font-size: 30px; background-color: #000; color: #FF0');
       });
     }
 
     // this._amount = amount;
   }
-  public get onFeeChange() {
-    return this._onFeeChange.asEvent();
+  public get onDonationLevelsChange() {
+    return this._onDonationLevelsChange.asEvent();
   }
   get fee(): number {
     return this.calculateFees();
@@ -49,7 +52,7 @@ export default class ProcessingFees {
   // Every time we set a fee, trigger the onFeeChange event
   set fee(value: number) {
     this._fee = value;
-    this._onFeeChange.dispatch(this._fee);
+    this._onDonationLevelsChange.dispatch(this._fee);
   }
   get processingFee(): number{
     return this.calculateProcessingFees();
@@ -99,13 +102,9 @@ export default class ProcessingFees {
   }
 
   // Add Fees to Amount
-  private addFees() {
-    if (form.submit) {
-      this._amount.setAmount(this._amount.amount + this.fee, false);
-    }
+  private changeLevels() {
+    
   }
-  // Remove Fees From Amount
-  private removeFees() {
-    this._amount.setAmount(this._amount.amount - this.fee);
-  }
+  
 }
+*/

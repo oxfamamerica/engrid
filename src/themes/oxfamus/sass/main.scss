@@ -40,6 +40,9 @@
 @import "../../../sass/addons/addon-tweet-to-target";
 
 /* CLIENT STYLING AND LAYOUTS */
+@import "./utilities";
 @import "./font";
-@import "./branding";
 @import "./layouts/center1col";
+@import "./footer";
+@import "./branding";
+
