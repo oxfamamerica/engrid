@@ -27,13 +27,16 @@ select.en__field__input--splitselect, // @TODO Required, otherwise EN's CSS wins
 select.en__field__input--tripleselect, // @TODO Required, otherwise EN's CSS wins out on Selects
 textarea {
   font-size: 1.8rem;
+  &:-webkit-autofill::first-line {
+    font-size: 1.8rem;
+  }
 }
 
 .en__field__element--select .en__field__item{
   padding: 0;
 }
 
-#engrid {
+#engrid[data-engrid-layout="centerleft1col"]  {
   &::before {
     content: "";
     display: block;
@@ -43,7 +46,7 @@ textarea {
       center center no-repeat;
     background-size: cover;
   }
-  &[data-engrid-layout="centerleft1col"] .body-headerOutside{
+  & .body-headerOutside{
     margin-top: 0;
     margin-bottom: 0;
 
@@ -58,6 +61,18 @@ textarea {
       @media screen and (min-width: 970px){
         fill: $client-white;
         max-width: 200px;
+      }
+      &.green{
+        fill: $client-cta-secondary;
+        @media screen and (min-width: 970px){fill: $client-cta-secondary;}
+      }
+      &.burgundy{
+        fill: $C-Burgundy;
+        @media screen and (min-width: 970px){fill: $C-Burgundy;}
+      }
+      &.black{
+        fill: $C-Black;
+        @media screen and (min-width: 970px){fill: $C-Black;}
       }
     }
   }
@@ -156,11 +171,11 @@ body:not(#en__pagebuilder)
   background-image: none;
   background-color: $client-white;
   @media screen and (min-width: 970px){
-  background-position: top left;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: var(--background-image);
-  will-change: transform; // creates a new paint layer
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: var(--background-image);
+    will-change: transform; // creates a new paint layer
   }
 }
 
@@ -199,7 +214,7 @@ body:not(#en__pagebuilder)
     h2 {
         color: $client-black;
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 2.4rem;
+        font-size: 2.2rem;
         font-weight: bold;
         font-stretch: normal;
         font-style: normal;
@@ -245,7 +260,16 @@ label.en__field__label {
   line-height: 1.44;
   letter-spacing: normal;
 }
-.en__field--text:not(.en__mandatory){
+.i1-optional .en__field:nth-of-type(1),
+.i2-optional .en__field:nth-of-type(2),
+.i3-optional .en__field:nth-of-type(3),
+.i4-optional .en__field:nth-of-type(4),
+.i5-optional .en__field:nth-of-type(5),
+.i6-optional .en__field:nth-of-type(6),
+.i7-optional .en__field:nth-of-type(7),
+.i8-optional .en__field:nth-of-type(8),
+.i9-optional .en__field:nth-of-type(9),
+.i10-optional .en__field:nth-of-type(10){
   .en__field__label{
     width: 100%;
     &:after{
@@ -317,7 +341,7 @@ label.en__field__label {
   height: 0;
   //left: calc((100% / 3) - 1rem);
   left: 2.0rem;
-  top: 1.3rem;
+  top: 1.4rem;
   color: $client-button-font-color;
   width: 0;
 }
@@ -381,6 +405,11 @@ label.en__field__label {
     margin-top: -0.5rem;
     margin-left: -0.2rem;
   }
+}
+.en__field__input--radio + .en__field__label::before,
+.en__field__input--checkbox + .en__field__label::before,
+.en__contactDetails__rows::before{
+  top: 7px;
 }
 
 .en__component .en__field.en__field--radio.en__field--recurrpay .en__field__element--radio {
@@ -549,7 +578,7 @@ label.en__field__label {
   }
   input[type="radio"] + label {
     flex-grow: 1;
-    padding: 1rem 0 1rem 2.25rem;
+    padding: 1.3rem 0 1.3rem;
     //background-position-x: calc(50% - 35px);
     background-position-x: 1.0rem;
     background-position-y: calc(50% - 2px);
@@ -561,7 +590,7 @@ label.en__field__label {
     color: $client-cta-secondary;
     line-height: 1;
     text-transform: none;
-    min-height: 50px;
+    //min-height: 50px;
   }
   input[type="radio"]:checked + label{
     color: $client-white;
@@ -571,19 +600,19 @@ label.en__field__label {
 // Case insensitive selector
 .give-by-select .en__field--radio input[value$="ard"] + label {
   background-size: 24px 18px;
-  background-image: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/oxfam-2017-cc-icon.png?v=1605711049000");
+  background-image: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/oxfam-2017-cc-icon.png?v=1605711049000") !important;
 }
 
 // Case insensitive selector
 .give-by-select .en__field--radio input[value$="heck"] + label {
   background-size: 24px 16px;
-  background-image: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/oxfam-2017-check-icon.png?v=1605711049000");
+  background-image: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/oxfam-2017-check-icon.png?v=1605711049000") !important;
 }
 
 // Case insensitive selector
 .give-by-select .en__field--radio input[value$="aypal"] + label {
   background-size: 17px 20px;
-  background-image: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/oxfam-2017-pp-icon.png?v=1605711049000");
+  background-image: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/oxfam-2017-pp-icon.png?v=1605711049000") !important;
 }
 
 // This field had a highlight applied to it that causes the checbox to show up off center
@@ -795,14 +824,17 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
     .en__field--recurrpay input[type='radio']:checked + label:after{
         border: 15px solid transparent;
         border-top-color: $client-cta-secondary;
-        position: relative;
+        position: absolute;
         content: " ";
         height: 0;
-        left: -50px;
-        top: 50px;
+        left: 43%;
+        top: 48px;
         width: 0;
         -webkit-transition: border-top-color 0.25s ease-out, color 0.25s ease-out;
         transition: border-top-color 0.25s ease-out, color 0.25s ease-out;
+        @media screen and (min-width: 970px){
+            left: 45%;
+        }
     }
 
      .en__field--paymenttype input[type='radio']:checked + label{
@@ -862,6 +894,9 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
   }
 }
 
+&[data-engrid-errors=fancy] .en__component .en__field__error{
+  font-size: 1.4rem;
+}
 
 div.manual-form-layout {
   &.en__component--formblock {
@@ -874,10 +909,26 @@ div.manual-form-layout {
   .en__field--bankAccountNumber,
   .en__field--bankRoutingNumber {
     flex-basis: 100%;
+
+    padding-left: 0;
+    padding-right: 0;
     @media screen and (min-width: 970px){
       flex-basis: 50%;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
     }
   }
+  .en__field--firstName{
+    @media screen and (min-width: 970px){
+        padding-left: 0;
+    }
+  }
+  .en__field--lastName{
+    @media screen and (min-width: 970px){
+        padding-right: 0;
+    }
+  }
+
 
   .en__field--ccexpire {
     flex-basis: calc((100% / 3) * 2);
@@ -900,8 +951,8 @@ div.manual-form-layout {
   .en__field--ccnumber,
   .en__field--bankAccountType {
     flex-basis: 100%;
-    padding-left: 0;
-    padding-right: 0;
+    //padding-left: 0;
+    //padding-right: 0;
   }
 
   .en__field--city,
@@ -911,14 +962,20 @@ div.manual-form-layout {
   .en__field--infreg,
   .en__field--infpostcd{
     //flex-basis: calc(100% / 2);
-    flex-basis: calc((100% / 2) - (1rem / 1));
+    flex-basis: calc((100% / 2) - (0rem));
     @media screen and (min-width: 970px){
       //flex-basis: calc(100% / 3);
-      flex-basis: calc((100% / 3) - (1rem / 1));
+      flex-basis: calc((100% / 3) - (0rem));
     }
   }
   .en__field--ccvv{
     flex-basis: calc(100% / 3);
+  }
+  .en__field--region{
+    padding-right:0;
+    @media screen and (min-width: 970px){
+        padding-right: 0.5rem;
+    }
   }
   .en__field--city{
     flex-basis: calc(100%);
@@ -928,16 +985,24 @@ div.manual-form-layout {
   }
 
   .en__field--city,
-  .en__field--infcity,
+  .en__field--infcity{
+    padding-right: 0;
+    padding-left: 0;
+    @media screen and (min-width: 970px){
+        padding-left: 0.5rem;
+    }
+  }
   .en__field--ccexpire {
     padding-left: 0;
   }
 
-  .en__field--lastName,
+  //.en__field--lastName,
   .en__field--postcode,
-  .en__field--infpostcd,
+  .en__field--infpostcd{
+    padding-left: 0;
+  }
   .en__field--ccvv {
-    padding-right: 0;
+    padding-right: 0 !important;
   }
 
   .en__field--recurrpay,
@@ -992,5 +1057,152 @@ div.manual-form-layout {
         margin-right: 10px;
         text-align:center;
     }
+    .en__captcha{
+      margin: 0 auto;
+    }
 }
 
+.en__field__input--checkbox:checked+.en__field__label:after{
+  left: -19px;
+  top: 2px;
+  content:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='21' height='16' viewBox='0 0 21 16'><path fill='svg-friendly-color(orange)' fill-rule='nonzero' d='M18.76.16L6.68 12.113l-4.44-4.392a.555.555 0 0 0-.779 0L.161 9.006a.541.541 0 0 0 0 .771L6.29 15.84a.555.555 0 0 0 .78 0l13.77-13.624a.541.541 0 0 0 0-.771L19.539.16a.555.555 0 0 0-.779 0z'/></svg>")
+}
+
+
+//upsell modal
+#enModal,
+#ieModal {
+    overflow: scroll;
+    display:block;
+    @media screen and (min-width: 970px){
+        display:flex;
+    }
+  
+    &.upsellModal{
+        .enModal-container{
+            max-width: 910px;
+        }
+        #enModalContent{
+            background: url('https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/lightbox-bg-redesign-2016.png?v=1607972998000') no-repeat top left;
+            padding: $body-padding;
+            @media screen and (min-width: 970px){
+                padding: $body-padding-lg;
+            }
+
+            .modal-left-column {
+                flex-basis: 50%;
+                background-size: cover;
+                background-position: left center;
+            }
+
+            .modal-right-column {
+                background-color: #ffffff;
+                flex-basis: 50%;
+                padding: $body-padding-sm;
+                @media screen and (min-width: 970px){
+                    padding: $body-padding-lg;
+                }
+                text-align: center;
+                .logo{
+                    width: 120px;
+                    @media screen and (min-width: 970px){
+                      width: 180px;
+                    }
+                }
+                h1{
+                    font-family: OxfamHeadline;
+                    color: $C-OxfamGreen;
+                    font-size: 2.0rem;
+                    @media screen and (min-width: 970px){
+                        font-size: 3.8rem;
+                    }
+                }
+                p{
+                    font-size: 1.6rem;
+                    @media screen and (min-width: 970px){
+                        font-size: 2.0rem;
+                    }
+                }
+                .live-giving-upsell-amount{
+                    color: $C-OxfamGreen;
+                    font-weight:bold;
+                }
+                .cta-groups{
+                    flex-direction: column;
+                    @media screen and (min-width: 970px){
+                        flex-direction: row;
+                    }
+                    .group {
+                        flex-direction: column;
+                        &.primary, &.secondary {
+                            margin-bottom: 0;
+                            @media screen and (min-width: 970px){margin-bottom: 50px;}
+                            button {
+                                padding: $body-padding-sm;
+                                background-color: $client-cta;
+                                font-size: 1.8rem;
+                                border-radius: 2px;
+                                min-width: 248px;
+                                max-width: 350px;
+                                margin: 0 auto;
+                                &:hover{
+                                  background-color:$client-cta-hover;
+                                }
+                                span{
+                                    font-weight: bold;
+                                    color: $C-White;
+                                    &.nowrap{
+                                      white-space: nowrap;
+                                    }
+                                }
+                                @media screen and (min-width: 970px){
+                                padding: $body-padding-lg;
+                                }
+                            }
+                            opacity: 1;
+                            visibility: visible;
+                            display: block;
+                            &#modalProgressMessage{
+                                opacity: 0;
+                                visibility: hidden;
+                                display:none;
+                            }
+                        }
+                    } //.group
+                } //.cta-groups
+            } //.modal-right-column
+            
+            flex-direction: column;
+
+            .modal-left-column {
+                display: none;
+            }
+            .modal-right-column{
+                flex-basis: 100%;
+            }
+        }//#enModalContent
+      
+  
+
+        &.in-progress{
+            .cta-groups{
+                .group{
+                    button{
+                        opacity: 0;
+                        visibility: hidden;
+                        display:none;
+                        -webkit-transition: 0.3s opacity ease-in-out;
+                        transition: 0.3s opacity ease-in-out;
+                    }
+                    &#modalProgressMessage{
+                        opacity: 1 !important;
+                        visibility: visible !important;
+                        -webkit-transition: 0.3s opacity ease-in-out;
+                        transition: 0.3s opacity ease-in-out;
+                        display: block !important;
+                    }
+                }
+            }
+        }
+    }//.upsellModal
+  } //#enModal

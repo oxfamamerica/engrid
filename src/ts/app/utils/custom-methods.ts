@@ -73,7 +73,10 @@ export const enInput = (() => {
 
 
 export const setDonationAmountLevels = (dFreq: string, dAmtOnetime?: Array<number>, dAmtMonthly?: Array<number>) => {
-  console.log("IN SET DONATION AMOUNTS");
+  if (!document.getElementsByName("transaction.donationAmt").length) {
+      return;
+  }
+  //console.log("IN SET DONATION AMOUNTS");
   const donationAmt = document.querySelector(
     ".en__field--donationAmt"
     ) as HTMLElement;
@@ -84,19 +87,19 @@ export const setDonationAmountLevels = (dFreq: string, dAmtOnetime?: Array<numbe
     if(dAmtOnetime){let donationAmtLevels: Array<number> = dAmtOnetime;} 
   
   if(dFreq == "monthly"){
-    console.log("it is monthly");
+    //console.log("it is monthly");
     let donationAmtLevels = [102,52,22,12];
     if(dAmtMonthly){let donationAmtLevels: Array<number> = dAmtMonthly;} 
   }
   const hpcQuery = getUrlParameter("hpc");
- console.log("Initial dFreq: "+dFreq);
+  /*console.log("Initial dFreq: "+dFreq);
   console.log("Initial donationAmtLevels: "+donationAmtLevels);
   console.log("Initial wDonationLevelAmt: "+window.wDonationLevelAmt);
-  console.log("Initial wDonationLevelAmtMonthly: "+window.wDonationLevelAmtMonthly);
+  console.log("Initial wDonationLevelAmtMonthly: "+window.wDonationLevelAmtMonthly);*/
   
   if (hpcQuery && dFreq == "single"){
     if (hpcQuery != ""){
-      var comma = hpcQuery.includes("%2C");
+      var comma = hpcQuery.includes(",");
       if( comma ){
         donationAmtLevels = [15000, 10000, 7500, 5000];
       }
@@ -123,21 +126,21 @@ export const setDonationAmountLevels = (dFreq: string, dAmtOnetime?: Array<numbe
   } else if(wDonationLevelAmt.length && dFreq == "single"){
   
     donationAmtLevels = window.wDonationLevelAmt;
-    console.log("single donationAmtLevels " +donationAmtLevels);
+    //console.log("single donationAmtLevels " +donationAmtLevels);
   }else if(wDonationLevelAmtMonthly.length && dFreq == "monthly"){
     
     donationAmtLevels = window.wDonationLevelAmtMonthly;
-    console.log("monthly donationAmtLevels "+ donationAmtLevels);
+    //console.log("monthly donationAmtLevels "+ donationAmtLevels);
   }
    else {
     donationAmtLevels = donationAmtLevels;
   }
 
-  console.log("Final donationAmtLevels = "+donationAmtLevels);
-  console.log("Final donationFrequency = "+dFreq);
+  //console.log("Final donationAmtLevels = "+donationAmtLevels);
+  //console.log("Final donationFrequency = "+dFreq);
   //if(dFreq != 'monthly'){
     for( var i = 0; i < donationAmtLevels.length; i++){
-      console.log(donationAmtLevels[i]);
+      //console.log(donationAmtLevels[i]);
       var field = <HTMLInputElement>document.getElementById('en__field_transaction_donationAmt'+(i));
       field.value = String(donationAmtLevels[i]);
       var label = field.nextElementSibling;
@@ -482,12 +485,12 @@ export const inputPlaceholder = () => {
   const enFieldPhoneNumber2 = document.querySelector(
     "#en__field_supporter_phoneNumber2"
   ) as HTMLInputElement;
-  // const enFieldCountry = document.querySelector("#en__field_supporter_country") as HTMLSelectElement;
+  const enFieldCountry = document.querySelector("#en__field_supporter_country") as HTMLSelectElement;
   // const enFieldAddress1 = document.querySelector("#en__field_supporter_address1") as HTMLInputElement;
   // const enFieldAddress2 = document.querySelector("#en__field_supporter_address2") as HTMLInputElement;
   // const enFieldCity = document.querySelector("#en__field_supporter_city") as HTMLInputElement;
   // const enFieldRegion = document.querySelector("#en__field_supporter_region") as HTMLSelectElement;
-  // const enFieldPostcode = document.querySelector("#en__field_supporter_postcode") as HTMLInputElement;
+  const enFieldPostcode = document.querySelector("#en__field_supporter_postcode") as HTMLInputElement;
   const enFieldHonname = document.querySelector(
     "#en__field_transaction_honname"
   ) as HTMLInputElement;
@@ -520,12 +523,12 @@ export const inputPlaceholder = () => {
   ) as HTMLInputElement;
   // const enFieldCcexpire = document.querySelector("#en__field_transaction_ccexpire") as HTMLInputElement;
   // const enFieldCcvv = document.querySelector("#en__field_transaction_ccvv") as HTMLInputElement;
-  // const enFieldBankAccountNumber = document.querySelector("#en__field_supporter_bankAccountNumber") as HTMLInputElement;
-  // const enFieldBankRoutingNumber = document.querySelector("#en__field_supporter_bankRoutingNumber") as HTMLInputElement;
+  const enFieldBankAccountNumber = document.querySelector("#en__field_supporter_bankAccountNumber") as HTMLInputElement;
+  const enFieldBankRoutingNumber = document.querySelector("#en__field_supporter_bankRoutingNumber") as HTMLInputElement;
 
   if (enFieldDonationAmt) {
     enFieldDonationAmt.placeholder = "Other";
-    enFieldDonationAmt.setAttribute("inputmode", "numeric");
+    enFieldDonationAmt.setAttribute("inputmode", "decimal");
   }
   // if (enFieldFirstName) {
   //   enFieldFirstName.placeholder = "First name";
@@ -542,9 +545,9 @@ export const inputPlaceholder = () => {
   if (enFieldPhoneNumber2) {
     enFieldPhoneNumber2.placeholder = "000-000-0000 (optional)";
   }
-  // if (enFieldCountry){
+  if (enFieldCountry){
   //   enFieldCountry.placeholder = "Country";
-  // // }
+  }
   // if (enFieldAddress1) {
   //   enFieldAddress1.placeholder = "Street address";
   // }
@@ -557,9 +560,12 @@ export const inputPlaceholder = () => {
   // if (enFieldRegion){
   //   enFieldRegion.placeholder = "TBD";
   // }
-  // if (enFieldPostcode) {
+  if (enFieldPostcode) {
   //   enFieldPostcode.placeholder = "Post code";
-  // }
+    if(enFieldCountry.value == 'US'){
+      enFieldPostcode.setAttribute("inputmode", "decimal");
+    }
+  }
   if (enFieldHonname) {
     enFieldHonname.placeholder = "Honoree name";
   }
@@ -602,12 +608,14 @@ export const inputPlaceholder = () => {
   // if (enFieldCcvv) {
   //   enFieldCcvv.placeholder = "CVV";
   // }
-  // if (enFieldBankAccountNumber) {
-  //   enFieldBankAccountNumber.placeholder = "Bank account number";
-  // }
-  // if (enFieldBankRoutingNumber) {
+  if (enFieldBankAccountNumber) {
+    //   enFieldBankAccountNumber.placeholder = "Bank account number";
+    enFieldBankAccountNumber.setAttribute("inputmode", "decimal");
+   }
+  if (enFieldBankRoutingNumber) {
   //   enFieldBankRoutingNumber.placeholder = "Bank routing number";
-  // }
+  enFieldBankRoutingNumber.setAttribute("inputmode", "decimal");
+  }
 };
 
 export const watchInmemField = () => {
@@ -739,8 +747,12 @@ export const watchGiveBySelectField = () => {
         removeClassesByPrefix(enGrid, prefix);
         enGrid.classList.add("has-give-by-card");
       }
-      // enFieldPaymentType.value = "card";
+      enFieldPaymentType.value = "card";
       handleCCUpdate();
+      //hide ACH fields
+      handleHideACH();
+      handleShowCC();
+      handleShowAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "check"
@@ -750,6 +762,10 @@ export const watchGiveBySelectField = () => {
         enGrid.classList.add("has-give-by-check");
       }
       enFieldPaymentType.value = "ACH";
+      //hide CC fields
+      handleHideCC();
+      handleShowACH();
+      handleShowAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "paypal"
@@ -759,6 +775,10 @@ export const watchGiveBySelectField = () => {
         enGrid.classList.add("has-give-by-paypal");
       }
       enFieldPaymentType.value = "paypal";
+      //hide address fields, ACH, CC
+      handleHideACH();
+      handleHideCC();
+      handleHideAddress();
     }
     else if (
       enFieldGiveBySelectCurrentValue &&
@@ -787,6 +807,10 @@ export const watchGiveBySelectField = () => {
       }
       // enFieldPaymentType.value = "card";
       handleCCUpdate();
+      //hide ACH fields
+      handleHideACH();
+      handleShowCC();
+      handleShowAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "check"
@@ -795,8 +819,13 @@ export const watchGiveBySelectField = () => {
         removeClassesByPrefix(enGrid, prefix);
         enGrid.classList.add("has-give-by-check");
       }
-      enFieldPaymentType.value = "check";
-      enFieldPaymentType.value = "Check";
+      //enFieldPaymentType.value = "check";
+      //enFieldPaymentType.value = "Check";
+      enFieldPaymentType.value = "ACH";
+      //hide CC fields
+      handleHideCC();
+      handleShowACH();
+      handleShowAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "ach"
@@ -805,8 +834,12 @@ export const watchGiveBySelectField = () => {
         removeClassesByPrefix(enGrid, prefix);
         enGrid.classList.add("has-give-by-check");
       }
-      enFieldPaymentType.value = "ach";
+      //enFieldPaymentType.value = "ach";
       enFieldPaymentType.value = "ACH";
+      //hide CC fields
+      handleHideCC();
+      handleShowACH();
+      handleShowAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "paypal"
@@ -816,7 +849,11 @@ export const watchGiveBySelectField = () => {
         enGrid.classList.add("has-give-by-paypal");
       }
       enFieldPaymentType.value = "paypal";
-      enFieldPaymentType.value = "Paypal";
+      //enFieldPaymentType.value = "Paypal";
+      //hide address fields, ACH, CC
+      handleHideACH();
+      handleHideCC();
+      handleHideAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "applepay"
@@ -873,8 +910,12 @@ export const watchLegacyGiveBySelectField = () => {
         removeClassesByPrefix(enGrid, prefix);
         enGrid.classList.add("has-give-by-card");
       }
-      // enFieldPaymentType.value = "card";
+      enFieldPaymentType.value = "card";
       handleCCUpdate();
+      //hide ACH fields
+      handleHideACH();
+      handleShowCC();
+      handleShowAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "check"
@@ -883,8 +924,13 @@ export const watchLegacyGiveBySelectField = () => {
         removeClassesByPrefix(enGrid, prefix);
         enGrid.classList.add("has-give-by-check");
       }
-      enFieldPaymentType.value = "Check";
-      enFieldPaymentType.value = "check";
+      //enFieldPaymentType.value = "Check";
+      //enFieldPaymentType.value = "check";
+      enFieldPaymentType.value = "ACH";
+      //hide CC fields
+      handleShowACH();
+      handleHideCC();
+      handleShowAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "ach"
@@ -894,7 +940,11 @@ export const watchLegacyGiveBySelectField = () => {
         enGrid.classList.add("has-give-by-check");
       }
       enFieldPaymentType.value = "ACH";
-      enFieldPaymentType.value = "ach";
+      //enFieldPaymentType.value = "ach";
+      //hide ACH fields
+      handleShowACH();
+      handleHideCC();
+      handleShowAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "paypal"
@@ -904,8 +954,12 @@ export const watchLegacyGiveBySelectField = () => {
         enGrid.classList.add("has-give-by-paypal");
       }
       enFieldPaymentType.add(paypalOption);
-      enFieldPaymentType.value = "Paypal";
+      //enFieldPaymentType.value = "Paypal";
       enFieldPaymentType.value = "paypal";
+      //hide Address fields
+      handleHideACH();
+      handleHideCC();
+      handleHideAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "applepay"
@@ -934,6 +988,10 @@ export const watchLegacyGiveBySelectField = () => {
       }
       // enFieldPaymentType.value = "card";
       handleCCUpdate();
+      //hide ACH fields
+      handleHideACH();
+      handleShowCC();
+      handleShowAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "check"
@@ -942,8 +1000,12 @@ export const watchLegacyGiveBySelectField = () => {
         removeClassesByPrefix(enGrid, prefix);
         enGrid.classList.add("has-give-by-check");
       }
-      enFieldPaymentType.value = "Check";
-      enFieldPaymentType.value = "check";
+      //enFieldPaymentType.value = "Check";
+      enFieldPaymentType.value = "ACH";
+      //hide CC fields
+      handleShowACH();
+      handleHideCC();
+      handleShowAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "ach"
@@ -953,7 +1015,11 @@ export const watchLegacyGiveBySelectField = () => {
         enGrid.classList.add("has-give-by-check");
       }
       enFieldPaymentType.value = "ACH";
-      enFieldPaymentType.value = "ach";
+      //enFieldPaymentType.value = "ach";
+      //hide CC fields
+      handleShowACH();
+      handleHideCC();
+      handleShowAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "paypal"
@@ -963,8 +1029,12 @@ export const watchLegacyGiveBySelectField = () => {
         enGrid.classList.add("has-give-by-paypal");
       }
       enFieldPaymentType.add(paypalOption);
-      enFieldPaymentType.value = "Paypal";
+      //enFieldPaymentType.value = "Paypal";
       enFieldPaymentType.value = "paypal";
+      //hide Address fields
+      handleHideACH();
+      handleHideCC();
+      handleHideAddress();
     } else if (
       enFieldGiveBySelectCurrentValue &&
       enFieldGiveBySelectCurrentValue.value.toLowerCase() == "applepay"
@@ -1083,7 +1153,70 @@ const getCardType = (cc_partial: string) => {
 /*
  * Handlers
  */
+const handleHideCC = () => {
+  //console.log("hide CC");
+  /*const enFieldCCVV = document.querySelectorAll(".en__field--ccvv");
+  const enFieldTransactionCCVV = document.getElementById("en__field_transaction_ccvv") as HTMLInputElement;
+  enFieldCCVV[0].classList.add("en__hidden");
+  if(enFieldTransactionCCVV) enFieldTransactionCCVV.disabled = true;*/
+};
+const handleShowCC = () => {
+  //console.log("show CC");
+  /*const enFieldCCVV = document.querySelectorAll(".en__field--ccvv");
+  const enFieldTransactionCCVV = document.getElementById("en__field_transaction_ccvv") as HTMLInputElement;
+  enFieldCCVV[0].classList.remove("en__hidden");
+  if(enFieldTransactionCCVV) enFieldTransactionCCVV.disabled = false;*/
+  
+};
+const handleHideACH = () => {
+  //console.log("Hide ACH");
+  const enFieldBankAccountType = document.querySelectorAll(".en__field--bankAccountType");
+  const enFieldSupporterBankAccountType = document.getElementById("en__field_supporter_bankAccountType") as HTMLInputElement;
+  const enFieldBankAccountNumber = document.querySelectorAll(".en__field--bankAccountNumber");
+  const enFieldSupporterBankAccountNumber = document.getElementById("en__field_supporter_bankAccountNumber") as HTMLInputElement;
+  const enFieldBankRoutingNumber = document.querySelectorAll(".en__field--bankRoutingNumber");
+  const enFieldSupporterBankRoutingNumber = document.getElementById("en__field_supporter_bankRoutingNumber") as HTMLInputElement;
+  const enHiddenFields = document.querySelectorAll(".en__hiddenFields")[0] as HTMLInputElement;
+  let enHiddenFieldsVal = "";
+
+  enFieldBankAccountType[0].classList.add("en__hidden");
+  if(enFieldSupporterBankAccountType) enFieldSupporterBankAccountType.disabled = true;
+  enFieldBankAccountNumber[0].classList.add("en__hidden");
+  if(enFieldSupporterBankAccountNumber) enFieldSupporterBankAccountNumber.disabled = true;
+  enFieldBankRoutingNumber[0].classList.add("en__hidden");
+  if(enFieldSupporterBankRoutingNumber) enFieldSupporterBankRoutingNumber.disabled = true;
+  enHiddenFieldsVal = "supporter.bankAccountType,supporter.bankAccountNumber,supporter.bankRoutingNumber";
+  enHiddenFields.value = enHiddenFieldsVal;
+};
+const handleShowACH = () => {
+  //console.log("Show ACH");
+  const enFieldBankAccountType = document.querySelectorAll(".en__field--bankAccountType");
+  const enFieldSupporterBankAccountType = document.getElementById("en__field_supporter_bankAccountType") as HTMLInputElement;
+  const enFieldBankAccountNumber = document.querySelectorAll(".en__field--bankAccountNumber");
+  const enFieldSupporterBankAccountNumber = document.getElementById("en__field_supporter_bankAccountNumber") as HTMLInputElement;
+  const enFieldBankRoutingNumber = document.querySelectorAll(".en__field--bankRoutingNumber");
+  const enFieldSupporterBankRoutingNumber = document.getElementById("en__field_supporter_bankRoutingNumber") as HTMLInputElement;
+  const enHiddenFields = document.querySelectorAll(".en__hiddenFields")[0] as HTMLInputElement;
+  let enHiddenFieldsVal = "";
+  enHiddenFields.value = enHiddenFieldsVal;
+
+  enFieldBankAccountType[0].classList.remove("en__hidden");
+  if(enFieldSupporterBankAccountType) enFieldSupporterBankAccountType.disabled = false;
+  enFieldBankAccountNumber[0].classList.remove("en__hidden");
+  if(enFieldSupporterBankAccountNumber) enFieldSupporterBankAccountNumber.disabled = false;
+  enFieldBankRoutingNumber[0].classList.remove("en__hidden");
+  if(enFieldSupporterBankRoutingNumber) enFieldSupporterBankRoutingNumber.disabled = false;
+};
+const handleHideAddress = () => {
+  //console.log("Hide Address");
+};
+const handleShowAddress = () => {
+  //console.log("Show Address");
+};
+
+
 const handleCCUpdate = () => {
+  handleHideACH();
   const card_type = getCardType(field_credit_card.value);
   if(field_payment_type.selectedIndex > 0){
     const payment_text =
@@ -1147,6 +1280,8 @@ const handleExpUpdate = (e: string) => {
     }
   }
 };
+
+
 
 /*
  * Event Listeners
@@ -1276,8 +1411,17 @@ const country_select = document.getElementById(
 const region_select = document.getElementById(
   "en__field_supporter_region"
 ) as HTMLSelectElement;
+const postcode_input = document.getElementById(
+  "en__field_supporter_postcode"
+) as HTMLSelectElement;
 if (country_select) {
   country_select.addEventListener("change", () => {
+    if(country_select.value == "US"){
+      postcode_input.setAttribute("inputmode", "decimal");
+    }
+    else{
+      postcode_input.setAttribute("inputmode", "text");
+    }
     setTimeout(() => {
       if (
         region_select.options.length == 1 &&

@@ -15,7 +15,8 @@ export default class LiveVariables {
   public _fees: ProcessingFees;
   public _postcode: Postcode;
   private _frequency: DonationFrequency;
-  private multiplier: number = 1 / 12;
+  //private multiplier: number = 1 / 12;
+  private multiplier: number = 1 / 1;
 
   constructor(submitLabel: string, feesLabel: string) {
     this._amount = amount;
@@ -44,12 +45,22 @@ export default class LiveVariables {
     // Watch the monthly-upsell links
     document.addEventListener("click", (e: Event) => {
       const element = e.target as HTMLInputElement;
+      let modalProgressMessage = document.getElementById("modalProgressMessage");
+      let enModal = document.getElementById("enModal");
+
       if (element) {
         if (element.classList.contains("monthly-upsell")) {
           this.upsold(e);
+          if(enModal && enModal.classList.contains("upsellModal")){
+            enModal.classList.add("in-progress");
+          }
         } else if (element.classList.contains("form-submit")) {
           e.preventDefault();
+          if(enModal && enModal.classList.contains("upsellModal")){
+            enModal.classList.add("in-progress");
+          }
           form.submitForm();
+
         }
       }
     });
@@ -62,13 +73,34 @@ export default class LiveVariables {
     return amount > 0 ? amountTxt : "";
   }
 
-  private getUpsellAmountTxt(amount: number = 0) {
+  /*private getUpsellAmountTxt(amount: number = 0) {
     const amountTxt = "$" + Math.ceil(amount / 5) * 5;
     return amount > 0 ? amountTxt : "";
   }
 
   private getUpsellAmountRaw(amount: number = 0) {
     const amountRaw = Math.ceil(amount / 5) * 5;
+    return amount > 0 ? amountRaw.toString() : "";
+  }*/
+
+  private getUpsellAmountTxt(amount: number = 0) {
+    let amountRaw = 5;
+    if(amount >= 25){
+      amountRaw = Math.round(amount * 0.2);
+      console.log("Txt amountRaw greater $25 is "+amountRaw);
+    }
+    const amountTxt = "$" + amountRaw;
+  console.log("amount is "+amount);
+    console.log("amountTxt is "+amountTxt);
+    return amount > 0 ? amountTxt : "";
+  }
+  private getUpsellAmountRaw(amount: number = 0){
+    let amountRaw = 5;
+    if(amount >= 25){
+      amountRaw = Math.round(amount * 0.2);
+      console.log("amountRaw greater $25 is "+amountRaw);
+    }
+    console.log("amountRaw is "+amountRaw);
     return amount > 0 ? amountRaw.toString() : "";
   }
 

@@ -54,10 +54,14 @@ export default class Modal {
     }
   }
   private openUpsell() {
+    let enFieldGiveBySelectCurrentValue = document.querySelector(
+      'input[name="transaction.giveBySelect"]:checked'
+    ) as HTMLInputElement;
+    let giveBySelectCurrent = enFieldGiveBySelectCurrentValue.value.toLowerCase();
     if (this.debug) console.log("Upsell Triggered");
     const freq = frequency.frequency;
     // Only open Upsell Modal if Frequency == Single & if the Modal is closed
-    if (freq == "single" && this.overlay.classList.contains("is-hidden")) {
+    if (freq == "single" && giveBySelectCurrent == "card" && this.overlay.classList.contains("is-hidden")) {
       this.open(this.upsellModal);
       window.scrollTo(0, 0);
       // Avoid form submission so you can see the modal

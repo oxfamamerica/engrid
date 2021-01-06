@@ -1,0 +1,15 @@
+#engrid {
+    
+    .en__tweetButton__send,
+    .en__tweetButton__sent{
+        background-color: $C-Twitter !important;
+        &:hover{
+            background-color: darken($C-Twitter, 15%);
+        }
+        a{
+            color: $C-White !important;
+            font-size:1.8rem;
+        }
+    }
+
+}

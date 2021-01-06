@@ -1,0 +1,22 @@
+#engrid.theme-emergency {
+  	&::before {
+    	background: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/strip-emergency-desktop.png?v=1608125967000") center center no-repeat;
+    
+  	}
+  	.body-header {
+    	&::before {
+    		@media screen and (min-width: 970px) {
+      			background: url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/strip-emergency-desktop.png?v=1608125967000") center center no-repeat;
+      		}
+      	}
+    }
+    #PageFooter {
+  		background: $client-white url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/strip-emergency-desktop.png?v=1608125967000") repeat-x left bottom;
+
+  		@media screen and (min-width: 970px){
+      		background: $client-white url("https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/strip-emergency-desktop.png?v=1608125967000") repeat-x left bottom;
+  		}
+	}
+}
+
+

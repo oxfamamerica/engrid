@@ -4,7 +4,6 @@ import "./sass/main.scss";
 
 const options = {
   	backgroundImage: [
-    	"https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/1-Puerto-Rico-fade.jpg?v=1596678839000",
     	"https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/05_man_farmer_hoe.jpg?v=1590996842000"
   	],
   	submitLabel: "Donate",
