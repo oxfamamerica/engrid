@@ -100,6 +100,12 @@ textarea {
       }
     }
   }
+  .en__component--advrow .body-top{
+    h1{
+      padding-top: 1.6rem;
+      text-align: center;
+    }
+  }
   .en__component--advrow .body-main{
     background-color: $background-color;
     padding-top: $body-padding;
