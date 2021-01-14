@@ -478,18 +478,18 @@ export const inputPlaceholder = () => {
   const enFieldDonationAmt = document.querySelector(
     ".en__field--donationAmt.en__field--withOther .en__field__input--other"
   ) as HTMLInputElement;
-  // const enFieldFirstName = document.querySelector("#en__field_supporter_firstName") as HTMLInputElement;
-  // const enFieldLastName = document.querySelector("#en__field_supporter_lastName") as HTMLInputElement;
-  // const enFieldEmailAddress = document.querySelector("#en__field_supporter_emailAddress") as HTMLInputElement;
-  // const enFieldPhoneNumber = document.querySelector("#en__field_supporter_phoneNumber") as HTMLInputElement;
+  const enFieldFirstName = document.querySelector("#en__field_supporter_firstName") as HTMLInputElement;
+  const enFieldLastName = document.querySelector("#en__field_supporter_lastName") as HTMLInputElement;
+  const enFieldEmailAddress = document.querySelector("#en__field_supporter_emailAddress") as HTMLInputElement;
+  const enFieldPhoneNumber = document.querySelector("#en__field_supporter_phoneNumber") as HTMLInputElement;
   const enFieldPhoneNumber2 = document.querySelector(
     "#en__field_supporter_phoneNumber2"
   ) as HTMLInputElement;
   const enFieldCountry = document.querySelector("#en__field_supporter_country") as HTMLSelectElement;
-  // const enFieldAddress1 = document.querySelector("#en__field_supporter_address1") as HTMLInputElement;
-  // const enFieldAddress2 = document.querySelector("#en__field_supporter_address2") as HTMLInputElement;
-  // const enFieldCity = document.querySelector("#en__field_supporter_city") as HTMLInputElement;
-  // const enFieldRegion = document.querySelector("#en__field_supporter_region") as HTMLSelectElement;
+  const enFieldAddress1 = document.querySelector("#en__field_supporter_address1") as HTMLInputElement;
+  const enFieldAddress2 = document.querySelector("#en__field_supporter_address2") as HTMLInputElement;
+  const enFieldCity = document.querySelector("#en__field_supporter_city") as HTMLInputElement;
+  const enFieldRegion = document.querySelector("#en__field_supporter_region") as HTMLSelectElement;
   const enFieldPostcode = document.querySelector("#en__field_supporter_postcode") as HTMLInputElement;
   const enFieldHonname = document.querySelector(
     "#en__field_transaction_honname"
@@ -522,7 +522,7 @@ export const inputPlaceholder = () => {
     "#en__field_transaction_ccnumber"
   ) as HTMLInputElement;
   // const enFieldCcexpire = document.querySelector("#en__field_transaction_ccexpire") as HTMLInputElement;
-  // const enFieldCcvv = document.querySelector("#en__field_transaction_ccvv") as HTMLInputElement;
+  const enFieldCcvv = document.querySelector("#en__field_transaction_ccvv") as HTMLInputElement;
   const enFieldBankAccountNumber = document.querySelector("#en__field_supporter_bankAccountNumber") as HTMLInputElement;
   const enFieldBankRoutingNumber = document.querySelector("#en__field_supporter_bankRoutingNumber") as HTMLInputElement;
 
@@ -530,38 +530,45 @@ export const inputPlaceholder = () => {
     enFieldDonationAmt.placeholder = "Other";
     enFieldDonationAmt.setAttribute("inputmode", "decimal");
   }
-  // if (enFieldFirstName) {
+  if (enFieldFirstName) {
   //   enFieldFirstName.placeholder = "First name";
-  // }
-  // if (enFieldLastName) {
+        enFieldFirstName.autocomplete = "given-name";
+   }
+  if (enFieldLastName) {
   //   enFieldLastName.placeholder = "Last name";
-  // }
-  // if (enFieldEmailAddress) {
+    enFieldLastName.autocomplete = "family-name";
+   }
+  if (enFieldEmailAddress) {
   //   enFieldEmailAddress.placeholder = "Email address";
-  // }
-  // if (enFieldPhoneNumber) {
+   }
+   if (enFieldPhoneNumber) {
   //   enFieldPhoneNumber.placeholder = "Phone number";
-  // }
+    enFieldPhoneNumber.autocomplete = "tel";
+   }
   if (enFieldPhoneNumber2) {
     enFieldPhoneNumber2.placeholder = "000-000-0000 (optional)";
   }
   if (enFieldCountry){
   //   enFieldCountry.placeholder = "Country";
+    enFieldCountry.autocomplete = "country-name";
   }
-  // if (enFieldAddress1) {
+   if (enFieldAddress1) {
   //   enFieldAddress1.placeholder = "Street address";
-  // }
-  // if (enFieldAddress2) {
+        enFieldAddress1.autocomplete = "address-line1";
+   }
+   if (enFieldAddress2) {
   //   enFieldAddress2.placeholder = "Apt., ste., bldg.";
-  // }
-  // if (enFieldCity) {
+        enFieldAddress2.autocomplete = "address-line2";
+   }
+  if (enFieldCity) {
   //   enFieldCity.placeholder = "City";
-  // }
-  // if (enFieldRegion){
+   }
+   if (enFieldRegion){
   //   enFieldRegion.placeholder = "TBD";
-  // }
+   }
   if (enFieldPostcode) {
   //   enFieldPostcode.placeholder = "Post code";
+    enFieldPostcode.autocomplete = "postal-code";
     if(enFieldCountry.value == 'US'){
       enFieldPostcode.setAttribute("inputmode", "decimal");
     }
@@ -601,13 +608,15 @@ export const inputPlaceholder = () => {
   // }
   if (enFieldCcnumber) {
     enFieldCcnumber.placeholder = "•••• •••• •••• ••••";
+    enFieldCcnumber.autocomplete = "cc-number";
   }
   // if (enFieldCcexpire) {
   //   enFieldCcexpire.placeholder = "MM / YY";
   // }
-  // if (enFieldCcvv) {
+   if (enFieldCcvv) {
   //   enFieldCcvv.placeholder = "CVV";
-  // }
+    enFieldCcvv.autocomplete = "cc-csc";
+   }
   if (enFieldBankAccountNumber) {
     //   enFieldBankAccountNumber.placeholder = "Bank account number";
     enFieldBankAccountNumber.setAttribute("inputmode", "decimal");
@@ -1118,19 +1127,19 @@ const getCardType = (cc_partial: string) => {
     case "3":
       field_credit_card.className = field_credit_card_classes.join(" ").trim();
       field_credit_card.classList.add("live-card-type-amex");
-      return "American Express";
+      return "AX";
     case "4":
       field_credit_card.className = field_credit_card_classes.join(" ").trim();
       field_credit_card.classList.add("live-card-type-visa");
-      return "Visa";
+      return "VI";
     case "5":
       field_credit_card.className = field_credit_card_classes.join(" ").trim();
       field_credit_card.classList.add("live-card-type-mastercard");
-      return "MasterCard";
+      return "MC";
     case "6":
       field_credit_card.className = field_credit_card_classes.join(" ").trim();
       field_credit_card.classList.add("live-card-type-discover");
-      return "Discover";
+      return "DI";
     case "7":
       field_credit_card.className = field_credit_card_classes.join(" ").trim();
       field_credit_card.classList.add("live-card-type-invalid");
@@ -1221,11 +1230,17 @@ const handleCCUpdate = () => {
   if(field_payment_type.selectedIndex > 0){
     const payment_text =
       field_payment_type.options[field_payment_type.selectedIndex].value;
-
     if (card_type && payment_text != card_type) {
-      field_payment_type.value = Array.from(field_payment_type.options).filter(
+      var opts = field_payment_type.options;
+      for (var opt, j = 0; opt = opts[j]; j++) {
+        if (opt.value == card_type) {
+          field_payment_type.selectedIndex = j;
+          break;
+        }
+      }
+      /*field_payment_type.value = Array.from(field_payment_type.options).filter(
         d => d.text === card_type
-      )[0].value;
+      )[0].value;*/
     }
   }
 };
