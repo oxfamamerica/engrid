@@ -1151,6 +1151,7 @@ div.manual-form-layout {
                                 min-width: 248px;
                                 max-width: 350px;
                                 margin: 0 auto;
+                                margin: 0 auto 1rem auto;
                                 &:hover{
                                   background-color:$client-cta-hover;
                                 }
