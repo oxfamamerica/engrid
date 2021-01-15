@@ -3,11 +3,11 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Donate Now | Oxfam US</title>
-    <meta name="title" content="Donate Now | Oxfam US">
-    <meta property="og:title" content="Donate Now | Oxfam US">
-    <meta name="twitter:title" content="Donate Now | Oxfam US">
-    <meta property="og:site_name" content="Oxfam US">
+    <title>${page~title}</title>
+    <meta name="title" content="${page~title}">
+    <meta property="og:title" content="${page~title}">
+    <meta name="twitter:title" content="${page~title}">
+    <meta property="og:site_name" content="Oxfam">
     <meta name="theme-color" content="#FFFFFF">
 
     <meta name="mobile-web-app-capable" content="yes">
@@ -29,7 +29,7 @@
     <link rel="preconnect" href="//fonts.gstatic.com">
     <link rel="preconnect" href="//h.online-metrix.net">
 
-    <script>
+     <script>
       function load_scripts_fast() {
         // Lazyload any image with a data-src defined
         // REF: https://varvy.com/pagespeed/defer-images.html
@@ -69,29 +69,26 @@
           j.async = true;
           j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
           f.parentNode.insertBefore(j, f);
-        })(window, document, "script", "dataLayer", "GTM-NP8MJ4");
+        })(window, document, "script", "dataLayer", "GTM-M6TCPJ");
 
         console.log("Fast Scripts Loaded");
       }
-
+       
       function load_scripts_slow() {
         // Get the first script element on the page
         var ref = document.getElementsByTagName("body")[0];
 
         // Create a new script element
-        // var script_oc_en_upland_sms_signup = document.createElement( 'script' );
-        //var script_oc_en_tracking_id_swap = document.createElement("script");
         //var script_threatMetrix = document.createElement("script");
+        var script_trustpilot = document.createElement("script");
 
         // Set the script element `src`
-        // script_oc_en_upland_sms_signup.src ='https://aaf1a18515da0e792f78-c27fdabe952dfc357fe25ebf5c8897ee.ssl.cf5.rackcdn.com/1991/oc-en-upland-sms-signup.js?v=1583861134000';
-        //script_oc_en_tracking_id_swap.src ="https://cdn.jsdelivr.net/gh/4site-interactive-studios/Ocean-Conservancy-Engaging-Networks-Template@master/themes/child-theme/js/oc-en-tracking-id-swap.js";
         //script_threatMetrix.src = "https://h.online-metrix.net/fp/tags.js?org_id=7nrfulxi&session_id=e1991-f3c4bc594cfb4edc83bd65fcbbdf1369-server10008&page_id=1";
+        script_trustpilot.src = "//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js";
 
         // Inject the script into the DOM
-        // ref.parentNode.insertBefore( script_oc_en_upland_sms_signup, ref );
-        //ref.parentNode.insertBefore(script_oc_en_tracking_id_swap, ref);
         //ref.parentNode.insertBefore(script_threatMetrix, ref);
+        ref.parentNode.insertBefore(script_trustpilot, ref);
 
         // GA Conversion Tracking Start
         window.dataLayer = window.dataLayer || [];
@@ -117,7 +114,22 @@
               );
               var initialAmount = "{receipt_data~amount}",
                 prettyAmount = initialAmount.replace(/\$/g, "");
-              dataLayer.push({ adRevenue: prettyAmount });
+                
+            dataLayer.push({'event': 'Donation',
+                'transactionId': pageJson.donationLogId,
+                'transactionAffiliation': pageJson.campaignId,
+                'transactionTotal': pageJson.amount,
+                'transactionProducts': [{
+                    'sku': pageJson.appealCode,
+                    'category': pageJson.transactionType,
+                    'name': pageJson.pageName,
+                    'price': pageJson.amount,
+                    'quantity': 1
+                }]
+            });
+                
+                
+              //dataLayer.push({ adRevenue: prettyAmount });
               console.log(
                 "A gift has been made and recorded to Google Analytics " +
                   "{receipt_data~amount}"
@@ -128,54 +140,7 @@
         });
         // GA Conversion Tracking End
 
-        // Tracking JS
-        window.addEventListener("load", function() {
-          var e = window.receipt_amount_data,
-            a = pageJson.pageName.toLowerCase();
-          if (a.indexOf("honor") >= 0) var n = "Honor";
-          else
-            n =
-              a.indexOf("memorial") >= 0
-                ? "Memorial"
-                : a.indexOf("premium") >= 0
-                ? "Premium"
-                : a.indexOf("monthly") >= 0
-                ? "Monthly"
-                : "Standard Donation";
-          var i,
-            o = window.receipt_recurring_frequency;
-          i = o || "OneTime";
-          if (e) {
-            var r = e.replace(/\$/g, "");
-            parseFloat(r) > 0 &&
-              "{receipt_data~amount}" != r &&
-              dataLayer.push({
-                event: "BFREDtransaction",
-                ecommerce: {
-                  purchase: {
-                    actionField: {
-                      id: window.receipt_tx_id,
-                      affiliation: "Engaging Networks Donation Form",
-                      revenue: r,
-                      tax: "0.00",
-                      shipping: "0.00",
-                    },
-                    products: [
-                      {
-                        name:
-                          pageJson.pageName + " - " + pageJson.campaignPageId,
-                        brand: n,
-                        id: pageJson.campaignPageId + " - " + r + " - " + i,
-                        price: r,
-                        variant: i,
-                        quantity: 1,
-                      },
-                    ],
-                  },
-                },
-              });
-          }
-        });
+       
         //Hubspot Forms API
         var getCookie = function(name) {
         var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
@@ -210,9 +175,10 @@
                 if (xhr.readyState > 3 && (xhr.status == 200 || xhr.status == 202)) {
                     success(xhr.responseText);
                 }
+                
             }
             xhr.send(final_data);
-            
+            return xhr;
         }
 
         function submitHSFormsAPI(){
@@ -222,8 +188,8 @@
               pageName: document.title
             };
             
-            let hsPortalId = '7987933';
-            let hsFormId = '5bdfe75e-680f-439f-990e-3732b6d85ce9';
+            let hsPortalId = '3850398';
+            let hsFormId = '82251906-7434-4a62-a27a-61ed78a24b2a';
             let hutk = getCookie('hubspotutk');
             
             if (hutk.length > 0) {
@@ -358,7 +324,6 @@
         console.log("Slow Scripts Loaded");
       }
     </script>
-
     <meta name="title" content="">
     <meta property="og:title" content="">
     <meta property="og:description" content="">
@@ -367,11 +332,9 @@
     <link rel="canonical" href="https://give.oxfamamerica.org/page/21162/donate/1?mode=DEMO&amp;locale=en-US">
     <meta property="og:url" content="https://give.oxfamamerica.org/page/21162/donate/1?mode=DEMO&amp;locale=en-US">
     <link rel="image_src" href="">
-    <!--<link href="https://give.oxfamamerica.org/ea-demo/frontend/pbAssets/build/css/enPage.css?v=3.58.0" rel="stylesheet" type="text/css">-->
    
     
-    <!--<script src="https://give.oxfamamerica.org/ea-demo/frontend/pbAssets/build/js/enPage.js?v=3.58.0"></script>-->
-  <link href="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.css?v=1605733491000" rel="stylesheet"></head>
+  <link href="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.css?v=1610631517000" rel="stylesheet"></head>
   <body>
     
     
