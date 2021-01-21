@@ -76,6 +76,10 @@ export const setDonationAmountLevels = (dFreq: string, dAmtOnetime?: Array<numbe
   if (!document.getElementsByName("transaction.donationAmt").length) {
       return;
   }
+  //JI 01/20/2021 - do not adjust amounts if this is a refresh of the form and has val as a parameter
+  if (window.location.href.indexOf("val") > -1) {
+    return;
+  }
   //console.log("IN SET DONATION AMOUNTS");
   const donationAmt = document.querySelector(
     ".en__field--donationAmt"
@@ -83,12 +87,12 @@ export const setDonationAmountLevels = (dFreq: string, dAmtOnetime?: Array<numbe
     
     let wDonationLevelAmt = window.wDonationLevelAmt;
     let wDonationLevelAmtMonthly = window.wDonationLevelAmtMonthly;
-    let donationAmtLevels = [1002,502,252,102];
+    let donationAmtLevels = [5000,1000,500,250];
     if(dAmtOnetime){let donationAmtLevels: Array<number> = dAmtOnetime;} 
   
   if(dFreq == "monthly"){
     //console.log("it is monthly");
-    let donationAmtLevels = [102,52,22,12];
+    let donationAmtLevels = [100,50,35,30];
     if(dAmtMonthly){let donationAmtLevels: Array<number> = dAmtMonthly;} 
   }
   const hpcQuery = getUrlParameter("hpc");
@@ -138,7 +142,7 @@ export const setDonationAmountLevels = (dFreq: string, dAmtOnetime?: Array<numbe
 
   //console.log("Final donationAmtLevels = "+donationAmtLevels);
   //console.log("Final donationFrequency = "+dFreq);
-  //if(dFreq != 'monthly'){
+  
     for( var i = 0; i < donationAmtLevels.length; i++){
       //console.log(donationAmtLevels[i]);
       var field = <HTMLInputElement>document.getElementById('en__field_transaction_donationAmt'+(i));
@@ -148,7 +152,7 @@ export const setDonationAmountLevels = (dFreq: string, dAmtOnetime?: Array<numbe
         label.innerHTML = '$'+donationAmtLevels[i];
       }
     }
-  //}
+  
 
 };
 
@@ -525,6 +529,7 @@ export const inputPlaceholder = () => {
   const enFieldCcvv = document.querySelector("#en__field_transaction_ccvv") as HTMLInputElement;
   const enFieldBankAccountNumber = document.querySelector("#en__field_supporter_bankAccountNumber") as HTMLInputElement;
   const enFieldBankRoutingNumber = document.querySelector("#en__field_supporter_bankRoutingNumber") as HTMLInputElement;
+  const enPseudoFieldROIRoutingNumber = document.querySelector("#en__field_transaction_othamt3") as HTMLInputElement;
 
   if (enFieldDonationAmt) {
     enFieldDonationAmt.placeholder = "Other";
@@ -626,6 +631,34 @@ export const inputPlaceholder = () => {
   enFieldBankRoutingNumber.setAttribute("inputmode", "decimal");
   }
 };
+
+export const watchBankRoutingNumberField = () => {
+  const enFieldBankRoutingNumber = document.getElementById("en__field_supporter_bankRoutingNumber") as HTMLInputElement;
+  const enPseudoFieldROIRoutingNumber = document.getElementById("en__field_transaction_othamt3") as HTMLInputElement;
+
+  const handleEnFieldBankRoutingNumberChange = (e: Event) => {
+    if (enGrid) {
+      if (enFieldBankRoutingNumber) {
+        enPseudoFieldROIRoutingNumber.value = enFieldBankRoutingNumber.value;
+      }
+    }
+  };
+
+  // Check Give In Honor State on Page Load
+  if (enFieldBankRoutingNumber && enGrid) {
+    // Run on page load
+    if (enFieldBankRoutingNumber) {
+      enPseudoFieldROIRoutingNumber.value = enFieldBankRoutingNumber.value;
+    }
+
+    // Run on change
+    enFieldBankRoutingNumber.addEventListener(
+      "change",
+      handleEnFieldBankRoutingNumberChange
+    );
+  }
+};
+
 
 export const watchInmemField = () => {
   const enFieldTransactionInmem = document.getElementById(
@@ -1365,9 +1398,9 @@ export const easyEdit = () => {
   const liveURL = window.location.href as string;
   let editURL = "" as string;
   if (liveURL.search("edit") !== -1) {
-    if (liveURL.includes("https://act.ran.org/page/")) {
+    if (liveURL.includes("https://give.oxfamamerica.org/page/")) {
       editURL = liveURL.replace(
-        "https://act.ran.org/page/",
+        "https://give.oxfamamerica.org/page/",
         "https://us.e-activist.com/index.html#pages/"
       );
       editURL = editURL.replace("/donate/1", "/edit");

@@ -5,3 +5,6 @@ const getUrlParameter = (name: string) => {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 export default getUrlParameter;
+
+
+

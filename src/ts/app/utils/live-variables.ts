@@ -87,20 +87,20 @@ export default class LiveVariables {
     let amountRaw = 5;
     if(amount >= 25){
       amountRaw = Math.round(amount * 0.2);
-      console.log("Txt amountRaw greater $25 is "+amountRaw);
+      //console.log("Txt amountRaw greater $25 is "+amountRaw);
     }
     const amountTxt = "$" + amountRaw;
-  console.log("amount is "+amount);
-    console.log("amountTxt is "+amountTxt);
+    //console.log("amount is "+amount);
+    //console.log("amountTxt is "+amountTxt);
     return amount > 0 ? amountTxt : "";
   }
   private getUpsellAmountRaw(amount: number = 0){
     let amountRaw = 5;
     if(amount >= 25){
       amountRaw = Math.round(amount * 0.2);
-      console.log("amountRaw greater $25 is "+amountRaw);
+      //console.log("amountRaw greater $25 is "+amountRaw);
     }
-    console.log("amountRaw is "+amountRaw);
+    //console.log("amountRaw is "+amountRaw);
     return amount > 0 ? amountRaw.toString() : "";
   }
 
@@ -179,10 +179,10 @@ export default class LiveVariables {
     );
   }
   public changePostcode(){
-    console.log("zip changed");
+    console.log("zip has changed, look it up");
   }
   public changeDonationLevels(frequency: string) {
-    console.log("change donation Levels ");
+    //console.log("change donation Levels ");
     setDonationAmountLevels(frequency);    
   }
 
