@@ -46,6 +46,7 @@ export const run = (opts: Object) => {
   app.setDonationAmountLevels(frequency.frequency, options.donationLevelsOnetime, options.donationLevelsMonthly);
 
   app.inputPlaceholder();
+  app.watchBankRoutingNumberField();
   app.watchInmemField();
   app.watchRecurrpayField();
   app.watchGiveBySelectField();

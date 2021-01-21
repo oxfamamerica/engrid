@@ -56,7 +56,8 @@ export default class DonationAmount {
   // Force a new amount
   public setAmount(amount: number, dispatch: boolean = true) {
     // Run only if it is a Donation Page with a Donation Amount field
-    if (document.getElementsByName("transaction.donationAmt").length) {
+    // JI 20-Jan 2021 - changed this to ! because we want it to exit only if is NOT a donation form
+    if (!document.getElementsByName("transaction.donationAmt").length) {
       return;
     }
     // Set dispatch to be checked by the SET method
@@ -81,6 +82,7 @@ export default class DonationAmount {
       otherField.value = parseFloat(amount.toString()).toFixed(2);
     }
     // Set the new amount and trigger all live variables
+    console.log("setAmount -> amount ="+ amount);
     this.amount = amount;
     // Revert dispatch to default value (true)
     this._dispatch = true;
