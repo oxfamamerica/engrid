@@ -715,12 +715,13 @@ export const watchRecurrpayField = () => {
   let roiSourceCodeOnetime = document.querySelector(
     "#en__field_supporter_NOT_TAGGED_73"
   ) as HTMLInputElement;
-
+  console.log("watchRecurrpayField");
 
   const handleEnFieldRecurrpay = (e: Event) => {
     enFieldRecurrpayCurrentValue = document.querySelector(
       'input[name="transaction.recurrpay"]:checked'
     ) as HTMLInputElement;
+    console.log("handleEnFieldRecurrpay and enFieldRecurrpayCurrentValue ="+ enFieldRecurrpayCurrentValue);
     if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "y" && enGrid) {
       enGrid.classList.remove("has-give-once");
       enGrid.classList.add("has-give-monthly");
@@ -737,6 +738,7 @@ export const watchRecurrpayField = () => {
     enFieldRecurrpayCurrentValue = document.querySelector(
       'input[name="transaction.recurrpay"]:checked'
     ) as HTMLInputElement;
+    console.log("check giving frequency on page load");
     if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "y" && enGrid) {
       enGrid.classList.remove("has-give-once");
       enGrid.classList.add("has-give-monthly");
@@ -1220,13 +1222,24 @@ const handleHideACH = () => {
   const enFieldSupporterBankRoutingNumber = document.getElementById("en__field_supporter_bankRoutingNumber") as HTMLInputElement;
   const enHiddenFields = document.querySelectorAll(".en__hiddenFields")[0] as HTMLInputElement;
   let enHiddenFieldsVal = "";
-
-  enFieldBankAccountType[0].classList.add("en__hidden");
-  if(enFieldSupporterBankAccountType) enFieldSupporterBankAccountType.disabled = true;
-  enFieldBankAccountNumber[0].classList.add("en__hidden");
-  if(enFieldSupporterBankAccountNumber) enFieldSupporterBankAccountNumber.disabled = true;
-  enFieldBankRoutingNumber[0].classList.add("en__hidden");
-  if(enFieldSupporterBankRoutingNumber) enFieldSupporterBankRoutingNumber.disabled = true;
+  if(enFieldBankAccountType[0]){
+    enFieldBankAccountType[0].classList.add("en__hidden");
+  }
+  if(enFieldSupporterBankAccountType){
+    enFieldSupporterBankAccountType.disabled = true;
+  }
+  if(enFieldBankAccountNumber[0]){
+    enFieldBankAccountNumber[0].classList.add("en__hidden");
+  }
+  if(enFieldSupporterBankAccountNumber){
+    enFieldSupporterBankAccountNumber.disabled = true;
+  }
+  if(enFieldBankRoutingNumber[0]){
+    enFieldBankRoutingNumber[0].classList.add("en__hidden");
+  }
+  if(enFieldSupporterBankRoutingNumber){
+    enFieldSupporterBankRoutingNumber.disabled = true;
+  }
   enHiddenFieldsVal = "supporter.bankAccountType,supporter.bankAccountNumber,supporter.bankRoutingNumber";
   enHiddenFields.value = enHiddenFieldsVal;
 };
@@ -1241,13 +1254,24 @@ const handleShowACH = () => {
   const enHiddenFields = document.querySelectorAll(".en__hiddenFields")[0] as HTMLInputElement;
   let enHiddenFieldsVal = "";
   enHiddenFields.value = enHiddenFieldsVal;
-
-  enFieldBankAccountType[0].classList.remove("en__hidden");
-  if(enFieldSupporterBankAccountType) enFieldSupporterBankAccountType.disabled = false;
-  enFieldBankAccountNumber[0].classList.remove("en__hidden");
-  if(enFieldSupporterBankAccountNumber) enFieldSupporterBankAccountNumber.disabled = false;
-  enFieldBankRoutingNumber[0].classList.remove("en__hidden");
-  if(enFieldSupporterBankRoutingNumber) enFieldSupporterBankRoutingNumber.disabled = false;
+  if(enFieldBankAccountType[0]){
+    enFieldBankAccountType[0].classList.remove("en__hidden");
+  }
+  if(enFieldSupporterBankAccountType){
+    enFieldSupporterBankAccountType.disabled = false;
+  }
+  if(enFieldBankAccountNumber[0]){
+    enFieldBankAccountNumber[0].classList.remove("en__hidden");
+  }
+  if(enFieldSupporterBankAccountNumber){
+    enFieldSupporterBankAccountNumber.disabled = false;
+  }
+  if(enFieldBankRoutingNumber[0]){
+    enFieldBankRoutingNumber[0].classList.remove("en__hidden");
+  }
+  if(enFieldSupporterBankRoutingNumber){
+    enFieldSupporterBankRoutingNumber.disabled = false;
+  }
 };
 const handleHideAddress = () => {
   //console.log("Hide Address");
