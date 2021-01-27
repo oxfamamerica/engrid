@@ -715,13 +715,13 @@ export const watchRecurrpayField = () => {
   let roiSourceCodeOnetime = document.querySelector(
     "#en__field_supporter_NOT_TAGGED_73"
   ) as HTMLInputElement;
-  console.log("watchRecurrpayField");
+  //console.log("watchRecurrpayField");
 
   const handleEnFieldRecurrpay = (e: Event) => {
     enFieldRecurrpayCurrentValue = document.querySelector(
       'input[name="transaction.recurrpay"]:checked'
     ) as HTMLInputElement;
-    console.log("handleEnFieldRecurrpay and enFieldRecurrpayCurrentValue ="+ enFieldRecurrpayCurrentValue);
+    //console.log("handleEnFieldRecurrpay and enFieldRecurrpayCurrentValue ="+ enFieldRecurrpayCurrentValue);
     if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "y" && enGrid) {
       enGrid.classList.remove("has-give-once");
       enGrid.classList.add("has-give-monthly");
@@ -738,7 +738,7 @@ export const watchRecurrpayField = () => {
     enFieldRecurrpayCurrentValue = document.querySelector(
       'input[name="transaction.recurrpay"]:checked'
     ) as HTMLInputElement;
-    console.log("check giving frequency on page load");
+    //console.log("check giving frequency on page load");
     if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "y" && enGrid) {
       enGrid.classList.remove("has-give-once");
       enGrid.classList.add("has-give-monthly");
