@@ -3,6 +3,7 @@ import DonationFrequency from "../events/donation-frequency";
 import ProcessingFees from "../events/processing-fees";
 import Postcode from "../events/postcode-lookup";
 import { setDonationAmountLevels } from "../utils/custom-methods";
+import { watchRecurrpayField } from "../utils/custom-methods";
 
 import { amount } from "../index";
 import { frequency } from "../index";
@@ -195,7 +196,7 @@ export default class LiveVariables {
     if (enFieldRecurrpay) {
       enFieldRecurrpay.checked = true;
     }
-
+    watchRecurrpayField();
     // Find the hidden radio select that needs to be selected when entering an "Other" amount
     const enFieldOtherAmountRadio = document.querySelector(
       ".en__field--donationAmt input[value='other']"
