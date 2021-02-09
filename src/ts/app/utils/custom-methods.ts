@@ -1,4 +1,7 @@
 import getUrlParameter from "./query-string";
+import DonationAmount from "../events/donation-amount";
+
+
 declare global {
   interface Window {
     enOnSubmit: any;
@@ -80,6 +83,7 @@ export const setDonationAmountLevels = (dFreq: string, dAmtOnetime?: Array<numbe
   if (window.location.href.indexOf("val") > -1) {
     return;
   }
+  
   //console.log("IN SET DONATION AMOUNTS");
   const donationAmt = document.querySelector(
     ".en__field--donationAmt"
@@ -95,6 +99,7 @@ export const setDonationAmountLevels = (dFreq: string, dAmtOnetime?: Array<numbe
     let donationAmtLevels = [100,50,35,30];
     if(dAmtMonthly){let donationAmtLevels: Array<number> = dAmtMonthly;} 
   }
+  
   const hpcQuery = getUrlParameter("hpc");
   /*console.log("Initial dFreq: "+dFreq);
   console.log("Initial donationAmtLevels: "+donationAmtLevels);
