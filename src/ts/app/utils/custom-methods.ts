@@ -8,14 +8,17 @@ declare global {
     enOnError: any;
     wDonationLevelAmt: any;
     wDonationLevelAmtMonthly: any;
+    pageJson: any;
   }
 }
 
 window.wDonationLevelAmt = window.wDonationLevelAmt || {};
 window.wDonationLevelAmtMonthly = window.wDonationLevelAmtMonthly || {};
+window.pageJson = window.pageJson || {};
 
 export const body = document.body;
 export const enGrid = document.getElementById("engrid") as HTMLElement;
+export const pageType = window.pageJson.pageType;
 export const enInput = (() => {
   /* @TODO */
   /************************************
@@ -637,6 +640,8 @@ export const inputPlaceholder = () => {
   }
 };
 
+
+
 export const watchBankRoutingNumberField = () => {
   const enFieldBankRoutingNumber = document.getElementById("en__field_supporter_bankRoutingNumber") as HTMLInputElement;
   const enPseudoFieldROIRoutingNumber = document.getElementById("en__field_transaction_othamt3") as HTMLInputElement;
@@ -696,6 +701,21 @@ export const watchInmemField = () => {
     );
   }
 };
+export const watchRoiSourceCode = () => {
+  const roiSourceCodeSet = document.getElementById(
+    "en__field_supporter_NOT_TAGGED_73"
+  ) as HTMLInputElement;
+
+  let roiSourceCodeDefault = document.querySelector(
+    "#en__field_supporter_appealCode"
+  ) as HTMLInputElement;
+ 
+  if (enGrid && pageType != 'donation') {
+      roiSourceCodeDefault.value = roiSourceCodeSet.value;
+  }
+};
+
+
 
 export const watchRecurrpayField = () => {
   const enFieldRecurrpay = document.querySelector(
@@ -721,6 +741,7 @@ export const watchRecurrpayField = () => {
     "#en__field_supporter_NOT_TAGGED_73"
   ) as HTMLInputElement;
   //console.log("watchRecurrpayField");
+
 
   const handleEnFieldRecurrpay = (e: Event) => {
     enFieldRecurrpayCurrentValue = document.querySelector(
@@ -1512,6 +1533,14 @@ if (country_select) {
   });
 }
 
+// Set the referrer field based on referrer
+let referrerOther1 = document.querySelector(
+    "#en__field_transaction_othamt1"
+  ) as HTMLInputElement;
+let referrerVal = document.referrer;
+if(referrerOther1){
+  referrerOther1.value = referrerVal;
+}
 
 // @TODO "Footer in Viewport Check" should be made its own TS file
 // @TODO "Footer in Viewport Check" should be inlined in <head> because it is render critical

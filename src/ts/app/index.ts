@@ -61,6 +61,7 @@ export const run = (opts: Object) => {
   app.watchLegacyGiveBySelectField();
   app.SetEnFieldOtherAmountRadioStepValue();
   app.simpleUnsubscribe();
+  app.watchRoiSourceCode();
 
   app.contactDetailLabels();
   app.easyEdit();
