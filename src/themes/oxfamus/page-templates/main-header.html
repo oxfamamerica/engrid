@@ -95,7 +95,7 @@
           console.log("giftProcess: ", giftProcess);
           console.log("pageNumber: ", pageNumber);
           console.log("pageCount: ", pageCount);
-          let ndform = /advocacypetition|otherdatacapture|emailsubscribeform/;
+          let ndform = /advocacypetition|otherdatacapture|emailsubscribeform|tweetpage|emailtotarget/;
           const pageType = pageJson.pageType;
 
           if (giftProcess === true && pageNumber == pageCount) {
@@ -135,12 +135,16 @@
               submitHSFormsAPI(pageJson.pageType);
             }
           }
-          else if(giftProcess === false && pageNumber == pageCount && pageType && ndform.test(pageJson.pageType) === true){
-              dataLayer.push({'event': 'ndFormSubmission',
-                'pageType': pageJson.pageType,
-                'pageName': pageJson.pageName,
-              });
-            submitHSFormsAPI(pageJson.pageType);    
+          else if(giftProcess === false && pageNumber == 1 && pageType && ndform.test(pageJson.pageType) === true){
+              window.enOnSubmit = function(){
+                console.log("non-donation form pageType = "+pageJson.pageType);
+                dataLayer.push({'event': 'ndFormSubmission',
+                    'pageType': pageJson.pageType,
+                    'pageName': pageJson.pageName,
+                });
+                submitHSFormsAPI(pageJson.pageType);
+                return true;
+              };   
           }
         });
         // GA Conversion Tracking End
@@ -201,284 +205,88 @@
             if (hutk.length > 0) {
               context.hutk = hutk;
             }
-            if(pagetype == "emailsubscribeform" | pagetype == "otherdatacapture" ){
+            if(pagetype == "emailsubscribeform" || pagetype == "otherdatacapture" ){
               hsFormId = "b87f05de-e71f-479a-a127-f7f07bb2c110";
               fields = [
-              {
-                name: 'country',
-                value: '{user_data~Country}'
-              },
-              {
-                name: 'email',
-                value: '{user_data~Email Address}'
-              },
-              {
-                name: 'firstname',
-                value: '{user_data~First Name}'
-              },
-              {
-                name: 'lastname',
-                value: '{user_data~Last Name}'
-              },
-              {
-                name: 'address',
-                value: '{user_data~Street}'
-              },
-              {
-                name: 'street_address_2',
-                value: '{user_data~Address 2}'
-              },
-              {
-                name: 'city',
-                value: '{user_data~City}'
-              },
-              {
-                name: 'state',
-                value: '{user_data~State}'
-              },
-              {
-                name: 'zip',
-                value: '{user_data~Zipcode}'
-              },
-              {
-                name: 'phone',
-                value: '{user_data~Home Phone}'
-              },
-              {
-                name: 'source',
-                value: '{user_data~ROI Source Code}'
-              },
-              {
-                name: 'formname',
-                value: pageJson.pageName
-              },
-              {
-                name: 'life_cycle',
-                value: getParamOrCookie('cyc', 'oxA_cyc')
-              },
-              {
-                name: 'utm_medium',
-                value: getParamOrCookie('utm_medium', 'oxA_um')
-              },
-              {
-                name: 'utm_source',
-                value: getParamOrCookie('utm_source', 'oxA_us')
-              },
-              {
-                name: 'utm_campaign',
-                value: getParamOrCookie('utm_campaign', 'oxA_uc')
-              },
-              {name: 'referrer',
-                value: referrer
-              },
-              {name: 'analytics_session_id',
-                value: getCookie('oxA_sid')
-              },
-              {name: 'analytics_user_id',
-                value: getCookie('oxA_uid')
-              },
-              {name: 'audience',
-                value: getParamOrCookie('aud', 'oxA_aud')
-              },
-              {
-                name: 'detail',
-                value: getParamOrCookie('det', 'oxA_det')
-              }
-            ];
+                  //{ name: 'country', value: document.getElementById("en__field_supporter_emailAddress").value  },
+                  { name: 'email', value: document.getElementById("en__field_supporter_emailAddress").value },
+                  { name: 'firstname', value: document.getElementById("en__field_supporter_firstName").value  },
+                  { name: 'lastname', value: document.getElementById("en__field_supporter_lastName").value  },
+                  { name: 'address', value: document.getElementById("en__field_supporter_address1").value },
+                  { name: 'street_address_2', value: document.getElementById("en__field_supporter_address2").value },
+                  { name: 'city', value: document.getElementById("en__field_supporter_city").value },
+                  //{ name: 'state', value: document.getElementById("en__field_supporter_emailAddress").value },
+                  { name: 'zip', value: document.getElementById("en__field_supporter_postcode").value },
+                  { name: 'phone', value: document.getElementById("en__field_supporter_phoneNumber").value },
+                  { name: 'source', value: document.getElementById("en__field_supporter_appealCode").value },
+                  { name: 'formname', value: pageJson.pageName},
+                  { name: 'life_cycle', value: getParamOrCookie('cyc', 'oxA_cyc')},
+                  { name: 'utm_medium', value: getParamOrCookie('utm_medium', 'oxA_um')},
+                  { name: 'utm_source', value: getParamOrCookie('utm_source', 'oxA_us')},
+                  { name: 'utm_campaign', value: getParamOrCookie('utm_campaign', 'oxA_uc')},
+                  { name: 'referrer', value: referrer },
+                  { name: 'analytics_session_id', value: getCookie('oxA_sid') },
+                  { name: 'analytics_user_id', value: getCookie('oxA_uid')},
+                  { name: 'audience',value: getParamOrCookie('aud', 'oxA_aud')},
+                  { name: 'detail',value: getParamOrCookie('det', 'oxA_det')}
+              ];
             }
-            else if(pagetype == "advocacypetition"){
+            else if(pagetype == "advocacypetition" || pagetype == "tweetpage" || pagetype == "emailtotarget"){
               hsFormId = "af36b9fa-34f4-4102-9f95-fea2cf21cfe1"; 
               fields = [
-              {
-                name: 'country',
-                value: '{user_data~Country}'
-              },
-              {
-                name: 'email',
-                value: '{user_data~Email Address}'
-              },
-              {
-                name: 'firstname',
-                value: '{user_data~First Name}'
-              },
-              {
-                name: 'lastname',
-                value: '{user_data~Last Name}'
-              },
-              {
-                name: 'address',
-                value: '{user_data~Street}'
-              },
-              {
-                name: 'street_address_2',
-                value: '{user_data~Address 2}'
-              },
-              {
-                name: 'city',
-                value: '{user_data~City}'
-              },
-              {
-                name: 'state',
-                value: '{user_data~State}'
-              },
-              {
-                name: 'zip',
-                value: '{user_data~Zipcode}'
-              },
-              {
-                name: 'phone',
-                value: '{user_data~Home Phone}'
-              },
-              {
-                name: 'source',
-                value: '{user_data~ROI Source Code}'
-              },
-              {
-                name: 'formname',
-                value: pageJson.pageName
-              },
-              {
-                name: 'life_cycle',
-                value: getParamOrCookie('cyc', 'oxA_cyc')
-              },
-              {
-                name: 'utm_medium',
-                value: getParamOrCookie('utm_medium', 'oxA_um')
-              },
-              {
-                name: 'utm_source',
-                value: getParamOrCookie('utm_source', 'oxA_us')
-              },
-              {
-                name: 'utm_campaign',
-                value: getParamOrCookie('utm_campaign', 'oxA_uc')
-              },
-              {name: 'referrer',
-                value: referrer
-              },
-              {name: 'analytics_session_id',
-                value: getCookie('oxA_sid')
-              },
-              {name: 'analytics_user_id',
-                value: getCookie('oxA_uid')
-              },
-              {name: 'audience',
-                value: getParamOrCookie('aud', 'oxA_aud')
-              },
-              {
-                name: 'detail',
-                value: getParamOrCookie('det', 'oxA_det')
-              }
-            ];
+                        //{ name: 'country', value: document.getElementById("en__field_supporter_emailAddress").value  },
+                        { name: 'email', value: document.getElementById("en__field_supporter_emailAddress").value },
+                        { name: 'firstname', value: document.getElementById("en__field_supporter_firstName").value  },
+                        { name: 'lastname', value: document.getElementById("en__field_supporter_lastName").value  },
+                        { name: 'address', value: document.getElementById("en__field_supporter_address1").value },
+                        { name: 'street_address_2', value: document.getElementById("en__field_supporter_address2").value },
+                        { name: 'city', value: document.getElementById("en__field_supporter_city").value },
+                        //{ name: 'state', value: document.getElementById("en__field_supporter_emailAddress").value },
+                        { name: 'zip', value: document.getElementById("en__field_supporter_postcode").value },
+                        { name: 'phone', value: document.getElementById("en__field_supporter_phoneNumber").value },
+                        { name: 'source', value: document.getElementById("en__field_supporter_appealCode").value },
+                        { name: 'formname', value: pageJson.pageName},
+                        { name: 'life_cycle', value: getParamOrCookie('cyc', 'oxA_cyc')},
+                        { name: 'utm_medium', value: getParamOrCookie('utm_medium', 'oxA_um')},
+                        { name: 'utm_source', value: getParamOrCookie('utm_source', 'oxA_us')},
+                        { name: 'utm_campaign', value: getParamOrCookie('utm_campaign', 'oxA_uc')},
+                        { name: 'referrer', value: referrer },
+                        { name: 'analytics_session_id', value: getCookie('oxA_sid') },
+                        { name: 'analytics_user_id', value: getCookie('oxA_uid')},
+                        { name: 'audience',value: getParamOrCookie('aud', 'oxA_aud')},
+                        { name: 'detail',value: getParamOrCookie('det', 'oxA_det')}
+                    ];
             }
             else{
               //pagetype = "donation";
               fields = [
-              {
-                name: 'country',
-                value: '{user_data~Country}'
-              },
-              {
-                name: 'email',
-                value: '{user_data~Email Address}'
-              },
-              {
-                name: 'firstname',
-                value: '{user_data~First Name}'
-              },
-              {
-                name: 'lastname',
-                value: '{user_data~Last Name}'
-              },
-              {
-                name: 'address',
-                value: '{user_data~Street}'
-              },
-              {
-                name: 'street_address_2',
-                value: '{user_data~Address 2}'
-              },
-              {
-                name: 'city',
-                value: '{user_data~City}'
-              },
-              {
-                name: 'state',
-                value: '{user_data~State}'
-              },
-              {
-                name: 'zip',
-                value: '{user_data~Zipcode}'
-              },
-              {
-                name: 'phone',
-                value: '{user_data~Home Phone}'
-              },
-              {
-                name: 'source',
-                value: '{user_data~ROI Source Code}'
-              },
-              {
-                name: 'subsource',
-                value: ''
-              },
-              {
-                name: 'campaign_id',
-                value: '{receipt_data~campaignId}'
-              },
-              {
-                name: 'formname',
-                value: pageJson.pageName
-              },
-              {
-                name: 'transaction_amt',
-                value: '{receipt_data~amount~[en]}'
-              },
-              {
-                name: 'pageamounts',
-                value: 'pageamounts'
-              },
-              {
-                name: 'contribution_key',
-                value: '{receipt_data~orderId}'
-              },
-              {
-                name: 'is_recurring',
-                value: '{receipt_data~recurringStatus}'
-              },
-              {
-                name: 'life_cycle',
-                value: getParamOrCookie('cyc', 'oxA_cyc')
-              },
-              {
-                name: 'utm_medium',
-                value: getParamOrCookie('utm_medium', 'oxA_um')
-              },
-              {
-                name: 'utm_source',
-                value: getParamOrCookie('utm_source', 'oxA_us')
-              },
-              {
-                name: 'utm_campaign',
-                value: getParamOrCookie('utm_campaign', 'oxA_uc')
-              },
-              {name: 'referrer',
-                value: referrer
-              },
-              {name: 'analytics_session_id',
-                value: getCookie('oxA_sid')
-              },
-              {name: 'analytics_user_id',
-                value: getCookie('oxA_uid')
-              },
-              {name: 'audience',
-                value: getParamOrCookie('aud', 'oxA_aud')
-              },
-              {
-                name: 'detail',
-                value: getParamOrCookie('det', 'oxA_det')
-              }
-              ];
+                        { name: 'country', value: '{user_data~Country}' },
+                        { name: 'email', value: '{user_data~Email Address}' },
+                        { name: 'firstname', value: '{user_data~First Name}' },
+                        { name: 'lastname', value: '{user_data~Last Name}' },
+                        { name: 'address', value: '{user_data~Street}'},
+                        { name: 'street_address_2', value: '{user_data~Address 2}'},
+                        { name: 'city', value: '{user_data~City}'},
+                        { name: 'state', value: '{user_data~State}'},
+                        { name: 'zip', value: '{user_data~Zipcode}'},
+                        { name: 'phone', value: '{user_data~Home Phone}'},
+                        { name: 'source', value: '{user_data~ROI Source Code}'},
+                        { name: 'campaign_id', value: '{receipt_data~campaignId}'},
+                        { name: 'formname', value: pageJson.pageName},
+                        { name: 'transaction_amt', value: '{receipt_data~amount~[en]}'},
+                        { name: 'pageamounts', value: 'pageamounts'},
+                        { name: 'contribution_key', value: '{receipt_data~orderId}'},
+                        { name: 'is_recurring', value: '{receipt_data~recurringStatus}'},
+                        { name: 'life_cycle', value: getParamOrCookie('cyc', 'oxA_cyc')},
+                        { name: 'utm_medium', value: getParamOrCookie('utm_medium', 'oxA_um')},
+                        { name: 'utm_source', value: getParamOrCookie('utm_source', 'oxA_us')},
+                        { name: 'utm_campaign', value: getParamOrCookie('utm_campaign', 'oxA_uc')},
+                        { name: 'referrer', value: referrer },
+                        { name: 'analytics_session_id', value: getCookie('oxA_sid') },
+                        { name: 'analytics_user_id', value: getCookie('oxA_uid')},
+                        { name: 'audience',value: getParamOrCookie('aud', 'oxA_aud')},
+                        { name: 'detail',value: getParamOrCookie('det', 'oxA_det')}
+                    ];
             }
             let target_url = 'https://api.hsforms.com/submissions/v3/integration/submit/' + hsPortalId + '/' + hsFormId;
             let data = JSON.stringify({
@@ -493,7 +301,7 @@
                     console.log(response.message);
                     window.dataLayer.push({
                       'event': 'hs-submitted',
-                      'form-type': 'donate'
+                      'form-type': pagetype
                     });
                 }
             });
