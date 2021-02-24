@@ -54,6 +54,7 @@ export const run = (opts: Object) => {
   app.setDonationAmountLevels(frequency.frequency, options.donationLevelsOnetime, options.donationLevelsMonthly);
 
   app.inputPlaceholder();
+  app.watchRoiSourceCode();
   app.watchBankRoutingNumberField();
   app.watchInmemField();
   app.watchRecurrpayField();
@@ -61,7 +62,7 @@ export const run = (opts: Object) => {
   app.watchLegacyGiveBySelectField();
   app.SetEnFieldOtherAmountRadioStepValue();
   app.simpleUnsubscribe();
-  app.watchRoiSourceCode();
+
 
   app.contactDetailLabels();
   app.easyEdit();
