@@ -208,42 +208,6 @@
             if(pagetype == "emailsubscribeform" || pagetype == "otherdatacapture" ){
               hsFormId = "b87f05de-e71f-479a-a127-f7f07bb2c110";
               fields = [
-                  //{ name: 'country', value: document.getElementById("en__field_supporter_emailAddress").value  },
-                  { name: 'email', value: document.getElementById("en__field_supporter_emailAddress").value },
-                  { name: 'firstname', value: document.getElementById("en__field_supporter_firstName").value  },
-                  { name: 'lastname', value: document.getElementById("en__field_supporter_lastName").value  },
-                  { name: 'address', value: document.getElementById("en__field_supporter_address1").value },
-                  { name: 'street_address_2', value: document.getElementById("en__field_supporter_address2").value },
-                  { name: 'city', value: document.getElementById("en__field_supporter_city").value },
-                  //{ name: 'state', value: document.getElementById("en__field_supporter_emailAddress").value },
-                  { name: 'zip', value: document.getElementById("en__field_supporter_postcode").value },
-                  { name: 'phone', value: document.getElementById("en__field_supporter_phoneNumber").value },
-                  { name: 'source', value: document.getElementById("en__field_supporter_appealCode").value },
-                  { name: 'formname', value: pageJson.pageName},
-                  { name: 'life_cycle', value: getParamOrCookie('cyc', 'oxA_cyc')},
-                  { name: 'utm_medium', value: getParamOrCookie('utm_medium', 'oxA_um')},
-                  { name: 'utm_source', value: getParamOrCookie('utm_source', 'oxA_us')},
-                  { name: 'utm_campaign', value: getParamOrCookie('utm_campaign', 'oxA_uc')},
-                  { name: 'referrer', value: referrer },
-                  { name: 'analytics_session_id', value: getCookie('oxA_sid') },
-                  { name: 'analytics_user_id', value: getCookie('oxA_uid')},
-                  { name: 'audience',value: getParamOrCookie('aud', 'oxA_aud')},
-                  { name: 'detail',value: getParamOrCookie('det', 'oxA_det')}
-              ];
-            }
-            else if(pagetype == "advocacypetition" || pagetype == "tweetpage" || pagetype == "emailtotarget"){
-              hsFormId = "af36b9fa-34f4-4102-9f95-fea2cf21cfe1"; 
-              fields = [
-                        //{ name: 'country', value: document.getElementById("en__field_supporter_emailAddress").value  },
-                        { name: 'email', value: document.getElementById("en__field_supporter_emailAddress").value },
-                        { name: 'firstname', value: document.getElementById("en__field_supporter_firstName").value  },
-                        { name: 'lastname', value: document.getElementById("en__field_supporter_lastName").value  },
-                        { name: 'address', value: document.getElementById("en__field_supporter_address1").value },
-                        { name: 'street_address_2', value: document.getElementById("en__field_supporter_address2").value },
-                        { name: 'city', value: document.getElementById("en__field_supporter_city").value },
-                        //{ name: 'state', value: document.getElementById("en__field_supporter_emailAddress").value },
-                        { name: 'zip', value: document.getElementById("en__field_supporter_postcode").value },
-                        { name: 'phone', value: document.getElementById("en__field_supporter_phoneNumber").value },
                         { name: 'source', value: document.getElementById("en__field_supporter_appealCode").value },
                         { name: 'formname', value: pageJson.pageName},
                         { name: 'life_cycle', value: getParamOrCookie('cyc', 'oxA_cyc')},
@@ -256,6 +220,63 @@
                         { name: 'audience',value: getParamOrCookie('aud', 'oxA_aud')},
                         { name: 'detail',value: getParamOrCookie('det', 'oxA_det')}
                     ];
+                    if(document.getElementById("en__field_supporter_emailAddress"))
+                        {fields.push({name:'email',value:document.getElementById("en__field_supporter_emailAddress").value});}
+                    if(document.getElementById("en__field_supporter_firstName"))
+                        {fields.push({name:'firstname',value:document.getElementById("en__field_supporter_firstName").value});}
+                    if(document.getElementById("en__field_supporter_lastName"))
+                        {fields.push({name:'lastname',value:document.getElementById("en__field_supporter_lastName").value});}
+                    if(document.getElementById("en__field_supporter_address1"))
+                        {fields.push({name:'address',value:document.getElementById("en__field_supporter_address1").value});}
+                    if(document.getElementById("en__field_supporter_address2"))
+                        {fields.push({name:'street_address_2',value:document.getElementById("en__field_supporter_address2").value});}
+                    if(document.getElementById("en__field_supporter_city"))
+                        {fields.push({name:'city',value:document.getElementById("en__field_supporter_city").value});}
+                    if(document.getElementById("en__field_supporter_region"))
+                        {fields.push({name:'state',value:document.getElementById("en__field_supporter_region").value});}
+                    if(document.getElementById("en__field_supporter_postcode"))
+                        {fields.push({name:'zip',value:document.getElementById("en__field_supporter_postcode").value});}
+                    if(document.getElementById("en__field_supporter_country"))
+                        {fields.push({name:'country',value:document.getElementById("en__field_supporter_country").value});}
+                    if(document.getElementById("en__field_supporter_phoneNumber"))
+                        {fields.push({name:'phone',value:document.getElementById("en__field_supporter_phoneNumber").value});}
+            }
+            else if(pagetype == "advocacypetition" || pagetype == "tweetpage" || pagetype == "emailtotarget"){
+              hsFormId = "af36b9fa-34f4-4102-9f95-fea2cf21cfe1"; 
+              fields = [
+                        { name: 'source', value: document.getElementById("en__field_supporter_appealCode").value },
+                        { name: 'formname', value: pageJson.pageName},
+                        { name: 'life_cycle', value: getParamOrCookie('cyc', 'oxA_cyc')},
+                        { name: 'utm_medium', value: getParamOrCookie('utm_medium', 'oxA_um')},
+                        { name: 'utm_source', value: getParamOrCookie('utm_source', 'oxA_us')},
+                        { name: 'utm_campaign', value: getParamOrCookie('utm_campaign', 'oxA_uc')},
+                        { name: 'referrer', value: referrer },
+                        { name: 'analytics_session_id', value: getCookie('oxA_sid') },
+                        { name: 'analytics_user_id', value: getCookie('oxA_uid')},
+                        { name: 'audience',value: getParamOrCookie('aud', 'oxA_aud')},
+                        { name: 'detail',value: getParamOrCookie('det', 'oxA_det')}
+                    ];
+                    if(document.getElementById("en__field_supporter_emailAddress"))
+                        {fields.push({name:'email',value:document.getElementById("en__field_supporter_emailAddress").value});}
+                    if(document.getElementById("en__field_supporter_firstName"))
+                        {fields.push({name:'firstname',value:document.getElementById("en__field_supporter_firstName").value});}
+                    if(document.getElementById("en__field_supporter_lastName"))
+                        {fields.push({name:'lastname',value:document.getElementById("en__field_supporter_lastName").value});}
+                    if(document.getElementById("en__field_supporter_address1"))
+                        {fields.push({name:'address',value:document.getElementById("en__field_supporter_address1").value});}
+                    if(document.getElementById("en__field_supporter_address2"))
+                        {fields.push({name:'street_address_2',value:document.getElementById("en__field_supporter_address2").value});}
+                    if(document.getElementById("en__field_supporter_city"))
+                        {fields.push({name:'city',value:document.getElementById("en__field_supporter_city").value});}
+                    if(document.getElementById("en__field_supporter_region"))
+                        {fields.push({name:'state',value:document.getElementById("en__field_supporter_region").value});}
+                    if(document.getElementById("en__field_supporter_postcode"))
+                        {fields.push({name:'zip',value:document.getElementById("en__field_supporter_postcode").value});}
+                    if(document.getElementById("en__field_supporter_country"))
+                        {fields.push({name:'country',value:document.getElementById("en__field_supporter_country").value});}
+                    if(document.getElementById("en__field_supporter_phoneNumber"))
+                        {fields.push({name:'phone',value:document.getElementById("en__field_supporter_phoneNumber").value});}
+                    
             }
             else{
               //pagetype = "donation";
@@ -314,7 +335,7 @@
     
    
     
-  <link href="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.css?v=1613664702000" rel="stylesheet">
+  <link href="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.css?v=1614172261000" rel="stylesheet">
     <meta property="og:site_name" content="Oxfam">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Oxfam">

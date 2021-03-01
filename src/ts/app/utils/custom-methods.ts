@@ -579,7 +579,7 @@ export const inputPlaceholder = () => {
    if (enFieldRegion){
   //   enFieldRegion.placeholder = "TBD";
    }
-  if (enFieldPostcode) {
+  if (enFieldPostcode && enFieldRegion && enFieldCountry) {
   //   enFieldPostcode.placeholder = "Post code";
     enFieldPostcode.autocomplete = "postal-code";
     if(enFieldCountry.value == 'US'){

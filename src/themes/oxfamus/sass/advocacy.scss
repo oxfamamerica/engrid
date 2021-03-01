@@ -12,4 +12,85 @@
         }
     }
 
+     div:not(.manual-form-layout).simplified-advocacy-form-layout {
+      &.en__component--formblock {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .en__field--firstName,
+      .en__field--lastName,
+      .en__field--phoneNumber{
+        flex-basis: 100%;
+
+        padding-left: 0;
+        padding-right: 0;
+        @media screen and (min-width: 970px){
+          flex-basis: 50%;
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+        }
+      }
+      .en__field--firstName{
+        @media screen and (min-width: 970px){
+            padding-left: 0;
+        }
+      }
+      .en__field--lastName{
+        @media screen and (min-width: 970px){
+            padding-right: 0;
+        }
+      }
+
+      .en__field--checkbox,
+      .en__field--emailAddress,
+      
+      .en__field--country,
+      .en__field--address1,
+      .en__field--address2{
+        flex-basis: 100%;
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .en__field--city,
+      .en__field--region,
+      .en__field--postcode,
+      {
+        //flex-basis: calc(100% / 2);
+        flex-basis: calc((100% / 2) - (0rem));
+        @media screen and (min-width: 970px){
+          //flex-basis: calc(100% / 3);
+          flex-basis: calc((100% / 3) - (0rem));
+        }
+      }
+      .en__field--region{
+        padding-right:0;
+        @media screen and (min-width: 970px){
+            padding-right: 0.5rem;
+        }
+      }
+      .en__field--city{
+        flex-basis: calc(100%);
+        @media screen and (min-width: 970px){
+          flex-basis: calc(100% / 3);
+        }
+      }
+
+      .en__field--city{
+        padding-right: 0;
+        padding-left: 0;
+        @media screen and (min-width: 970px){
+            padding-left: 0.5rem;
+        }
+      }
+
+      .en__field--postcode{
+        padding-left: 0;
+      }
+      
+
+    }
+
+
 }
