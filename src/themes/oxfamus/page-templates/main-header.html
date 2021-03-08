@@ -142,9 +142,18 @@
                     'pageType': pageJson.pageType,
                     'pageName': pageJson.pageName,
                 });
-                submitHSFormsAPI(pageJson.pageType);
-                return true;
-              };   
+                return new Promise(function(resolve, reject){
+                    submitHSFormsAPI(pageJson.pageType)
+                        .then(function () {
+                            resolve();
+                        })
+                        .catch(function (error) {
+                            reject();
+                        });  
+                        
+                });
+              
+            };   
           }
         });
         // GA Conversion Tracking End
@@ -173,7 +182,36 @@
        
 
         // HS Script (can adjust to Mobile Commons/Upland)
-        
+        function postAjaxRequest(url, data) {
+            var final_data = data;
+            // Create the XHR request
+            var request = new XMLHttpRequest();
+            // Return it as a Promise
+            return new Promise(function (resolve, reject) {
+                // Setup our listener to process compeleted requests
+                request.onreadystatechange = function () {
+                    // Only run if the request is complete
+                    if (request.readyState !== 4) return;
+                    // Process the response
+                    if (request.status >= 200 && request.status < 300) {
+                        // If successful
+                        resolve(request);
+                    } else {
+                        // If failed
+                        reject({
+                            status: request.status,
+                            statusText: request.statusText
+                        });
+                    }
+                };
+                // Setup our HTTP request
+                request.open('POST', url);
+                request.setRequestHeader('Content-Type', 'application/json');
+                
+                // Send the request
+                request.send(final_data);
+            });
+        }
         function postAjax(url, data, success) {
             var final_data = data;
         
@@ -315,16 +353,16 @@
                 context: context,
                 skipValidation: true
             });
-            postAjax(target_url, data, function(data) {
-                var response = JSON.parse(data);
-                if (response.error){ console.log("error submit forms API");}
-                else {
-                    console.log(response.message);
-                    window.dataLayer.push({
-                      'event': 'hs-submitted',
-                      'form-type': pagetype
-                    });
-                }
+            return new Promise(function(resolve, reject){
+                postAjaxRequest(target_url, data)
+                    .then(function (data) {
+                        resolve();
+                        return true;
+                    })
+                    .catch(function (error) {
+                        reject();
+                        return false;
+                    });        
             });
         }
         
@@ -335,7 +373,7 @@
     
    
     
-  <link href="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.css?v=1614627840000" rel="stylesheet">
+  <link href="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.css?v=1615232039000" rel="stylesheet">
     <meta property="og:site_name" content="Oxfam">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Oxfam">
