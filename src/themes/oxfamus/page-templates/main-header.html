@@ -255,8 +255,11 @@
                         { name: 'referrer', value: referrer },
                         { name: 'analytics_session_id', value: getCookie('oxA_sid') },
                         { name: 'analytics_user_id', value: getCookie('oxA_uid')},
-                        { name: 'audience',value: getParamOrCookie('aud', 'oxA_aud')},
-                        { name: 'detail',value: getParamOrCookie('det', 'oxA_det')}
+                        { name: 'en_txn6',value: getParamOrCookie('en_txn6', 'oxA_en_txn6')},
+                        { name: 'en_txn7',value: getParamOrCookie('en_txn7', 'oxA_en_txn7')},
+                        { name: 'en_txn8',value: getParamOrCookie('en_txn8', 'oxA_en_txn8')},
+                        { name: 'en_txn9',value: getParamOrCookie('en_txn9', 'oxA_en_txn9')},
+                        { name: 'en_txn10',value: getParamOrCookie('en_txn10', 'oxA_en_txn10')}
                     ];
                     if(document.getElementById("en__field_supporter_emailAddress"))
                         {fields.push({name:'email',value:document.getElementById("en__field_supporter_emailAddress").value});}
@@ -291,8 +294,11 @@
                         { name: 'referrer', value: referrer },
                         { name: 'analytics_session_id', value: getCookie('oxA_sid') },
                         { name: 'analytics_user_id', value: getCookie('oxA_uid')},
-                        { name: 'audience',value: getParamOrCookie('aud', 'oxA_aud')},
-                        { name: 'detail',value: getParamOrCookie('det', 'oxA_det')}
+                        { name: 'en_txn6',value: getParamOrCookie('en_txn6', 'oxA_en_txn6')},
+                        { name: 'en_txn7',value: getParamOrCookie('en_txn7', 'oxA_en_txn7')},
+                        { name: 'en_txn8',value: getParamOrCookie('en_txn8', 'oxA_en_txn8')},
+                        { name: 'en_txn9',value: getParamOrCookie('en_txn9', 'oxA_en_txn9')},
+                        { name: 'en_txn10',value: getParamOrCookie('en_txn10', 'oxA_en_txn10')}
                     ];
                     if(document.getElementById("en__field_supporter_emailAddress"))
                         {fields.push({name:'email',value:document.getElementById("en__field_supporter_emailAddress").value});}
@@ -343,8 +349,11 @@
                         { name: 'referrer', value: referrer },
                         { name: 'analytics_session_id', value: getCookie('oxA_sid') },
                         { name: 'analytics_user_id', value: getCookie('oxA_uid')},
-                        { name: 'audience',value: getParamOrCookie('aud', 'oxA_aud')},
-                        { name: 'detail',value: getParamOrCookie('det', 'oxA_det')}
+                        { name: 'en_txn6',value: getParamOrCookie('en_txn6', 'oxA_en_txn6')},
+                        { name: 'en_txn7',value: getParamOrCookie('en_txn7', 'oxA_en_txn7')},
+                        { name: 'en_txn8',value: getParamOrCookie('en_txn8', 'oxA_en_txn8')},
+                        { name: 'en_txn9',value: getParamOrCookie('en_txn9', 'oxA_en_txn9')},
+                        { name: 'en_txn10',value: getParamOrCookie('en_txn10', 'oxA_en_txn10')}
                     ];
             }
             let target_url = 'https://api.hsforms.com/submissions/v3/integration/submit/' + hsPortalId + '/' + hsFormId;
