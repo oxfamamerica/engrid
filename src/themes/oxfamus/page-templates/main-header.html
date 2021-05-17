@@ -281,6 +281,10 @@
                         {fields.push({name:'country',value:document.getElementById("en__field_supporter_country").value});}
                     if(document.getElementById("en__field_supporter_phoneNumber"))
                         {fields.push({name:'phone',value:document.getElementById("en__field_supporter_phoneNumber").value});}
+                    if(document.getElementById("en__field_supporter_NOT_TAGGED_72"))
+                        {fields.push({name:'c3_actor', value:'True'});}
+                    if(document.getElementById("en__field_supporter_NOT_TAGGED_73"))
+                        {fields.push({name:'c4_actor', value:'True'});}
                     
             }
             else if(pagetype == "advocacypetition" || pagetype == "tweetpage" || pagetype == "emailtotarget"){
@@ -321,7 +325,10 @@
                         {fields.push({name:'country',value:document.getElementById("en__field_supporter_country").value});}
                     if(document.getElementById("en__field_supporter_phoneNumber"))
                         {fields.push({name:'phone',value:document.getElementById("en__field_supporter_phoneNumber").value});}
-                    
+                    if(document.getElementById("en__field_supporter_NOT_TAGGED_72"))
+                        {fields.push({name:'c3_actor', value:'True'});}
+                    if(document.getElementById("en__field_supporter_NOT_TAGGED_73"))
+                        {fields.push({name:'c4_actor', value:'True'});}
                     
             }
             else{
@@ -357,6 +364,12 @@
                         { name: 'en_txn9',value: getParamOrCookie('en_txn9', 'oxA_en_txn9')},
                         { name: 'en_txn10',value: getParamOrCookie('en_txn10', 'oxA_en_txn10')}
                     ];
+                    if(document.getElementById('engrid').classList.contains("theme-oxfamaction")){
+                        {fields.push({name:'c4_actor', value:'True'});}
+                    }
+                    else{
+                        fields.push({name:'c3_actor', value:'True'});
+                    }
             }
             let target_url = 'https://api.hsforms.com/submissions/v3/integration/submit/' + hsPortalId + '/' + hsFormId;
             let data = JSON.stringify({
