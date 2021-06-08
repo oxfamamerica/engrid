@@ -24,9 +24,17 @@
     <link rel="preconnect" href="//d2amdniajcqcy4.cloudfront.net">
     <link rel="preconnect" href="//fonts.gstatic.com">
     <link rel="preconnect" href="//h.online-metrix.net">
-
+    <script>
+        window.dataLayer = window.dataLayer || [];
+    </script>
+        <!-- anti-flicker snippet (recommended)  -->
+        <style>.async-hide { opacity: 0 !important} </style>
+        <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date; h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;})(window,document.documentElement,'async-hide','dataLayer',2000,{'GTM-M6TCPJ':true});</script>
+    
      <script>
+
       function load_scripts_fast() {
+
         // Lazyload any image with a data-src defined
         // REF: https://varvy.com/pagespeed/defer-images.html
         function lazyLoadImgDataSrc() {
@@ -87,7 +95,7 @@
         //ref.parentNode.insertBefore(script_trustpilot, ref);
 
         // GA Conversion Tracking Start
-        window.dataLayer = window.dataLayer || [];
+        //window.dataLayer = window.dataLayer || [];
         window.addEventListener("DOMContentLoaded", (event) => {
           const giftProcess = pageJson.giftProcess;
           const pageNumber = pageJson.pageNumber;
