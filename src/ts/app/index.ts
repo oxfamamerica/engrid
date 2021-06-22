@@ -45,7 +45,7 @@ export const run = (opts: Object) => {
   // set the donation level from url param
   const donationLevel = getUrlParameter("donation_level");
   if(donationLevel){
-    console.log("donationLevel= "+donationLevel);
+    //console.log("donationLevel= "+donationLevel);
     amount.setAmount(parseFloat(donationLevel),true);
   }
 
