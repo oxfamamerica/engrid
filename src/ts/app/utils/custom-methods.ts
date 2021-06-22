@@ -9,12 +9,14 @@ declare global {
     wDonationLevelAmt: any;
     wDonationLevelAmtMonthly: any;
     pageJson: any;
+    dataLayer: any;
   }
 }
 
 window.wDonationLevelAmt = window.wDonationLevelAmt || {};
 window.wDonationLevelAmtMonthly = window.wDonationLevelAmtMonthly || {};
 window.pageJson = window.pageJson || {};
+
 
 export const body = document.body;
 export const enGrid = document.getElementById("engrid") as HTMLElement;

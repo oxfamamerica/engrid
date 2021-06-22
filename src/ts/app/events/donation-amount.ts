@@ -62,16 +62,59 @@ export default class DonationAmount {
     }
     // Set dispatch to be checked by the SET method
     this._dispatch = dispatch;
+
+    const transactionDonAmt = document.getElementsByName(
+      "transaction.donationAmt"
+      ) as NodeList;
+    Array.from(transactionDonAmt).forEach(e => {
+      let element = e as HTMLInputElement;
+      console.log("list of transaction.donationAmt");
+      //console.log(element);
+      console.log("element.value = "+element.value);
+      console.log("amount ="+amount);
+    });
     // Search for the current amount on radio boxes
-    let found = Array.from(
+    let found = Array.from(document.querySelectorAll('input[name="' + this._radios + '"]')
+    );
+    let newAmountField;
+    found.forEach(e =>{ 
+      let element = e as HTMLInputElement;
+      console.log("found element.value = "+element.value);
+      console.log("found amount = "+amount);
+      if(amount > 0 && parseInt(element.value) == amount){
+        newAmountField = element;
+        console.log("newAmountField.value = "+ newAmountField.value);
+        newAmountField.checked = true;
+        this.clearOther();
+      }
+      else{
+        if(amount > 0){
+          if(element.checked){
+          console.log("checked element = "+element);
+          console.log("checked element value = "+element.value);
+          element.checked = false;}
+          const otherField = document.querySelector(
+            'input[name="' + this._other + '"]'
+          ) as HTMLInputElement;
+          otherField.focus();
+          otherField.value = parseFloat(amount.toString()).toFixed(2);
+        }
+      }
+    });
+    
+    /*let found = Array.from(
       document.querySelectorAll('input[name="' + this._radios + '"]')
     ).filter(
       el => el instanceof HTMLInputElement && parseInt(el.value) == amount
-    );
+    );*/
+   
     // We found the amount on the radio boxes, so check it
-    if (found.length) {
+    /*if (found.length) {
+      found.forEach(e =>{ let element = e as HTMLInputElement;console.log("found = "+e);});
+      console.log("found in ask string");
       const amountField = found[0] as HTMLInputElement;
       amountField.checked = true;
+      console.log("amountField.value = "+ amountField.value);
       // Clear OTHER text field
       this.clearOther();
     } else {
@@ -80,7 +123,7 @@ export default class DonationAmount {
       ) as HTMLInputElement;
       otherField.focus();
       otherField.value = parseFloat(amount.toString()).toFixed(2);
-    }
+    }*/
     // Set the new amount and trigger all live variables
     console.log("setAmount -> amount ="+ amount);
     this.amount = amount;
@@ -96,6 +139,7 @@ export default class DonationAmount {
     const otherWrapper = otherField.parentNode as HTMLElement;
     otherWrapper.classList.add("en__field__item--hidden");
   }
+ 
   // Remove commas
   public removeCommas(v: string) {
     // replace 5,00 with 5.00

@@ -38,6 +38,8 @@ export default class LiveVariables {
     );
     frequency.onFrequencyChange.subscribe(() => this.changeFeesLabel(feesLabel));
     frequency.onFrequencyChange.subscribe(() => this.changeDonationLevels(frequency.frequency));
+    frequency.onFrequencyChange.subscribe(() => this.changeLiveAmount());
+    frequency.onFrequencyChange.subscribe((s) => amount.setAmount(amount.amount));
     
     postcode.onPostcodeChange.subscribe(() => this.changePostcode());
     form.onSubmit.subscribe(() => this.loadingSubmitButton());

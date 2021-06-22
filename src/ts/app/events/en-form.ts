@@ -13,6 +13,7 @@ export default class EnForm {
   public dispatchError() {
     this._onError.dispatch();
     console.log("dispatchError");
+    
   }
 
   public submitForm() {

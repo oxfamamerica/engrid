@@ -78,9 +78,11 @@ export const run = (opts: Object) => {
 
   // Event Listener Examples
   amount.onAmountChange.subscribe((s) => console.log(`Live Amount: ${s}`));
-  frequency.onFrequencyChange.subscribe((s) =>
-    console.log(`Live Frequency: ${s}`)
+  frequency.onFrequencyChange.subscribe((s) => 
+    console.log(`Live Frequency: ${s}` + `Live Amount: ${amount.amount}`)
+    
   );
+  
   postcode.onPostcodeChange.subscribe((s) => console.log(`Postcode: ${s}`));
   form.onSubmit.subscribe((s) => console.log('Submit: ', s));
   form.onError.subscribe((s) => console.log('Error:', s));
@@ -91,7 +93,17 @@ export const run = (opts: Object) => {
   };
   window.enOnError = function () {
     form.dispatchError();
+    let error = document.querySelectorAll(".en__field__error");
+    error.forEach(function(value){
+      window.dataLayer.push({
+        'event': 'formError',
+        'errorMsg': value.textContent
+      });
+    });
   };
+  
+    
+
 
   // Iframe Code Start
   const inIframe = () => {
