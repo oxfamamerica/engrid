@@ -92,7 +92,9 @@ export default class Modal {
     overlayContent.innerHTML = modal.innerHTML;
     // Load Values
     amount.load();
+    console.log("amount is "+amount.amount);
     frequency.load();
+    console.log("frequency is "+frequency.frequency);
     // @TODO After the Modal is open we need to find a way to register that there are new buttons with the "monthly-upsell" class that should be watched for clicks
     // Show Modal
     this.overlay.classList.remove("is-hidden");
