@@ -150,6 +150,17 @@
                     'pageType': pageJson.pageType,
                     'pageName': pageJson.pageName,
                 });
+                var emailAdded = "N",
+                            phoneAdded = "N";
+                            
+                        if(document.getElementById("en__field_supporter_phoneNumber").value){ phoneAdded = "Y";}
+                        if(document.getElementById("en__field_supporter_emailAddress").value){ emailAdded = "Y";}
+                        dataLayer.push({'event': 'ndFormSubmit',
+                            'pageType': pageJson.pageType,
+                            'pageName': pageJson.pageName,
+                            'emailAdded': emailAdded,
+                            'phoneAdded': phoneAdded
+                        });
                 return new Promise(function(resolve, reject){
                     submitHSFormsAPI(pageJson.pageType)
                         .then(function () {
