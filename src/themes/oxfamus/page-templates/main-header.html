@@ -145,11 +145,7 @@
           }
           else if(giftProcess === false && pageNumber == 1 && pageType && ndform.test(pageJson.pageType) === true){
               window.enOnSubmit = function(){
-                console.log("non-donation form pageType = "+pageJson.pageType);
-                dataLayer.push({'event': 'ndFormSubmission',
-                    'pageType': pageJson.pageType,
-                    'pageName': pageJson.pageName,
-                });
+                //console.log("non-donation form pageType = "+pageJson.pageType);
                 var emailAdded = "N",
                             phoneAdded = "N";
                             
