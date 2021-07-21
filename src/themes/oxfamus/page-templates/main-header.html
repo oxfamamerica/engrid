@@ -145,12 +145,11 @@
           }
           else if(giftProcess === false && pageNumber == 1 && pageType && ndform.test(pageJson.pageType) === true){
               window.enOnSubmit = function(){
-                //console.log("non-donation form pageType = "+pageJson.pageType);
+                console.log("non-donation form pageType = "+pageJson.pageType);
                 var emailAdded = "N",
-                            phoneAdded = "N";
-                            
-                        if(document.getElementById("en__field_supporter_phoneNumber").value){ phoneAdded = "Y";}
-                        if(document.getElementById("en__field_supporter_emailAddress").value){ emailAdded = "Y";}
+                    phoneAdded = "N";
+                if(document.getElementById("en__field_supporter_phoneNumber") && document.getElementById("en__field_supporter_phoneNumber").value){ phoneAdded = "Y";}
+                if(document.getElementById("en__field_supporter_emailAddress") &&document.getElementById("en__field_supporter_emailAddress").value){ emailAdded = "Y";}
                         dataLayer.push({'event': 'ndFormSubmit',
                             'pageType': pageJson.pageType,
                             'pageName': pageJson.pageName,

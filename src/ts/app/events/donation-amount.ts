@@ -73,7 +73,12 @@ export default class DonationAmount {
       amountField.checked = true;
       // Clear OTHER text field
       this.clearOther();
-    } else {
+    } else if(amount == 0) {
+      console.log("AMOUNT IS "+ amount);
+      this.clearOther();
+    }
+
+    else {
       const otherField = document.querySelector(
         'input[name="' + this._other + '"]'
       ) as HTMLInputElement;
