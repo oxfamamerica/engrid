@@ -561,7 +561,8 @@ export const inputPlaceholder = () => {
     enFieldPhoneNumber.autocomplete = "tel";
    }
   if (enFieldPhoneNumber2) {
-    enFieldPhoneNumber2.placeholder = "000-000-0000 (optional)";
+    //enFieldPhoneNumber2.placeholder = "000-000-0000 (optional)";
+    enFieldPhoneNumber2.autocomplete = "tel";
   }
   if (enFieldCountry){
   //   enFieldCountry.placeholder = "Country";

@@ -149,6 +149,7 @@
                 var emailAdded = "N",
                     phoneAdded = "N";
                 if(document.getElementById("en__field_supporter_phoneNumber") && document.getElementById("en__field_supporter_phoneNumber").value){ phoneAdded = "Y";}
+                if(document.getElementById("en__field_supporter_phoneNumber2") && document.getElementById("en__field_supporter_phoneNumber2").value){ phoneAdded = "Y";}
                 if(document.getElementById("en__field_supporter_emailAddress") &&document.getElementById("en__field_supporter_emailAddress").value){ emailAdded = "Y";}
                         dataLayer.push({'event': 'ndFormSubmit',
                             'pageType': pageJson.pageType,
@@ -295,6 +296,8 @@
                         {fields.push({name:'country',value:document.getElementById("en__field_supporter_country").value});}
                     if(document.getElementById("en__field_supporter_phoneNumber"))
                         {fields.push({name:'phone',value:document.getElementById("en__field_supporter_phoneNumber").value});}
+                    if(document.getElementById("en__field_supporter_phoneNumber2"))
+                        {fields.push({name:'mobilephone',value:document.getElementById("en__field_supporter_phoneNumber2").value});}
                     if(document.getElementById("en__field_supporter_NOT_TAGGED_72"))
                         {fields.push({name:'c3_actor', value:'True'});}
                     if(document.getElementById("en__field_supporter_NOT_TAGGED_73"))
@@ -339,6 +342,8 @@
                         {fields.push({name:'country',value:document.getElementById("en__field_supporter_country").value});}
                     if(document.getElementById("en__field_supporter_phoneNumber"))
                         {fields.push({name:'phone',value:document.getElementById("en__field_supporter_phoneNumber").value});}
+                    if(document.getElementById("en__field_supporter_phoneNumber2"))
+                        {fields.push({name:'mobilephone',value:document.getElementById("en__field_supporter_phoneNumber2").value});}
                     if(document.getElementById("en__field_supporter_NOT_TAGGED_72"))
                         {fields.push({name:'c3_actor', value:'True'});}
                     if(document.getElementById("en__field_supporter_NOT_TAGGED_73"))
@@ -358,6 +363,7 @@
                         { name: 'state', value: '{user_data~State}'},
                         { name: 'zip', value: '{user_data~Zipcode}'},
                         { name: 'phone', value: '{user_data~Home Phone}'},
+                        { name: 'mobilephone', value: '{user_data~Cell Phone}'},
                         { name: 'source', value: '{user_data~ROI Source Code}'},
                         { name: 'campaign_id', value: '{receipt_data~campaignId}'},
                         { name: 'formname', value: pageJson.pageName},
@@ -411,7 +417,7 @@
     
    
     
-  <link href="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.css?v=1626852351000" rel="stylesheet">
+  <link href="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.css?v=1626939586000" rel="stylesheet">
     <meta property="og:site_name" content="Oxfam">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Oxfam">
