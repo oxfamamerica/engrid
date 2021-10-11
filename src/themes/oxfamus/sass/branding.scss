@@ -104,6 +104,11 @@ textarea {
     h1{
       padding-top: 1.6rem;
       text-align: center;
+      line-height: 1.0em;
+      font-size: 4.2rem;
+      @media screen and (min-width: 970px) {
+        font-size: 6.0rem;
+      }
     }
   }
   .en__component--advrow .body-main{
