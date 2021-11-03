@@ -1,5 +1,5 @@
 html {
-  font: 62.5% / 1.6 Arial, sans-serif; /* Sets up the Base 10 stuff */
+  font: 62.5% / 1.6 $F-BodyCopy; /* Sets up the Base 10 stuff */
 }
 /************************************
      * Inputs
@@ -104,6 +104,11 @@ textarea {
     h1{
       padding-top: 1.6rem;
       text-align: center;
+      line-height: 1.0em;
+      font-size: 4.2rem;
+      @media screen and (min-width: 970px) {
+        font-size: 6.0rem;
+      }
     }
   }
   .en__component--advrow .body-main{
@@ -150,8 +155,8 @@ body {
 
 body,
 body#en__pagebuilder {
-  // font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-family: Arial, Helvetica, sans-serif;//"Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
+  
+  font-family: $F-BodyCopy;
   font-size: 2.0rem;
   font-weight: normal;
   font-stretch: normal;
@@ -202,7 +207,7 @@ body:not(#en__pagebuilder)
 #engrid {
     h1 {
         color: $client-black;
-        font-family: OxfamHeadline;
+        font-family: $F-TStarHeadline;
         font-size: 3.2rem;
         font-weight: 900;
         font-stretch: normal;
@@ -219,7 +224,7 @@ body:not(#en__pagebuilder)
 
     h2 {
         color: $client-black;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: $F-TStarBold;
         font-size: 2.2rem;
         font-weight: bold;
         font-stretch: normal;
@@ -234,7 +239,7 @@ body:not(#en__pagebuilder)
 
     h3 {
         color: $client-black;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: $F-TStarBold;
         font-size: 2.4rem;
         font-weight: normal;
         font-stretch: normal;
@@ -247,7 +252,7 @@ body:not(#en__pagebuilder)
     }
 
 label.en__field__label {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: $F-BodyCopy;
   font-size: 1.8rem;
   font-weight: normal;
   font-stretch: normal;
@@ -258,7 +263,7 @@ label.en__field__label {
 }
 
 .en__field__label--item {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: $F-BodyCopy;
   font-size: 2.0rem;
   font-weight: normal;
   font-stretch: normal;
@@ -291,9 +296,9 @@ label.en__field__label {
   .en__field__label--item,
   .en__field__item--other::before,
   .en__field__item--other input {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: $F-TStarHeadline;
     font-size: 2.0rem;
-    font-weight: 900;
+    font-weight: normal;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
@@ -370,7 +375,7 @@ label.en__field__label {
 .en__field--recurrpay {
   label.en__field__label {
     font-size: 2.0rem;
-    font-weight: bold !important;
+    font-weight: normal;
     text-transform: none !important;
     &::before {
       top: 3px;
@@ -592,7 +597,8 @@ label.en__field__label {
     background-position-y: calc(50% - 2px);
     background-repeat: no-repeat;
     font-size: 2.0rem;
-    font-weight: bold;
+    font-weight: normal;
+    font-family: $F-TStarHeadline;
     letter-spacing: 0px;
     text-align: center;
     color: $client-cta-secondary;
@@ -674,7 +680,7 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
   color: #ffffff;
   font-size: 1.4rem;
   display: inline-block;
-  font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
+  font-family: $F-TStarHeadline;
   font-weight: normal;
   line-height: 26px;
   /* margin-left: 0px; */
@@ -685,7 +691,7 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
   color: #ffffff;
   font-size: 1.4rem;
   display: inline-block;
-  font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
+  font-family: $F-TStarHeadline;
   margin-right: 10px;
   /* margin-left: 0px; */
   margin: 20px 20px 20px 0;
@@ -724,7 +730,7 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
   color: #ffffff !important;
   font-size: 1.4rem !important;
   display: inline-block;
-  font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
+  font-family: $F-TStarHeadline;
   font-weight: normal;
   line-height: 26px;
 }
@@ -752,13 +758,15 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
         display: inline-block;
         width: 100%;
         margin:  0;
-        font-family: inherit;
+        font-family: $F-TStarHeadline;
+        font-size: 2.0rem;
+        font-weight: normal;
         padding: 12px 10px 12px 10px;
         -webkit-appearance: none;
         border-radius: 0;
         -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out;
         transition: background-color 0.25s ease-out, color 0.25s ease-out;
-        font-size: 2.0rem;
+        
         text-align: center;
         cursor: pointer;
         color: $client-cta-secondary;
@@ -1045,7 +1053,8 @@ div.manual-form-layout {
 }
 .en__submit button{
     font-size: 2.0rem;
-    font-weight: bold; 
+    font-family: $F-TStarHeadline;
+    font-weight: normal; 
     min-width: 250px;
     width: auto;
     margin: 0 auto;
@@ -1146,8 +1155,8 @@ div.manual-form-layout {
                     }
                 }
                 h1{
-                    font-family: OxfamHeadline;
-                    color: $C-OxfamGreen;
+                    font-family: $F-TStarHeadline;
+                    color: $C-primaryOxfamGreenAA;
                     font-size: 2.0rem;
                     @media screen and (min-width: 970px){
                         font-size: 3.8rem;
@@ -1160,7 +1169,7 @@ div.manual-form-layout {
                     }
                 }
                 .live-giving-upsell-amount{
-                    color: $C-OxfamGreen;
+                    color: $C-primaryOxfamGreenAA;
                     font-weight:bold;
                 }
                 .cta-groups{

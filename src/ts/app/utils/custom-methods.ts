@@ -1661,7 +1661,7 @@ if (contentFooter && isInViewport(contentFooter)) {
 
 //     if (countrySelecLabel == "United States"){
 //        countrySelecLabel = "the United States";
-//     }	
+//     }  
 
 //     var countryWrapper = document.querySelector('.simple_country_select');
 

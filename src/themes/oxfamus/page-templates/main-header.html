@@ -103,10 +103,16 @@
           console.log("giftProcess: ", giftProcess);
           console.log("pageNumber: ", pageNumber);
           console.log("pageCount: ", pageCount);
-          let ndform = /advocacypetition|otherdatacapture|emailsubscribeform|tweetpage|emailtotarget/;
+          let ndform = /advocacypetition|otherdatacapture|emailsubscribeform|tweetpage|emailtotarget|click2call/;
           const pageType = pageJson.pageType;
+            if(window.sessionStorage.first_load){
+                window.sessionStorage.first_load += 1;
+            }
+            else{
+                window.sessionStorage.first_load = 0;
+            }
 
-          if (giftProcess === true && pageNumber == pageCount) {
+          if (giftProcess === true && pageNumber == pageCount && window.sessionStorage.first_load == 0) {
             window.receipt_amount_data = "{receipt_data~amount}";
             window.receipt_recurring_frequency =
               "{receipt_data~recurringFrequency}";
@@ -114,32 +120,30 @@
 
             let rti = window.sessionStorage.getItem("receipt_tx_id");
             if (!rti || window.receipt_tx_id != rti) {
-              window.sessionStorage.setItem(
-                "receipt_tx_id",
-                window.receipt_tx_id
-              );
-              var initialAmount = "{receipt_data~amount}",
-                prettyAmount = initialAmount.replace(/\$/g, "");
+                window.sessionStorage.setItem(
+                    "receipt_tx_id",
+                    window.receipt_tx_id
+                );
+                var initialAmount = "{receipt_data~amount}",
+                    prettyAmount = initialAmount.replace(/\$/g, "");
                 
-            dataLayer.push({'event': 'Donation',
-                'transactionId': pageJson.donationLogId,
-                'transactionAffiliation': pageJson.campaignId,
-                'transactionTotal': pageJson.amount,
-                'transactionProducts': [{
-                    'sku': pageJson.appealCode,
-                    'category': pageJson.transactionType,
-                    'name': pageJson.pageName,
-                    'price': pageJson.amount,
-                    'quantity': 1
-                }]
-            });
+                dataLayer.push({'event': 'Donation',
+                    'transactionId': pageJson.donationLogId,
+                    'transactionAffiliation': pageJson.campaignId,
+                    'transactionTotal': pageJson.amount,
+                    'transactionProducts': [{
+                        'sku': pageJson.appealCode,
+                        'category': pageJson.transactionType,
+                        'name': pageJson.pageName,
+                        'price': pageJson.amount,
+                        'quantity': 1
+                    }]
+                });
                 
                 
               //dataLayer.push({ adRevenue: prettyAmount });
-              console.log(
-                "A gift has been made and recorded to Google Analytics " +
-                  "{receipt_data~amount}"
-              );
+                console.log("A gift has been made and recorded to Google Analytics " +"{receipt_data~amount}");
+                
               submitHSFormsAPI(pageJson.pageType);
             }
           }
@@ -304,7 +308,7 @@
                         {fields.push({name:'c4_actor', value:'True'});}
                     
             }
-            else if(pagetype == "advocacypetition" || pagetype == "tweetpage" || pagetype == "emailtotarget"){
+            else if(pagetype == "advocacypetition" || pagetype == "tweetpage" || pagetype == "emailtotarget" || pagetype == "click2call"){
               hsFormId = "af36b9fa-34f4-4102-9f95-fea2cf21cfe1"; 
               fields = [
                         { name: 'source', value: document.getElementById("en__field_supporter_appealCode").value },
@@ -417,7 +421,7 @@
     
    
     
-  <link href="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.css?v=1626939586000" rel="stylesheet">
+  <link href="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.css?v=1632138190000" rel="stylesheet">
     <meta property="og:site_name" content="Oxfam">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Oxfam">

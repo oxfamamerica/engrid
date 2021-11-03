@@ -40,14 +40,14 @@ export const run = (opts: Object) => {
     },
     ...opts,
   };
-  frequency.load();
+  //frequency.load();
 
-  // set the donation level from url param
+  /*// set the donation level from url param
   const donationLevel = getUrlParameter("donation_level");
   if(donationLevel){
     console.log("donationLevel= "+donationLevel);
     amount.setAmount(parseFloat(donationLevel),true);
-  }
+  }*/
 
   // The entire App
   app.setBackgroundImages(options.backgroundImage);
