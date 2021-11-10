@@ -8,14 +8,19 @@ declare global {
     enOnError: any;
     wDonationLevelAmt: any;
     wDonationLevelAmtMonthly: any;
+    pageJson: any;
+    dataLayer: any;
   }
 }
 
 window.wDonationLevelAmt = window.wDonationLevelAmt || {};
 window.wDonationLevelAmtMonthly = window.wDonationLevelAmtMonthly || {};
+window.pageJson = window.pageJson || {};
+
 
 export const body = document.body;
 export const enGrid = document.getElementById("engrid") as HTMLElement;
+export const pageType = window.pageJson.pageType;
 export const enInput = (() => {
   /* @TODO */
   /************************************
@@ -162,7 +167,7 @@ export const setDonationAmountLevels = (dFreq: string, dAmtOnetime?: Array<numbe
 };
 
 export const setBackgroundImages = (bg: string | Array<String>) => {
-  console.log("Backgroud", bg);
+  console.log("Background", bg);
 
   // @TODO This whole section might be overkill. This should 
   // Find Inline Background Image, hide it, and set it as the background image.
@@ -556,7 +561,8 @@ export const inputPlaceholder = () => {
     enFieldPhoneNumber.autocomplete = "tel";
    }
   if (enFieldPhoneNumber2) {
-    enFieldPhoneNumber2.placeholder = "000-000-0000 (optional)";
+    //enFieldPhoneNumber2.placeholder = "000-000-0000 (optional)";
+    enFieldPhoneNumber2.autocomplete = "tel";
   }
   if (enFieldCountry){
   //   enFieldCountry.placeholder = "Country";
@@ -576,7 +582,7 @@ export const inputPlaceholder = () => {
    if (enFieldRegion){
   //   enFieldRegion.placeholder = "TBD";
    }
-  if (enFieldPostcode) {
+  if (enFieldPostcode && enFieldRegion && enFieldCountry) {
   //   enFieldPostcode.placeholder = "Post code";
     enFieldPostcode.autocomplete = "postal-code";
     if(enFieldCountry.value == 'US'){
@@ -637,6 +643,8 @@ export const inputPlaceholder = () => {
   }
 };
 
+
+
 export const watchBankRoutingNumberField = () => {
   const enFieldBankRoutingNumber = document.getElementById("en__field_supporter_bankRoutingNumber") as HTMLInputElement;
   const enPseudoFieldROIRoutingNumber = document.getElementById("en__field_transaction_othamt3") as HTMLInputElement;
@@ -696,6 +704,32 @@ export const watchInmemField = () => {
     );
   }
 };
+export const watchRoiSourceCode = () => {
+  const roiSourceCodeSet = document.getElementById(
+    "roiSourceCodeNonDonation"
+  ) as HTMLElement;
+
+  let roiSourceCodeDefault = document.querySelector(
+    "#en__field_supporter_appealCode"
+  ) as HTMLInputElement;
+  
+  if (enGrid && pageType != 'donation' && roiSourceCodeDefault !== null && roiSourceCodeSet.hasAttribute('data-sourcecode')) {
+    if(roiSourceCodeSet.getAttribute('data-sourcecode') !== null){
+      console.log("roiSourceCodeDefault.value1 = "+ roiSourceCodeDefault.value);
+      if(roiSourceCodeSet.getAttribute('data-sourcecode') as string != ""){
+        roiSourceCodeDefault.value = roiSourceCodeSet.getAttribute('data-sourcecode') as string;
+        console.log("roiSourceCodeDefault.value2a = "+ roiSourceCodeDefault.value);
+        console.log("roiSourceCodeSet.getAttribute('data-sourcecode') = "+roiSourceCodeSet.getAttribute('data-sourcecode'));
+      }
+      else{
+        console.log("roiSourceCodeDefault.value2b = "+ roiSourceCodeDefault.value);
+        console.log("roiSourceCodeSet.getAttribute('data-sourcecode') = "+roiSourceCodeSet.getAttribute('data-sourcecode'));
+      }
+    }
+  }
+};
+
+
 
 export const watchRecurrpayField = () => {
   const enFieldRecurrpay = document.querySelector(
@@ -720,7 +754,21 @@ export const watchRecurrpayField = () => {
   let roiSourceCodeOnetime = document.querySelector(
     "#en__field_supporter_NOT_TAGGED_73"
   ) as HTMLInputElement;
+
+  let roiSCMonthly = document.getElementById("roiSourceCodeMonthly") as HTMLElement;
+  let roiSCOnetime = document.getElementById("roiSourceCodeOnetime") as HTMLElement;
+  let roiSCMonthlyData:string = "monthly";
+  let roiSCOnetimeData:string = "onetime";
+  
+  if(roiSCMonthly !== null && pageType == 'donation' && roiSCMonthly.hasAttribute("data-sourcecode")){
+    roiSCMonthlyData = roiSCMonthly.getAttribute("data-sourcecode") as string;
+  }
+  
+  if(roiSCOnetime !== null  && pageType == 'donation' && roiSCOnetime.hasAttribute("data-sourcecode")){
+      roiSCOnetimeData = roiSCOnetime.getAttribute("data-sourcecode") as string;    
+  }
   //console.log("watchRecurrpayField");
+
 
   const handleEnFieldRecurrpay = (e: Event) => {
     enFieldRecurrpayCurrentValue = document.querySelector(
@@ -730,11 +778,21 @@ export const watchRecurrpayField = () => {
     if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "y" && enGrid) {
       enGrid.classList.remove("has-give-once");
       enGrid.classList.add("has-give-monthly");
-      roiSourceCode.value = roiSourceCodeMonthly.value;
+      if(roiSourceCodeMonthly){
+        roiSourceCode.value = roiSourceCodeMonthly.value;
+      }
+      if(roiSCMonthly){
+          roiSourceCode.value = roiSCMonthlyData;
+      }
     } else if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "n" && enGrid) {
       enGrid.classList.remove("has-give-monthly");
       enGrid.classList.add("has-give-once");
-      roiSourceCode.value= roiSourceCodeOnetime.value;
+      if(roiSourceCodeOnetime){
+        roiSourceCode.value= roiSourceCodeOnetime.value;
+      }
+      if(roiSCOnetime){
+        roiSourceCode.value = roiSCOnetimeData;
+      }
     }
   };
 
@@ -747,11 +805,20 @@ export const watchRecurrpayField = () => {
     if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "y" && enGrid) {
       enGrid.classList.remove("has-give-once");
       enGrid.classList.add("has-give-monthly");
-      roiSourceCode.value = roiSourceCodeMonthly.value;
+      if(roiSourceCodeMonthly){
+        roiSourceCode.value = roiSourceCodeMonthly.value;
+      }
+      if(roiSCMonthly){
+          roiSourceCode.value = roiSCMonthlyData;
+      }
     } else if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "n" && enGrid) {
       enGrid.classList.add("has-give-once");
       enGrid.classList.remove("has-give-monthly");
-      roiSourceCode.value = roiSourceCodeOnetime.value;
+      if(roiSourceCodeOnetime){
+      roiSourceCode.value = roiSourceCodeOnetime.value;}
+      if(roiSCOnetime){
+        roiSourceCode.value = roiSCOnetimeData;
+      }
     }
   }
 
@@ -1512,6 +1579,14 @@ if (country_select) {
   });
 }
 
+// Set the referrer field based on referrer
+let referrerOther1 = document.querySelector(
+    "#en__field_transaction_othamt1"
+  ) as HTMLInputElement;
+let referrerVal = document.referrer;
+if(referrerOther1){
+  referrerOther1.value = referrerVal;
+}
 
 // @TODO "Footer in Viewport Check" should be made its own TS file
 // @TODO "Footer in Viewport Check" should be inlined in <head> because it is render critical

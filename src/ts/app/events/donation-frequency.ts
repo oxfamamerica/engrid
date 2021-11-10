@@ -30,7 +30,7 @@ export default class DonationFrequency {
     return this._onFrequencyChange.asEvent();
   }
 
-  // Set amount var with currently selected amount
+  // Set freq var with currently selected freq
   public load() {
     const currentFrequencyField = document.querySelector(
       'input[name="' + this._radios + '"]:checked'

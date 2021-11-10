@@ -24,9 +24,17 @@
     <link rel="preconnect" href="//d2amdniajcqcy4.cloudfront.net">
     <link rel="preconnect" href="//fonts.gstatic.com">
     <link rel="preconnect" href="//h.online-metrix.net">
-
+    <script>
+        window.dataLayer = window.dataLayer || [];
+    </script>
+        <!-- anti-flicker snippet (recommended)  -->
+        <style>.async-hide { opacity: 0 !important} </style>
+        <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date; h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;})(window,document.documentElement,'async-hide','dataLayer',2000,{'GTM-M6TCPJ':true});</script>
+    
      <script>
+
       function load_scripts_fast() {
+
         // Lazyload any image with a data-src defined
         // REF: https://varvy.com/pagespeed/defer-images.html
         function lazyLoadImgDataSrc() {
@@ -87,7 +95,7 @@
         //ref.parentNode.insertBefore(script_trustpilot, ref);
 
         // GA Conversion Tracking Start
-        window.dataLayer = window.dataLayer || [];
+        //window.dataLayer = window.dataLayer || [];
         window.addEventListener("DOMContentLoaded", (event) => {
           const giftProcess = pageJson.giftProcess;
           const pageNumber = pageJson.pageNumber;
@@ -95,7 +103,7 @@
           console.log("giftProcess: ", giftProcess);
           console.log("pageNumber: ", pageNumber);
           console.log("pageCount: ", pageCount);
-          let ndform = /advocacypetition|otherdatacapture|emailsubscribeform/;
+          let ndform = /advocacypetition|otherdatacapture|emailsubscribeform|tweetpage|emailtotarget/;
           const pageType = pageJson.pageType;
 
           if (giftProcess === true && pageNumber == pageCount) {
@@ -135,12 +143,32 @@
               submitHSFormsAPI(pageJson.pageType);
             }
           }
-          else if(giftProcess === false && pageNumber == pageCount && pageType && ndform.test(pageJson.pageType) === true){
-              dataLayer.push({'event': 'ndFormSubmission',
-                'pageType': pageJson.pageType,
-                'pageName': pageJson.pageName,
-              });
-            submitHSFormsAPI(pageJson.pageType);    
+          else if(giftProcess === false && pageNumber == 1 && pageType && ndform.test(pageJson.pageType) === true){
+              window.enOnSubmit = function(){
+                console.log("non-donation form pageType = "+pageJson.pageType);
+                var emailAdded = "N",
+                    phoneAdded = "N";
+                if(document.getElementById("en__field_supporter_phoneNumber") && document.getElementById("en__field_supporter_phoneNumber").value){ phoneAdded = "Y";}
+                if(document.getElementById("en__field_supporter_phoneNumber2") && document.getElementById("en__field_supporter_phoneNumber2").value){ phoneAdded = "Y";}
+                if(document.getElementById("en__field_supporter_emailAddress") &&document.getElementById("en__field_supporter_emailAddress").value){ emailAdded = "Y";}
+                        dataLayer.push({'event': 'ndFormSubmit',
+                            'pageType': pageJson.pageType,
+                            'pageName': pageJson.pageName,
+                            'emailAdded': emailAdded,
+                            'phoneAdded': phoneAdded
+                        });
+                return new Promise(function(resolve, reject){
+                    submitHSFormsAPI(pageJson.pageType)
+                        .then(function () {
+                            resolve();
+                        })
+                        .catch(function (error) {
+                            reject();
+                        });  
+                        
+                });
+              
+            };   
           }
         });
         // GA Conversion Tracking End
@@ -169,7 +197,36 @@
        
 
         // HS Script (can adjust to Mobile Commons/Upland)
-        
+        function postAjaxRequest(url, data) {
+            var final_data = data;
+            // Create the XHR request
+            var request = new XMLHttpRequest();
+            // Return it as a Promise
+            return new Promise(function (resolve, reject) {
+                // Setup our listener to process compeleted requests
+                request.onreadystatechange = function () {
+                    // Only run if the request is complete
+                    if (request.readyState !== 4) return;
+                    // Process the response
+                    if (request.status >= 200 && request.status < 300) {
+                        // If successful
+                        resolve(request);
+                    } else {
+                        // If failed
+                        reject({
+                            status: request.status,
+                            statusText: request.statusText
+                        });
+                    }
+                };
+                // Setup our HTTP request
+                request.open('POST', url);
+                request.setRequestHeader('Content-Type', 'application/json');
+                
+                // Send the request
+                request.send(final_data);
+            });
+        }
         function postAjax(url, data, success) {
             var final_data = data;
         
@@ -201,284 +258,138 @@
             if (hutk.length > 0) {
               context.hutk = hutk;
             }
-            if(pagetype == "emailsubscribeform" | pagetype == "otherdatacapture" ){
-              hsFormId = "b87f05de-e71f-479a-a127-f7f07bb2c110";//this is dev
+            if(pagetype == "emailsubscribeform" || pagetype == "otherdatacapture" ){
+              hsFormId = "b87f05de-e71f-479a-a127-f7f07bb2c110";
               fields = [
-              {
-                name: 'country',
-                value: '{user_data~Country}'
-              },
-              {
-                name: 'email',
-                value: '{user_data~Email Address}'
-              },
-              {
-                name: 'firstname',
-                value: '{user_data~First Name}'
-              },
-              {
-                name: 'lastname',
-                value: '{user_data~Last Name}'
-              },
-              {
-                name: 'address',
-                value: '{user_data~Street}'
-              },
-              {
-                name: 'street_address_2',
-                value: '{user_data~Address 2}'
-              },
-              {
-                name: 'city',
-                value: '{user_data~City}'
-              },
-              {
-                name: 'state',
-                value: '{user_data~State}'
-              },
-              {
-                name: 'zip',
-                value: '{user_data~Zipcode}'
-              },
-              {
-                name: 'phone',
-                value: '{user_data~Home Phone}'
-              },
-              {
-                name: 'source',
-                value: '{user_data~ROI Source Code}'
-              },
-              {
-                name: 'formname',
-                value: pageJson.pageName
-              },
-              {
-                name: 'life_cycle',
-                value: getParamOrCookie('cyc', 'oxA_cyc')
-              },
-              {
-                name: 'utm_medium',
-                value: getParamOrCookie('utm_medium', 'oxA_um')
-              },
-              {
-                name: 'utm_source',
-                value: getParamOrCookie('utm_source', 'oxA_us')
-              },
-              {
-                name: 'utm_campaign',
-                value: getParamOrCookie('utm_campaign', 'oxA_uc')
-              },
-              {name: 'referrer',
-                value: referrer
-              },
-              {name: 'analytics_session_id',
-                value: getCookie('oxA_sid')
-              },
-              {name: 'analytics_user_id',
-                value: getCookie('oxA_uid')
-              },
-              {name: 'audience',
-                value: getParamOrCookie('aud', 'oxA_aud')
-              },
-              {
-                name: 'detail',
-                value: getParamOrCookie('det', 'oxA_det')
-              }
-            ];
+                        { name: 'source', value: document.getElementById("en__field_supporter_appealCode").value },
+                        { name: 'formname', value: pageJson.pageName},
+                        { name: 'life_cycle', value: getParamOrCookie('cyc', 'oxA_cyc')},
+                        { name: 'utm_medium', value: getParamOrCookie('utm_medium', 'oxA_um')},
+                        { name: 'utm_source', value: getParamOrCookie('utm_source', 'oxA_us')},
+                        { name: 'utm_campaign', value: getParamOrCookie('utm_campaign', 'oxA_uc')},
+                        { name: 'referrer', value: referrer },
+                        { name: 'analytics_session_id', value: getCookie('oxA_sid') },
+                        { name: 'analytics_user_id', value: getCookie('oxA_uid')},
+                        { name: 'en_txn6',value: getParamOrCookie('en_txn6', 'oxA_en_txn6')},
+                        { name: 'en_txn7',value: getParamOrCookie('en_txn7', 'oxA_en_txn7')},
+                        { name: 'en_txn8',value: getParamOrCookie('en_txn8', 'oxA_en_txn8')},
+                        { name: 'en_txn9',value: getParamOrCookie('en_txn9', 'oxA_en_txn9')},
+                        { name: 'en_txn10',value: getParamOrCookie('en_txn10', 'oxA_en_txn10')}
+                    ];
+                    if(document.getElementById("en__field_supporter_emailAddress"))
+                        {fields.push({name:'email',value:document.getElementById("en__field_supporter_emailAddress").value});}
+                    if(document.getElementById("en__field_supporter_firstName"))
+                        {fields.push({name:'firstname',value:document.getElementById("en__field_supporter_firstName").value});}
+                    if(document.getElementById("en__field_supporter_lastName"))
+                        {fields.push({name:'lastname',value:document.getElementById("en__field_supporter_lastName").value});}
+                    if(document.getElementById("en__field_supporter_address1"))
+                        {fields.push({name:'address',value:document.getElementById("en__field_supporter_address1").value});}
+                    if(document.getElementById("en__field_supporter_address2"))
+                        {fields.push({name:'street_address_2',value:document.getElementById("en__field_supporter_address2").value});}
+                    if(document.getElementById("en__field_supporter_city"))
+                        {fields.push({name:'city',value:document.getElementById("en__field_supporter_city").value});}
+                    if(document.getElementById("en__field_supporter_region"))
+                        {fields.push({name:'state',value:document.getElementById("en__field_supporter_region").value});}
+                    if(document.getElementById("en__field_supporter_postcode"))
+                        {fields.push({name:'zip',value:document.getElementById("en__field_supporter_postcode").value});}
+                    if(document.getElementById("en__field_supporter_country"))
+                        {fields.push({name:'country',value:document.getElementById("en__field_supporter_country").value});}
+                    if(document.getElementById("en__field_supporter_phoneNumber"))
+                        {fields.push({name:'phone',value:document.getElementById("en__field_supporter_phoneNumber").value});}
+                    if(document.getElementById("en__field_supporter_phoneNumber2"))
+                        {fields.push({name:'mobilephone',value:document.getElementById("en__field_supporter_phoneNumber2").value});}
+                    if(document.getElementById("en__field_supporter_NOT_TAGGED_72"))
+                        {fields.push({name:'c3_actor', value:'True'});}
+                    if(document.getElementById("en__field_supporter_NOT_TAGGED_73"))
+                        {fields.push({name:'c4_actor', value:'True'});}
+                    
             }
-            else if(pagetype == "advocacypetition"){
-              hsFormId = "af36b9fa-34f4-4102-9f95-fea2cf21cfe1"; //this is dev
+            else if(pagetype == "advocacypetition" || pagetype == "tweetpage" || pagetype == "emailtotarget"){
+              hsFormId = "af36b9fa-34f4-4102-9f95-fea2cf21cfe1"; 
               fields = [
-              {
-                name: 'country',
-                value: '{user_data~Country}'
-              },
-              {
-                name: 'email',
-                value: '{user_data~Email Address}'
-              },
-              {
-                name: 'firstname',
-                value: '{user_data~First Name}'
-              },
-              {
-                name: 'lastname',
-                value: '{user_data~Last Name}'
-              },
-              {
-                name: 'address',
-                value: '{user_data~Street}'
-              },
-              {
-                name: 'street_address_2',
-                value: '{user_data~Address 2}'
-              },
-              {
-                name: 'city',
-                value: '{user_data~City}'
-              },
-              {
-                name: 'state',
-                value: '{user_data~State}'
-              },
-              {
-                name: 'zip',
-                value: '{user_data~Zipcode}'
-              },
-              {
-                name: 'phone',
-                value: '{user_data~Home Phone}'
-              },
-              {
-                name: 'source',
-                value: '{user_data~ROI Source Code}'
-              },
-              {
-                name: 'formname',
-                value: pageJson.pageName
-              },
-              {
-                name: 'life_cycle',
-                value: getParamOrCookie('cyc', 'oxA_cyc')
-              },
-              {
-                name: 'utm_medium',
-                value: getParamOrCookie('utm_medium', 'oxA_um')
-              },
-              {
-                name: 'utm_source',
-                value: getParamOrCookie('utm_source', 'oxA_us')
-              },
-              {
-                name: 'utm_campaign',
-                value: getParamOrCookie('utm_campaign', 'oxA_uc')
-              },
-              {name: 'referrer',
-                value: referrer
-              },
-              {name: 'analytics_session_id',
-                value: getCookie('oxA_sid')
-              },
-              {name: 'analytics_user_id',
-                value: getCookie('oxA_uid')
-              },
-              {name: 'audience',
-                value: getParamOrCookie('aud', 'oxA_aud')
-              },
-              {
-                name: 'detail',
-                value: getParamOrCookie('det', 'oxA_det')
-              }
-            ];
+                        { name: 'source', value: document.getElementById("en__field_supporter_appealCode").value },
+                        { name: 'formname', value: pageJson.pageName},
+                        { name: 'life_cycle', value: getParamOrCookie('cyc', 'oxA_cyc')},
+                        { name: 'utm_medium', value: getParamOrCookie('utm_medium', 'oxA_um')},
+                        { name: 'utm_source', value: getParamOrCookie('utm_source', 'oxA_us')},
+                        { name: 'utm_campaign', value: getParamOrCookie('utm_campaign', 'oxA_uc')},
+                        { name: 'referrer', value: referrer },
+                        { name: 'analytics_session_id', value: getCookie('oxA_sid') },
+                        { name: 'analytics_user_id', value: getCookie('oxA_uid')},
+                        { name: 'en_txn6',value: getParamOrCookie('en_txn6', 'oxA_en_txn6')},
+                        { name: 'en_txn7',value: getParamOrCookie('en_txn7', 'oxA_en_txn7')},
+                        { name: 'en_txn8',value: getParamOrCookie('en_txn8', 'oxA_en_txn8')},
+                        { name: 'en_txn9',value: getParamOrCookie('en_txn9', 'oxA_en_txn9')},
+                        { name: 'en_txn10',value: getParamOrCookie('en_txn10', 'oxA_en_txn10')}
+                    ];
+                    if(document.getElementById("en__field_supporter_emailAddress"))
+                        {fields.push({name:'email',value:document.getElementById("en__field_supporter_emailAddress").value});}
+                    if(document.getElementById("en__field_supporter_firstName"))
+                        {fields.push({name:'firstname',value:document.getElementById("en__field_supporter_firstName").value});}
+                    if(document.getElementById("en__field_supporter_lastName"))
+                        {fields.push({name:'lastname',value:document.getElementById("en__field_supporter_lastName").value});}
+                    if(document.getElementById("en__field_supporter_address1"))
+                        {fields.push({name:'address',value:document.getElementById("en__field_supporter_address1").value});}
+                    if(document.getElementById("en__field_supporter_address2"))
+                        {fields.push({name:'street_address_2',value:document.getElementById("en__field_supporter_address2").value});}
+                    if(document.getElementById("en__field_supporter_city"))
+                        {fields.push({name:'city',value:document.getElementById("en__field_supporter_city").value});}
+                    if(document.getElementById("en__field_supporter_region"))
+                        {fields.push({name:'state',value:document.getElementById("en__field_supporter_region").value});}
+                    if(document.getElementById("en__field_supporter_postcode"))
+                        {fields.push({name:'zip',value:document.getElementById("en__field_supporter_postcode").value});}
+                    if(document.getElementById("en__field_supporter_country"))
+                        {fields.push({name:'country',value:document.getElementById("en__field_supporter_country").value});}
+                    if(document.getElementById("en__field_supporter_phoneNumber"))
+                        {fields.push({name:'phone',value:document.getElementById("en__field_supporter_phoneNumber").value});}
+                    if(document.getElementById("en__field_supporter_phoneNumber2"))
+                        {fields.push({name:'mobilephone',value:document.getElementById("en__field_supporter_phoneNumber2").value});}
+                    if(document.getElementById("en__field_supporter_NOT_TAGGED_72"))
+                        {fields.push({name:'c3_actor', value:'True'});}
+                    if(document.getElementById("en__field_supporter_NOT_TAGGED_73"))
+                        {fields.push({name:'c4_actor', value:'True'});}
+                    
             }
             else{
               //pagetype = "donation";
               fields = [
-              {
-                name: 'country',
-                value: '{user_data~Country}'
-              },
-              {
-                name: 'email',
-                value: '{user_data~Email Address}'
-              },
-              {
-                name: 'firstname',
-                value: '{user_data~First Name}'
-              },
-              {
-                name: 'lastname',
-                value: '{user_data~Last Name}'
-              },
-              {
-                name: 'address',
-                value: '{user_data~Street}'
-              },
-              {
-                name: 'street_address_2',
-                value: '{user_data~Address 2}'
-              },
-              {
-                name: 'city',
-                value: '{user_data~City}'
-              },
-              {
-                name: 'state',
-                value: '{user_data~State}'
-              },
-              {
-                name: 'zip',
-                value: '{user_data~Zipcode}'
-              },
-              {
-                name: 'phone',
-                value: '{user_data~Home Phone}'
-              },
-              {
-                name: 'source',
-                value: '{user_data~ROI Source Code}'
-              },
-              {
-                name: 'subsource',
-                value: ''
-              },
-              {
-                name: 'campaign_id',
-                value: '{receipt_data~campaignId}'
-              },
-              {
-                name: 'formname',
-                value: pageJson.pageName
-              },
-              {
-                name: 'transaction_amt',
-                value: '{receipt_data~amount~[en]}'
-              },
-              {
-                name: 'pageamounts',
-                value: 'pageamounts'
-              },
-              {
-                name: 'contribution_key',
-                value: '{receipt_data~orderId}'
-              },
-              {
-                name: 'is_recurring',
-                value: '{receipt_data~recurringStatus}'
-              },
-              {
-                name: 'life_cycle',
-                value: getParamOrCookie('cyc', 'oxA_cyc')
-              },
-              {
-                name: 'utm_medium',
-                value: getParamOrCookie('utm_medium', 'oxA_um')
-              },
-              {
-                name: 'utm_source',
-                value: getParamOrCookie('utm_source', 'oxA_us')
-              },
-              {
-                name: 'utm_campaign',
-                value: getParamOrCookie('utm_campaign', 'oxA_uc')
-              },
-              {name: 'referrer',
-                value: referrer
-              },
-              {name: 'analytics_session_id',
-                value: getCookie('oxA_sid')
-              },
-              {name: 'analytics_user_id',
-                value: getCookie('oxA_uid')
-              },
-              {name: 'audience',
-                value: getParamOrCookie('aud', 'oxA_aud')
-              },
-              {
-                name: 'detail',
-                value: getParamOrCookie('det', 'oxA_det')
-              }
-              ];
+                        { name: 'country', value: '{user_data~Country}' },
+                        { name: 'email', value: '{user_data~Email Address}' },
+                        { name: 'firstname', value: '{user_data~First Name}' },
+                        { name: 'lastname', value: '{user_data~Last Name}' },
+                        { name: 'address', value: '{user_data~Street}'},
+                        { name: 'street_address_2', value: '{user_data~Address 2}'},
+                        { name: 'city', value: '{user_data~City}'},
+                        { name: 'state', value: '{user_data~State}'},
+                        { name: 'zip', value: '{user_data~Zipcode}'},
+                        { name: 'phone', value: '{user_data~Home Phone}'},
+                        { name: 'mobilephone', value: '{user_data~Cell Phone}'},
+                        { name: 'source', value: '{user_data~ROI Source Code}'},
+                        { name: 'campaign_id', value: '{receipt_data~campaignId}'},
+                        { name: 'formname', value: pageJson.pageName},
+                        { name: 'transaction_amt', value: '{receipt_data~amount~[en]}'},
+                        { name: 'pageamounts', value: 'pageamounts'},
+                        { name: 'contribution_key', value: '{receipt_data~orderId}'},
+                        { name: 'is_recurring', value: '{receipt_data~recurringStatus}'},
+                        { name: 'life_cycle', value: getParamOrCookie('cyc', 'oxA_cyc')},
+                        { name: 'utm_medium', value: getParamOrCookie('utm_medium', 'oxA_um')},
+                        { name: 'utm_source', value: getParamOrCookie('utm_source', 'oxA_us')},
+                        { name: 'utm_campaign', value: getParamOrCookie('utm_campaign', 'oxA_uc')},
+                        { name: 'referrer', value: referrer },
+                        { name: 'analytics_session_id', value: getCookie('oxA_sid') },
+                        { name: 'analytics_user_id', value: getCookie('oxA_uid')},
+                        { name: 'en_txn6',value: getParamOrCookie('en_txn6', 'oxA_en_txn6')},
+                        { name: 'en_txn7',value: getParamOrCookie('en_txn7', 'oxA_en_txn7')},
+                        { name: 'en_txn8',value: getParamOrCookie('en_txn8', 'oxA_en_txn8')},
+                        { name: 'en_txn9',value: getParamOrCookie('en_txn9', 'oxA_en_txn9')},
+                        { name: 'en_txn10',value: getParamOrCookie('en_txn10', 'oxA_en_txn10')}
+                    ];
+                    if(document.getElementById('engrid').classList.contains("theme-oxfamaction")){
+                        {fields.push({name:'c4_actor', value:'True'});}
+                    }
+                    else{
+                        fields.push({name:'c3_actor', value:'True'});
+                    }
             }
             let target_url = 'https://api.hsforms.com/submissions/v3/integration/submit/' + hsPortalId + '/' + hsFormId;
             let data = JSON.stringify({
@@ -486,16 +397,16 @@
                 context: context,
                 skipValidation: true
             });
-            postAjax(target_url, data, function(data) {
-                var response = JSON.parse(data);
-                if (response.error){ console.log("error submit forms API");}
-                else {
-                    console.log(response.message);
-                    window.dataLayer.push({
-                      'event': 'hs-submitted',
-                      'form-type': 'donate'
-                    });
-                }
+            return new Promise(function(resolve, reject){
+                postAjaxRequest(target_url, data)
+                    .then(function (data) {
+                        resolve();
+                        return true;
+                    })
+                    .catch(function (error) {
+                        reject();
+                        return false;
+                    });        
             });
         }
         
@@ -506,7 +417,7 @@
     
    
     
-  <link href="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.css?v=1611754420000" rel="stylesheet">
+  <link href="https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/main.css?v=1626939586000" rel="stylesheet">
     <meta property="og:site_name" content="Oxfam">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Oxfam">

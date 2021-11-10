@@ -58,10 +58,11 @@ export default class Modal {
       'input[name="transaction.giveBySelect"]:checked'
     ) as HTMLInputElement;
     let giveBySelectCurrent = enFieldGiveBySelectCurrentValue.value.toLowerCase();
+    let currAmt: number = amount.amount;
     if (this.debug) console.log("Upsell Triggered");
     const freq = frequency.frequency;
-    // Only open Upsell Modal if Frequency == Single & if the Modal is closed
-    if (freq == "single" && giveBySelectCurrent == "card" && this.overlay.classList.contains("is-hidden")) {
+    // Only open Upsell Modal if Frequency == Single & if the Modal is closed & if amount < 500
+    if (freq == "single" && giveBySelectCurrent == "card" && this.overlay.classList.contains("is-hidden") && currAmt < 500) {
       this.open(this.upsellModal);
       window.scrollTo(0, 0);
       // Avoid form submission so you can see the modal
@@ -91,7 +92,9 @@ export default class Modal {
     overlayContent.innerHTML = modal.innerHTML;
     // Load Values
     amount.load();
+    console.log("amount is "+amount.amount);
     frequency.load();
+    console.log("frequency is "+frequency.frequency);
     // @TODO After the Modal is open we need to find a way to register that there are new buttons with the "monthly-upsell" class that should be watched for clicks
     // Show Modal
     this.overlay.classList.remove("is-hidden");

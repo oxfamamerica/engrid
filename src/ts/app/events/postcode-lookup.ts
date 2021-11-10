@@ -6,8 +6,9 @@ export default class Postcode{
   private _postcode: string = "";
   private _dispatch: boolean = true;
   private _field: HTMLInputElement | null = document.querySelector(
-    'input[name="supporter.postcode"]'
-  );
+    'input[name="supporter.postcode"]');
+  private _state: HTMLInputElement | null = document.querySelector('select[name="supporter.region"]');
+  
 
   constructor( postcode: string) {
     //console.log('%c Postcode Constructor', 'font-size: 30px; background-color: #000; color: #FF0');
@@ -15,7 +16,9 @@ export default class Postcode{
     if (this._field instanceof HTMLInputElement){
       this._field.addEventListener("change", (e: Event) =>{
         this._onPostcodeChange.dispatch(this.postcode);
-        this.lookupPostcode(this._field!.value);
+        if(this._state != null){
+            this.lookupPostcode(this._field!.value);
+        }
         //console.log('%c Postcode change Applied', 'font-size: 30px; background-color: #000; color: #FF0');
       });
     }

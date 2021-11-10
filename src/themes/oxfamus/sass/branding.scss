@@ -1075,7 +1075,35 @@ div.manual-form-layout {
   top: 2px;
   content:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='21' height='16' viewBox='0 0 21 16'><path fill='svg-friendly-color(orange)' fill-rule='nonzero' d='M18.76.16L6.68 12.113l-4.44-4.392a.555.555 0 0 0-.779 0L.161 9.006a.541.541 0 0 0 0 .771L6.29 15.84a.555.555 0 0 0 .78 0l13.77-13.624a.541.541 0 0 0 0-.771L19.539.16a.555.555 0 0 0-.779 0z'/></svg>")
 }
+/*
+.en__contactDetails__rows:after{
+  position: absolute;
+  left: -19px;
+  top: -2px;
+  content:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='21' height='16' viewBox='0 0 21 16'><path fill='svg-friendly-color(orange)' fill-rule='nonzero' d='M18.76.16L6.68 12.113l-4.44-4.392a.555.555 0 0 0-.779 0L.161 9.006a.541.541 0 0 0 0 .771L6.29 15.84a.555.555 0 0 0 .78 0l13.77-13.624a.541.541 0 0 0 0-.771L19.539.16a.555.555 0 0 0-.779 0z'/></svg>")
+}
+/*
+.en__field__input--checkbox + .en__field__label::before,
+.en__contactDetails__rows::before {
+  border-radius: 50%;
+}
+.en__field__input--checkbox:checked + .en__field__label::before,
+.en__contactDetails__select:checked + .en__contactDetails__rows::before {
+  background-color: var(--client-black);
+  box-shadow: none;
+}
 
+.en__field__input--checkbox:checked + .en__field__label::after,
+.en__contactDetails__select:checked + .en__contactDetails__rows::after {
+  content: "\a0\2713";
+  color: var(--client-white);
+  left: -31px;
+  top: 1px;
+}*/
+//override the hideCheck
+.en__contacts--hideCheck .en__contactDetails__select{
+  display:block !important;
+}
 
 //upsell modal
 #enModal,

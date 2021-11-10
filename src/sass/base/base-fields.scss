@@ -271,7 +271,8 @@ textarea:focus {
 /* Custom Styling for Radio & Checkbox Inputs */
 .en__field__input--radio,
 .en__field__input--checkbox,
-.en__contactDetails__select {
+//.en__contactDetails__select 
+{
   border: 0;
   clip: rect(0 0 0 0);
   -webkit-clip-path: inset(50%);
@@ -287,7 +288,8 @@ textarea:focus {
 
 .en__field__input--radio + .en__field__label,
 .en__field__input--checkbox + .en__field__label,
-.en__contactDetails__rows {
+//.en__contactDetails__rows 
+{
   position: relative;
   margin-left: 2rem;
   cursor: pointer;
@@ -297,7 +299,8 @@ textarea:focus {
 
 .en__field__input--radio + .en__field__label::before,
 .en__field__input--checkbox + .en__field__label::before,
-.en__contactDetails__rows::before {
+//.en__contactDetails__rows::before 
+{
   content: "";
   position: absolute;
   height: 1.4rem;
@@ -321,7 +324,8 @@ textarea:focus {
 }
 
 .en__field__input--checkbox + .en__field__label::before,
-.en__contactDetails__rows::before {
+//.en__contactDetails__rows::before 
+{
   border-radius: 0;
   border-width: 2px;
   -webkit-box-shadow: none;
@@ -334,7 +338,8 @@ textarea:focus {
 
 .en__field__input--radio:checked + .en__field__label::before,
 .en__field__input--checkbox:checked + .en__field__label::before,
-.en__contactDetails__select:checked + .en__contactDetails__rows::before {
+//.en__contactDetails__select:checked + .en__contactDetails__rows::before 
+{
   background-color: var(
     --client-checkmark-background-color,
     $client-checkmark-background-color
@@ -345,7 +350,8 @@ textarea:focus {
 }
 
 .en__field__input--checkbox:checked + .en__field__label::before,
-.en__contactDetails__select:checked + .en__contactDetails__rows::before {
+//.en__contactDetails__select:checked + .en__contactDetails__rows::before 
+{
   color: var(
     --client-checkmark-background-color,
     $client-checkmark-background-color
@@ -356,7 +362,8 @@ textarea:focus {
 /* TODO This needs to pull in $clinet-cta instead of being hard coded to #F57E20 */
 /* REF: https://stackoverflow.com/questions/25477819/scss-variable-in-background-image-with-svg-image-data-uri */
 .en__field__input--checkbox:checked + .en__field__label::after,
-.en__contactDetails__select:checked + .en__contactDetails__rows::after {
+//.en__contactDetails__select:checked + .en__contactDetails__rows::after 
+{
   content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='21' height='16' viewBox='0 0 21 16'><path fill='#{svg-friendly-color($client-cta)}' fill-rule='nonzero' d='M18.76.16L6.68 12.113l-4.44-4.392a.555.555 0 0 0-.779 0L.161 9.006a.541.541 0 0 0 0 .771L6.29 15.84a.555.555 0 0 0 .78 0l13.77-13.624a.541.541 0 0 0 0-.771L19.539.16a.555.555 0 0 0-.779 0z'/></svg>");
   position: absolute;
   left: -28px;
@@ -374,14 +381,16 @@ textarea:focus {
 /* QA Needed: Would like to find a way so that radio input focus is round rather than square. May require re-writing how radio inputs are styled */
 .en__field__input--radio:focus + .en__field__label::before,
 .en__field__input--checkbox:focus + .en__field__label::before,
-.en__contactDetails__select:focus + .en__contactDetails__rows::before {
+//.en__contactDetails__select:focus + .en__contactDetails__rows::before 
+{
   // outline: var(--client-gray, $client-gray) auto 0.3125rem;
   // border-color: var(--client-input-border-color-focus, #4d4d4d);
 }
 
 .en__field__input--radio:focus + .en__field__label,
 .en__field__input--checkbox:focus + .en__field__label,
-.en__contactDetails__select:focus + .en__contactDetails__rows {
+//.en__contactDetails__select:focus + .en__contactDetails__rows 
+{
   // outline: 2px solid var(--client-input-border-color-focus, #4d4d4d);
   // outline-offset: 3px;
   outline: -webkit-focus-ring-color auto 1px;

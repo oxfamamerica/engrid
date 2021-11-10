@@ -56,8 +56,7 @@ export default class DonationAmount {
   // Force a new amount
   public setAmount(amount: number, dispatch: boolean = true) {
     // Run only if it is a Donation Page with a Donation Amount field
-    // JI 20-Jan 2021 - changed this to ! because we want it to exit only if is NOT a donation form
-    if (!document.getElementsByName("transaction.donationAmt").length) {
+    if (!document.getElementsByName(this._radios).length) {
       return;
     }
     // Set dispatch to be checked by the SET method
@@ -74,7 +73,12 @@ export default class DonationAmount {
       amountField.checked = true;
       // Clear OTHER text field
       this.clearOther();
-    } else {
+    } else if(amount == 0) {
+      console.log("AMOUNT IS "+ amount);
+      this.clearOther();
+    }
+
+    else {
       const otherField = document.querySelector(
         'input[name="' + this._other + '"]'
       ) as HTMLInputElement;
@@ -82,7 +86,6 @@ export default class DonationAmount {
       otherField.value = parseFloat(amount.toString()).toFixed(2);
     }
     // Set the new amount and trigger all live variables
-    console.log("setAmount -> amount ="+ amount);
     this.amount = amount;
     // Revert dispatch to default value (true)
     this._dispatch = true;
@@ -96,6 +99,75 @@ export default class DonationAmount {
     const otherWrapper = otherField.parentNode as HTMLElement;
     otherWrapper.classList.add("en__field__item--hidden");
   }
+  /*// Force a new amount
+  public setAmount(amount: number, dispatch: boolean = true) {
+    // Run only if it is a Donation Page with a Donation Amount field
+    // JI 20-Jan 2021 - changed this to ! because we want it to exit only if is NOT a donation form
+    if (!document.getElementsByName("transaction.donationAmt").length) {
+      return;
+    }
+    // Set dispatch to be checked by the SET method
+    this._dispatch = dispatch;
+
+    const transactionDonAmt = document.getElementsByName(
+      "transaction.donationAmt"
+      ) as NodeList;
+    Array.from(transactionDonAmt).forEach(e => {
+      let element = e as HTMLInputElement;
+      //console.log("list of transaction.donationAmt");
+      //console.log("element.value = "+element.value);
+      console.log("amount ="+amount);
+    });
+    // Search for the current amount on radio boxes
+    let found = Array.from(document.querySelectorAll('input[name="' + this._radios + '"]')
+    );
+    let newAmountField;
+    found.forEach(e =>{ 
+      let element = e as HTMLInputElement;
+      console.log("found element.value = "+element.value);
+      console.log("found amount = "+amount);
+      if(amount > 0 && parseInt(element.value) == amount){
+        this.clearOther();
+        newAmountField = element;
+        console.log("newAmountField.value = "+ newAmountField.value);
+        newAmountField.checked = true;
+      }
+      else{
+        if(amount > 0){
+          if(element.checked){
+          //console.log("checked element = "+element);
+          console.log("checked element value = "+element.value);
+          element.checked = false;}
+          const otherField = document.querySelector(
+            'input[name="' + this._other + '"]'
+          ) as HTMLInputElement;
+          otherField.focus();
+          otherField.value = parseFloat(amount.toString()).toFixed(2);
+        }
+      }
+    });
+    
+    // Set the new amount and trigger all live variables
+    console.log("setAmount -> amount ="+ amount);
+    this.amount = amount;
+    // Revert dispatch to default value (true)
+    this._dispatch = true;
+  }
+  // Clear Other Field
+  public clearOther() {
+    const otherField = document.querySelector(
+      'input[name="' + this._other + '"]'
+    ) as HTMLInputElement;
+    console.log("clear other start = "+ otherField.value);
+      otherField.blur();
+      otherField.value = "";
+      otherField.setAttribute("value","");
+      
+      console.log("clear other cleared = "+ otherField.value );
+    const otherWrapper = otherField.parentNode as HTMLElement;
+    otherWrapper.classList.add("en__field__item--hidden");
+  }
+ */
   // Remove commas
   public removeCommas(v: string) {
     // replace 5,00 with 5.00
