@@ -16,6 +16,10 @@ export default class DonationAmount {
       if (element && (element.name == radios || element.name == other)) {
         element.value = this.removeCommas(element.value);
         this.amount = parseFloat(element.value);
+        //add this to fix single . at end
+        console.log("element.value = "+ element.value );
+        element.value = this.amount.toString();
+        console.log("element.value = "+ element.value );
       }
     });
   }
