@@ -759,7 +759,7 @@ export const watchRecurrpayField = () => {
   let roiSCOnetime = document.getElementById("roiSourceCodeOnetime") as HTMLElement;
   let roiSCMonthlyData:string = "monthly";
   let roiSCOnetimeData:string = "onetime";
-  
+  console.log("0623 - in watchRecurrpayField");
   if(roiSCMonthly !== null && pageType == 'donation' && roiSCMonthly.hasAttribute("data-sourcecode")){
     roiSCMonthlyData = roiSCMonthly.getAttribute("data-sourcecode") as string;
   }
@@ -774,10 +774,18 @@ export const watchRecurrpayField = () => {
     enFieldRecurrpayCurrentValue = document.querySelector(
       'input[name="transaction.recurrpay"]:checked'
     ) as HTMLInputElement;
-    //console.log("handleEnFieldRecurrpay and enFieldRecurrpayCurrentValue ="+ enFieldRecurrpayCurrentValue);
+    console.log("0623 - HANDLING RECURRPAY CHANGE: handleEnFieldRecurrpay and enFieldRecurrpayCurrentValue ="+ enFieldRecurrpayCurrentValue);
     if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "y" && enGrid) {
+      console.log("0623 - switched to monthly before class changes - "+enGrid.classList);
       enGrid.classList.remove("has-give-once");
       enGrid.classList.add("has-give-monthly");
+      if(enGrid.classList.contains('has-give-by-paypal')){
+        enGrid.classList.remove('has-give-by-paypal');
+        enGrid.classList.add('has-give-by-check');
+        let check_button = document.getElementById("en__field_transaction_giveBySelect2");
+        if(check_button){check_button.click();}
+      }
+      console.log("0623 - switched to monthly after class changes - "+enGrid.classList);
       if(roiSourceCodeMonthly){
         roiSourceCode.value = roiSourceCodeMonthly.value;
       }
@@ -785,8 +793,16 @@ export const watchRecurrpayField = () => {
           roiSourceCode.value = roiSCMonthlyData;
       }
     } else if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "n" && enGrid) {
+      console.log("0623 - switched to once before class changes - "+enGrid.classList);
       enGrid.classList.remove("has-give-monthly");
       enGrid.classList.add("has-give-once");
+      if(enGrid.classList.contains('has-give-by-check')){
+        enGrid.classList.remove('has-give-by-check');
+        enGrid.classList.add('has-give-by-card');
+        let card_button = document.getElementById("en__field_transaction_giveBySelect0");
+        if(card_button){card_button.click();}
+      }
+      console.log("0623 - switched to once after class changes - "+enGrid.classList);
       if(roiSourceCodeOnetime){
         roiSourceCode.value= roiSourceCodeOnetime.value;
       }
@@ -801,10 +817,15 @@ export const watchRecurrpayField = () => {
     enFieldRecurrpayCurrentValue = document.querySelector(
       'input[name="transaction.recurrpay"]:checked'
     ) as HTMLInputElement;
-    //console.log("check giving frequency on page load");
+    console.log("0623 - check giving frequency on page load");
     if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "y" && enGrid) {
+      console.log(enGrid.classList);
       enGrid.classList.remove("has-give-once");
       enGrid.classList.add("has-give-monthly");
+      if(enGrid.classList.contains('has-give-by-paypal')){
+        enGrid.classList.remove('has-give-by-paypal');
+        enGrid.classList.add('has-give-by-check');
+      }
       if(roiSourceCodeMonthly){
         roiSourceCode.value = roiSourceCodeMonthly.value;
       }
@@ -812,8 +833,13 @@ export const watchRecurrpayField = () => {
           roiSourceCode.value = roiSCMonthlyData;
       }
     } else if (enFieldRecurrpayCurrentValue.value.toLowerCase() == "n" && enGrid) {
+      console.log(enGrid.classList);
       enGrid.classList.add("has-give-once");
       enGrid.classList.remove("has-give-monthly");
+      if(enGrid.classList.contains('has-give-by-check')){
+        enGrid.classList.remove('has-give-by-check');
+        enGrid.classList.add('has-give-by-card');
+      }
       if(roiSourceCodeOnetime){
       roiSourceCode.value = roiSourceCodeOnetime.value;}
       if(roiSCOnetime){
@@ -826,6 +852,7 @@ export const watchRecurrpayField = () => {
   if (transactionRecurrpay) {
     Array.from(transactionRecurrpay).forEach(e => {
       let element = e as HTMLInputElement;
+      console.log("waing on recurr pay changes");
       element.addEventListener("change", handleEnFieldRecurrpay);
     });
   }
@@ -1314,6 +1341,8 @@ const handleHideACH = () => {
   }
   enHiddenFieldsVal = "supporter.bankAccountType,supporter.bankAccountNumber,supporter.bankRoutingNumber";
   enHiddenFields.value = enHiddenFieldsVal;
+  const processingFees = document.getElementsByClassName("en__field--processing_fees");
+  processingFees[0].classList.remove("en__hidden");
 };
 const handleShowACH = () => {
   //console.log("Show ACH");
@@ -1344,6 +1373,8 @@ const handleShowACH = () => {
   if(enFieldSupporterBankRoutingNumber){
     enFieldSupporterBankRoutingNumber.disabled = false;
   }
+  const processingFees = document.getElementsByClassName("en__field--processing_fees");
+  processingFees[0].classList.add("en__hidden");
 };
 const handleHideAddress = () => {
   //console.log("Hide Address");
