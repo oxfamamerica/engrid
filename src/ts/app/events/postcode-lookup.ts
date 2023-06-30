@@ -18,6 +18,7 @@ export default class Postcode{
         this._onPostcodeChange.dispatch(this.postcode);
         if(this._state != null){
             this.lookupPostcode(this._field!.value);
+           // this.USPSLookup(this._field!.value);
         }
         //console.log('%c Postcode change Applied', 'font-size: 30px; background-color: #000; color: #FF0');
       });
@@ -72,6 +73,23 @@ export default class Postcode{
     }); 
     return pc;
   }
+
+  public USPSLookup(pc: string){
+    // USPS CityStateLookup
+    const USPS = require('usps-webtools');
+
+    const usps = new USPS({
+      server: 'http://production.shippingapis.com/ShippingAPI.dll',
+      userId: '847K57OXFAM41',
+      ttl: 10000 //TTL in milliseconds for request
+    });
+    usps.cityStateLookup(pc, function(err, result) {
+      console.log("USPS City State Lookup");
+      console.log(result);
+      // result == { city: , state: , zip: }
+    });
+  }
+ 
 
   public get onPostcodeChange() {
 
