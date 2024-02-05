@@ -1386,7 +1386,7 @@ const handleShowAddress = () => {
 
 const handleCCUpdate = () => {
   handleHideACH();
-  const card_type = getCardType(field_credit_card.value);
+  /*const card_type = getCardType(field_credit_card.value);
   if(field_payment_type.selectedIndex > 0){
     const payment_text =
       field_payment_type.options[field_payment_type.selectedIndex].value;
@@ -1398,11 +1398,8 @@ const handleCCUpdate = () => {
           break;
         }
       }
-      /*field_payment_type.value = Array.from(field_payment_type.options).filter(
-        d => d.text === card_type
-      )[0].value;*/
     }
-  }
+  }*/
 };
 
 const handleExpUpdate = (e: string) => {
