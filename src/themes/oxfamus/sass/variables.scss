@@ -1,19 +1,50 @@
 $slicer-breakpoints: 0 400px 600px 1024px 1200px;
 
+/* Colours------------------------------ */
+
+/* 2021 brand refresh palette */
+/* Primary palette */
+$C-primaryOxfamGreenAA:    	#44841A;
+$C-primaryOxfamGreenAAA:	#336114;
+$C-primaryOxfamLightGreen:	#BECE45;
+
+/* Secondary palette */
+$C-secondaryPurple: 		#53297D;
+$C-secondaryBlueAAA:		#065E84;
+$C-secondaryBurgundy:		#630235;
+$C-secondaryGray:			#545454;
+$C-secondaryBlack:			#000000;
+$C-secondaryBeige:			#EAEADE;
+$C-secondaryRed:			#E70052;
+$C-secondaryPink:			#E43989;
+$C-secondaryOrange: 		#F16E22;
+$C-secondaryBlue: 			#0B9CDA;
+$C-secondaryYellow: 		#FBC43A;
+
+/* Emergency palette */
+$C-emergencyRedAAA: 		#A20011;
+$C-emergencyDeepRed: 		#FF1D34;
+
+/* Supplementary palette */
+$C-lightBackgroundGray:     #F5F5F5;
+$C-mediumBackgroundGray:     #CCCCCC;
+
+/* Primary palette */
 $C-OxfamGreen: #61A534;
 $C-OxfamGreenDarken: darken($C-OxfamGreen, 15%);
-$C-Orange: #F16E22;
+$C-Orange:     #F16E22;
 $C-OrangeDarken: darken($C-Orange, 15%);
-$C-Red: #E70052;
+$C-Red:        #E70052;
 $C-RedDarken: darken($C-Red, 15%);
 
+/* Complementary palette */
 $C-DarkGreen:  #0C884A;
 $C-DarkGreenDarken: darken($C-DarkGreen, 15%);
 $C-Burgundy:   #630235;
 $C-BurgundyDarken: darken($C-Burgundy, 15%);
 $C-Purple:     #53297D;
 $C-PurpleDarken: darken($C-Purple, 15%);
-$C-White: #FFFFFF;
+
 /* Non-compliant palette */
 $C-Pink:       #E43989;
 $C-PinkDarken: darken($C-Pink, 15%);
@@ -29,12 +60,12 @@ $client-black: #545454;
 $client-gray: #8a8a8a;
 $client-light-gray: #cacaca;
 $client-lightest-gray: #eeeeee;
-$client-input-button: $C-White; //$C-OxfamGreen;//#f16e22;
-$client-input-button-hover: $C-OxfamGreen; //#f05523;
+$client-input-button: #ffffff; //$C-OxfamGreen;//#f16e22;
+$client-input-button-hover: $C-primaryOxfamGreenAA; //#f05523;
 $client-cta: $C-Orange;//#f16e22;
 $client-cta-hover: $C-OrangeDarken; //#f05523;
-$client-cta-secondary: $C-OxfamGreen;//#f16e22;
-$client-cta-secondary-hover: $C-OxfamGreenDarken; //#f05523;
+$client-cta-secondary: $C-primaryOxfamGreenAA;//#f16e22;
+$client-cta-secondary-hover: $C-primaryOxfamGreenAAA; //#f05523;
 $background-color: $client-lightest-gray;
 $background-image-background-color: #333333;
 
@@ -116,13 +147,13 @@ $C-RedHero:         #ec4631; // used for homepage hero bg when image can't stret
 $C-Shadow:          rgba(226, 226, 215, 0.96);
 $C-GreenInputBG:    #d0e4c2;
 $C-InputShadow:     rgba(97, 165, 52, 0.5);
-$C-PlaceholderText: #a6a6a2;
+$C-PlaceholderText: #AFAFAB;
 $C-AltGrey:         #888; // Used for lighter grey elements
 $C-BlueAlt:         shade($C-Blue, 20%); // Used for the blue button hover styles
 
 // Social Colours
 $C-Facebook:   #3b5998;
-$C-Twitter:    #1b95e0; //#00a0d1;
+$C-Twitter:    #000000;//#00a0d1;
 $C-Pinterest:  #da0734;
 $C-GooglePlus: #ff8700;
 $C-LinkedIn: #0075b4;
