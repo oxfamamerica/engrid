@@ -50,7 +50,7 @@
             width: 70%;
         }
         a{
-            color: $C-OxfamGreen;
+            color: $C-primaryOxfamGreenAA;
         }
     }
 
@@ -60,7 +60,7 @@
             margin-top: $body-padding;
         }
         svg.ox-horiz{
-            fill: $C-OxfamGreen;
+            fill: $C-primaryOxfamGreenAA;
         }
 
         @media screen and (min-width: 970px){
@@ -115,7 +115,7 @@
         text-align: center;
         padding: 0 0 10px 0;
         display: block;
-        color: $C-OxfamGreen;
+        color: $C-primaryOxfamGreenAA;
         text-decoration:none;
         font-size: 18px;
     }
@@ -126,7 +126,7 @@
         }
 
         li {
-            border-left: 1px solid $C-Beige;
+            border-left: 1px solid $C-secondaryBeige;
             margin: 0;
         }
 
@@ -149,7 +149,7 @@
 
     // Larger Screens
     @media screen and (min-width: 970px){
-        border-bottom: 3px solid $C-Beige;
+        border-bottom: 3px solid $C-secondaryBeige;
         margin-right: 0;
         margin-bottom: $body-padding * 2;
         margin-left: 0;
@@ -173,7 +173,7 @@
 
         li a {
             display: inline-block;
-            color: $C-OxfamGreen;
+            color: $C-primaryOxfamGreenAA;
             text-decoration:none;
         }
 
@@ -228,38 +228,40 @@
     .social-presence {
         a {
             color: $C-White !important;
+
+            i { 
+                &.icon{
+                    &-facebook{
+                        content: url(https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/icon-social-facebook-circle-color.svg?v=1708968698000);
+                    }
+                    &-x, &-twitter{
+                        content: url(https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/icon-social-x-circle-color.svg?v=1708968706000);
+                    }
+                    &-instagram{
+                        content: url(https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/icon-social-instagram-circle-color.svg?v=1708968699000);
+                    }
+                    &-youtube{
+                        content: url(https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/icon-social-youtube-circle-color.svg?v=1708968707000);
+                    }
+                    &-tiktok{
+                        content: url(https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/icon-social-tiktok-circle-color.svg?v=1708968704000);
+                    }
+                    &-threads{
+                        content: url(https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/icon-social-threads-circle-color.svg?v=1708968702000);
+                    }
+                    &-linkedin{
+                        content: url(https://acb0a5d73b67fccd4bbe-c2d8138f0ea10a18dd4c43ec3aa4240a.ssl.cf5.rackcdn.com/10070/icon-social-linkedin-circle-color.svg?v=1708968701000);
+                    }
+                }
+            }
         }
 
-        .fb {
-            background-color: $C-Facebook;
-        }
-
-        .tw {
-            background-color: $C-Twitter;
-        }
-
-        .pn {
-            background-color: $C-Pinterest;
-        }
-
-        .gp {
-            background-color: $C-GooglePlus;
-        }
-        .ig {
-            background-color: $C-Instagram;
-        }
-        .yt {
-            background-color: $C-Youtube;
-        }
-        .li{
-            background-color:$C-LinkedIn;
-        }
     }
 }
 /* Modals and modals links */
 .form-sidebar section.logo-grouping div#modals-block
 {
-    color: #eaeade;
+    color: $C-secondaryBeige;
     width: 100%;
     padding-bottom: 20px;
 }
@@ -281,19 +283,18 @@
 #modals-block a,
 .close-modal-button
 {
-    color: #61a534;
+    color: $C-primaryOxfamGreenAA;
     cursor: pointer;
 }
 #modals-block a:hover,
 .close-modal-button:hover
 {
-    color: #44841a;
+    color: $C-primaryOxfamGreenAAA;
 }
 
 /* Pre-footer content */
 .form-prefooter{
     display: block;
-    //background-image: url(https://s.bsd.net/oxfamlive/main/page/-/wrappers/default/img/patterns/strip-green-desktop.png?1362759430);
     background-repeat: no-repeat;
     background-color: #fff;
     background-position: -170px 0;
@@ -333,7 +334,7 @@
 
     a {
         background-color: $C-White;
-        color: $C-Purple;
+        color: $C-secondaryPurple;
         display: block;
         width: 40px;
         height: 40px;

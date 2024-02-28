@@ -67,12 +67,12 @@ textarea {
         @media screen and (min-width: 970px){fill: $client-cta-secondary;}
       }
       &.burgundy{
-        fill: $C-Burgundy;
-        @media screen and (min-width: 970px){fill: $C-Burgundy;}
+        fill: $C-secondaryBurgundy;
+        @media screen and (min-width: 970px){fill: $C-secondaryBurgundy;}
       }
       &.black{
-        fill: $C-Black;
-        @media screen and (min-width: 970px){fill: $C-Black;}
+        fill: $C-secondaryBlack;
+        @media screen and (min-width: 970px){fill: $C-secondaryBlack;}
       }
     }
   }
@@ -150,8 +150,7 @@ body {
 
 body,
 body#en__pagebuilder {
-  // font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-family: Arial, Helvetica, sans-serif;//"Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
+  font-family: Roboto-Regular-webfont,Arial, Helvetica, sans-serif;
   font-size: 2.0rem;
   font-weight: normal;
   font-stretch: normal;
@@ -202,7 +201,7 @@ body:not(#en__pagebuilder)
 #engrid {
     h1 {
         color: $client-black;
-        font-family: OxfamHeadline;
+        font-family: oxfam_tstar_proheadline, Arial, Helvetica, sans-serif;
         font-size: 3.2rem;
         font-weight: 900;
         font-stretch: normal;
@@ -219,7 +218,7 @@ body:not(#en__pagebuilder)
 
     h2 {
         color: $client-black;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: oxfam_tstar_probold, Arial, Helvetica, sans-serif;
         font-size: 2.2rem;
         font-weight: bold;
         font-stretch: normal;
@@ -234,7 +233,7 @@ body:not(#en__pagebuilder)
 
     h3 {
         color: $client-black;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: oxfam_tstar_probold, Arial, Helvetica, sans-serif;
         font-size: 2.4rem;
         font-weight: normal;
         font-stretch: normal;
@@ -247,7 +246,7 @@ body:not(#en__pagebuilder)
     }
 
 label.en__field__label {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Roboto-Regular-webfont, Arial, Helvetica, sans-serif;
   font-size: 1.8rem;
   font-weight: normal;
   font-stretch: normal;
@@ -258,7 +257,7 @@ label.en__field__label {
 }
 
 .en__field__label--item {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: oxfam_tstar_proheadline, Arial, Helvetica, sans-serif;
   font-size: 2.0rem;
   font-weight: normal;
   font-stretch: normal;
@@ -291,9 +290,9 @@ label.en__field__label {
   .en__field__label--item,
   .en__field__item--other::before,
   .en__field__item--other input {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: oxfam_tstar_proheadline, Arial, Helvetica, sans-serif;
     font-size: 2.0rem;
-    font-weight: 900;
+    font-weight: normal;
     font-stretch: normal;
     font-style: normal;
     line-height: normal;
@@ -312,7 +311,7 @@ label.en__field__label {
     display: block;
     width: 100%;
     font-size: 2.0rem;
-    font-weight: 900;
+    font-weight: normal;
     line-height: 1;
     padding: 18px 0;
   }
@@ -370,7 +369,7 @@ label.en__field__label {
 .en__field--recurrpay {
   label.en__field__label {
     font-size: 2.0rem;
-    font-weight: bold !important;
+    font-weight: normal;
     text-transform: none !important;
     &::before {
       top: 3px;
@@ -395,7 +394,7 @@ label.en__field__label {
   position: absolute;
   pointer-events: none;
   border: 20px solid transparent;
-  border-top-color: #f9f003;
+  border-top-color: $client-highlight-background-color;
   margin-left: 30px;
   z-index: 1;
 }
@@ -513,7 +512,7 @@ label.en__field__label {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: $C-White;
   padding: 30px 0px;
   flex-wrap: wrap;
   .footer-logo {
@@ -527,7 +526,7 @@ label.en__field__label {
     padding: 1rem;
     a {
       display: block;
-      color: #fff;
+      color: $C-White;
       font-size: 1.8rem;
       font-weight: bold;
       text-decoration: none;
@@ -545,7 +544,7 @@ label.en__field__label {
       font-weight: 400;
       line-height: 1.57;
       letter-spacing: 0.6px;
-      color: #ffffff;
+      color: $C-White;
     }
   }
   .address {
@@ -553,19 +552,19 @@ label.en__field__label {
     font-weight: 400;
     line-height: 1.57;
     letter-spacing: 0.6px;
-    color: #ffffff;
+    color: $C-White;
     margin: 0;
     display: block;
     width: 100%;
     padding-top: 30px;
-    border-top: 2px solid rgba(#fff, 0.8);
+    border-top: 2px solid rgba($C-White, 0.8);
     text-align: center;
   }
 }
 
 @media screen and (min-width: 970px) {
   .footer-wrapper .footer-copy p {
-    border-left: 1px solid #fff;
+    border-left: 1px solid $C-White;
     padding-left: 65px;
   }
 }
@@ -591,8 +590,9 @@ label.en__field__label {
     background-position-x: 1.0rem;
     background-position-y: calc(50% - 2px);
     background-repeat: no-repeat;
+    font-family: oxfam_tstar_proheadline, Arial, Helvetica, sans-serif;
     font-size: 2.0rem;
-    font-weight: bold;
+    font-weight: normal;
     letter-spacing: 0px;
     text-align: center;
     color: $client-cta-secondary;
@@ -671,10 +671,10 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
 }
 
 .footer-block-two .yd-col.yd-ft-left p {
-  color: #ffffff;
+  color: $C-White;
   font-size: 1.4rem;
   display: inline-block;
-  font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
+  font-family: oxfam_tstar_proregular, Arial, Helvetica, sans-serif;
   font-weight: normal;
   line-height: 26px;
   /* margin-left: 0px; */
@@ -682,10 +682,10 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
 }
 
 .footer-block-two .yd-col.yd-ft-right p {
-  color: #ffffff;
+  color: $C-White;
   font-size: 1.4rem;
   display: inline-block;
-  font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
+  font-family: oxfam_tstar_proregular, Arial, Helvetica, sans-serif;
   margin-right: 10px;
   /* margin-left: 0px; */
   margin: 20px 20px 20px 0;
@@ -721,10 +721,10 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
 .ft-link-wrapper a {
   margin-right: 25px !important;
   text-decoration: none !important;
-  color: #ffffff !important;
+  color: $C-White !important;
   font-size: 1.4rem !important;
   display: inline-block;
-  font-family: "Oxfam TSTAR PRO", Arial, Helvetica, sans-serif;
+  font-family: oxfam_tstar_proregular, Arial, Helvetica, sans-serif;
   font-weight: normal;
   line-height: 26px;
 }
@@ -752,13 +752,14 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
         display: inline-block;
         width: 100%;
         margin:  0;
-        font-family: inherit;
+        font-family: oxfam_tstar_proheadline, Arial, Helvetica, sans-serif;
         padding: 12px 10px 12px 10px;
         -webkit-appearance: none;
         border-radius: 0;
         -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out;
         transition: background-color 0.25s ease-out, color 0.25s ease-out;
         font-size: 2.0rem;
+        font-weight: normal;
         text-align: center;
         cursor: pointer;
         color: $client-cta-secondary;
@@ -789,16 +790,7 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
             
         }
     }
-    /*//.en__field--donationAmt label.en__field__label.en__field__label--item,
-    .en__field--othamt1 label.en__field__label.en__field__label--item{
-        background-color: $client-cta-secondary;
-        color: #ffffff;
-        border:2px solid $client-cta-secondary;
-        & span.mo{
-          display:none;
-          font-size: 1.6rem;
-        }
-    }*/
+   
 
 
     .en__field--recurrpay label.en__field__label.en__field__label--item {
@@ -846,8 +838,8 @@ body:not(#en__pagebuilder) .en__component--advrow:not(.show) .hide {
     }
 
      .en__field--paymenttype input[type='radio']:checked + label{
-        background-color: $C-DarkGreen;
-        border: 2px solid $C-DarkGreen;
+        background-color: $C-primaryOxfamGreenAAA;
+        border: 2px solid $C-primaryOxfamGreenAAA;
         color: $C-White;
     }
 
@@ -915,7 +907,8 @@ div.manual-form-layout {
   .en__field--firstName,
   .en__field--lastName,
   .en__field--bankAccountNumber,
-  .en__field--bankRoutingNumber {
+  .en__field--bankRoutingNumber
+  .en__field--ccnumber {
     flex-basis: 100%;
 
     padding-left: 0;
@@ -956,7 +949,7 @@ div.manual-form-layout {
   .en__field--infadd1,
   .en__field--gftrsn,
   .en__field--paymenttype,
-  .en__field--ccnumber,
+  //.en__field--ccnumber,
   .en__field--bankAccountType {
     flex-basis: 100%;
     //padding-left: 0;
@@ -976,6 +969,7 @@ div.manual-form-layout {
       flex-basis: calc((100% / 3) - (0rem));
     }
   }
+  
   .en__field--ccvv{
     flex-basis: calc(100% / 3);
   }
@@ -1045,7 +1039,8 @@ div.manual-form-layout {
 }
 .en__submit button{
     font-size: 2.0rem;
-    font-weight: bold; 
+    font-weight: normal; 
+    font-family: oxfam_tstar_proheadline, RobotoCondensed-Bold-webfont, Arial, sans-serif;
     min-width: 250px;
     width: auto;
     margin: 0 auto;
@@ -1059,9 +1054,9 @@ div.manual-form-layout {
         height: 40px;
         line-height: 24px;
         border-radius: 36px;
-        background-color: #545454;
+        background-color: $C-secondaryGray;
         border: 8px solid transparent;
-        color: #fff;
+        color: $C-White;
         margin-right: 10px;
         text-align:center;
     }
@@ -1132,7 +1127,7 @@ div.manual-form-layout {
             }
 
             .modal-right-column {
-                background-color: #ffffff;
+                background-color: $C-White;
                 flex-basis: 50%;
                 padding: $body-padding-sm;
                 @media screen and (min-width: 970px){
@@ -1146,8 +1141,8 @@ div.manual-form-layout {
                     }
                 }
                 h1{
-                    font-family: OxfamHeadline;
-                    color: $C-OxfamGreen;
+                    font-family: oxfam_tstar_proheadline;
+                    color: $C-primaryOxfamGreenAA;
                     font-size: 2.0rem;
                     @media screen and (min-width: 970px){
                         font-size: 3.8rem;
@@ -1160,7 +1155,7 @@ div.manual-form-layout {
                     }
                 }
                 .live-giving-upsell-amount{
-                    color: $C-OxfamGreen;
+                    color: $C-primaryOxfamGreenAA;
                     font-weight:bold;
                 }
                 .cta-groups{

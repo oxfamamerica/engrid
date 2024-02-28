@@ -270,7 +270,7 @@ textarea:focus {
 
 /* Custom Styling for Radio & Checkbox Inputs */
 .en__field__input--radio,
-.en__field__input--checkbox,
+.en__field__input--checkbox
 //.en__contactDetails__select 
 {
   border: 0;
@@ -505,7 +505,8 @@ div:not(.manual-form-layout) {
   .en__field--firstName,
   .en__field--lastName,
   .en__field--bankAccountNumber,
-  .en__field--bankRoutingNumber {
+  .en__field--bankRoutingNumber,
+  .en__field--ccnumber {
     flex-basis: 50%;
   }
 
@@ -527,7 +528,7 @@ div:not(.manual-form-layout) {
   .en__field--infadd1,
   .en__field--gftrsn,
   .en__field--paymenttype,
-  .en__field--ccnumber,
+  //.en__field--ccnumber,
   .en__field--bankAccountType {
     flex-basis: 100%;
     padding-left: 0;
