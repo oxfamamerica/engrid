@@ -1319,6 +1319,8 @@ const handleHideACH = () => {
   const enFieldSupporterBankAccountNumber = document.getElementById("en__field_supporter_bankAccountNumber") as HTMLInputElement;
   const enFieldBankRoutingNumber = document.querySelectorAll(".en__field--bankRoutingNumber");
   const enFieldSupporterBankRoutingNumber = document.getElementById("en__field_supporter_bankRoutingNumber") as HTMLInputElement;
+  const enFieldPhoneNumber = document.querySelectorAll(".en__field--phoneNumber");
+  const enFieldSupporterPhoneNumber = document.getElementById("en__field_supporter_phoneNumber") as HTMLInputElement;
   const enHiddenFields = document.querySelectorAll(".en__hiddenFields")[0] as HTMLInputElement;
   let enHiddenFieldsVal = "";
   if(enFieldBankAccountType[0]){
@@ -1339,7 +1341,13 @@ const handleHideACH = () => {
   if(enFieldSupporterBankRoutingNumber){
     enFieldSupporterBankRoutingNumber.disabled = true;
   }
-  enHiddenFieldsVal = "supporter.bankAccountType,supporter.bankAccountNumber,supporter.bankRoutingNumber";
+  if(enFieldPhoneNumber[0]){
+    enFieldPhoneNumber[0].classList.add("en__hidden");
+  }
+  if(enFieldSupporterPhoneNumber){
+    enFieldSupporterPhoneNumber.disabled = true;
+  }
+  enHiddenFieldsVal = "supporter.bankAccountType,supporter.bankAccountNumber,supporter.bankRoutingNumber,supporter.phoneNumber";
   enHiddenFields.value = enHiddenFieldsVal;
   const processingFees = document.getElementsByClassName("en__field--processing_fees");
   processingFees[0].classList.remove("en__hidden");
@@ -1352,6 +1360,8 @@ const handleShowACH = () => {
   const enFieldSupporterBankAccountNumber = document.getElementById("en__field_supporter_bankAccountNumber") as HTMLInputElement;
   const enFieldBankRoutingNumber = document.querySelectorAll(".en__field--bankRoutingNumber");
   const enFieldSupporterBankRoutingNumber = document.getElementById("en__field_supporter_bankRoutingNumber") as HTMLInputElement;
+  const enFieldPhoneNumber = document.querySelectorAll(".en__field--phoneNumber");
+  const enFieldSupporterPhoneNumber = document.getElementById("en__field_supporter_phoneNumber") as HTMLInputElement;
   const enHiddenFields = document.querySelectorAll(".en__hiddenFields")[0] as HTMLInputElement;
   let enHiddenFieldsVal = "";
   enHiddenFields.value = enHiddenFieldsVal;
@@ -1372,6 +1382,12 @@ const handleShowACH = () => {
   }
   if(enFieldSupporterBankRoutingNumber){
     enFieldSupporterBankRoutingNumber.disabled = false;
+  }
+  if(enFieldPhoneNumber[0]){
+    enFieldPhoneNumber[0].classList.remove("en__hidden");
+  }
+  if(enFieldSupporterPhoneNumber){
+    enFieldSupporterPhoneNumber.disabled = false;
   }
   const processingFees = document.getElementsByClassName("en__field--processing_fees");
   processingFees[0].classList.add("en__hidden");
