@@ -65,7 +65,7 @@ export const run = (opts: Object) => {
 
 
   app.contactDetailLabels();
-  app.easyEdit();
+  //app.easyEdit(); //remove to disable Easy Edit
   app.enInput.init();
 
   new ShowHideRadioCheckboxes("transaction.giveBySelect", "giveBySelect-");
